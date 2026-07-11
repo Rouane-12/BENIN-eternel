@@ -1,0 +1,355 @@
+'use client';
+import { useState, useMemo } from 'react';
+import { SiteLayout, PageHero } from '@/components/SiteLayout';
+import { Reveal } from '@/components/Reveal';
+
+
+const PLATS = [
+  { name: 'Amiwo', origin: 'Pays fon', desc: 'Pâte de maïs rouge à la tomate, servie avec poulet braisé ou poisson grillé. Plat emblématique des fêtes.' },
+  { name: 'Pâte rouge', origin: 'Sud du Bénin', desc: 'Variante de l\'amiwo, mijotée à la tomate et à l\'huile rouge de palme, accompagnée de viande ou de poisson.' },
+  { name: 'Akassa', origin: 'Pays fon & goun', desc: 'Pâte fermentée de maïs blanc, présentée en feuilles. Indispensable du petit-déjeuner et des sauces.' },
+  { name: 'Ablo', origin: 'Sud du Bénin', desc: 'Petit pain de maïs cuit à la vapeur, légèrement sucré, idéal avec sauce de poisson.' },
+  { name: 'Wagashi', origin: 'Pays Peulh', desc: 'Fromage frais de lait de vache, souvent grillé, originaire des éleveurs peulhs du nord.' },
+  { name: 'Dakouin', origin: 'Pays fon', desc: 'Boulettes de farine de maïs et niébé, ancien plat royal aujourd\'hui rare.' },
+  { name: 'Talon', origin: 'Centre du Bénin', desc: 'Riz au gras parfumé, mijoté avec viande fumée, oignon et bouillon traditionnel.' },
+  { name: 'Atassi', origin: 'Pays yoruba', desc: 'Riz aux haricots niébé, populaire dans tout le sud-est, plat de partage.' },
+  { name: 'Poisson braisé', origin: 'Côte atlantique', desc: 'Barracuda, capitaine ou dorade, mariné aux épices puis grillé au feu de bois, servi avec atiéké.' },
+  { name: 'Poulet bicyclette', origin: 'Toute l\'Afrique de l\'Ouest', desc: 'Poulet de basse-cour mariné, grillé lentement, à la chair ferme et aux épices marquées.' },
+];
+
+const CATEGORIES = [
+  { id: 'tous', label: 'Toutes les adresses' },
+  { id: 'traditionnel', label: 'Béninois & traditionnel' },
+  { id: 'mer', label: 'Fruits de mer & grillades' },
+  { id: 'asiatique', label: 'Cuisine asiatique' },
+  { id: 'glacier', label: 'Glaciers & desserts' },
+  { id: 'international', label: 'International & fine dining' },
+];
+
+const ADRESSES = [
+  {
+    name: 'Face à la Mer',
+    city: 'Cotonou',
+    category: 'international',
+    tag: 'Franco-italien',
+    rating: 4.8,
+    reviews: 356,
+    price: '€€€',
+    location: 'Haie Vive, front de mer',
+    phone: '+229 21 30 12 45',
+    desc: 'Table de référence de la capitale, cuisine méditerranéenne raffinée face à l\'Atlantique.',
+    img: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'La Cabane du Pêcheur',
+    city: 'Cotonou',
+    category: 'mer',
+    tag: 'Fruits de mer',
+    rating: 4.6,
+    reviews: 210,
+    price: '€€',
+    location: 'Fidjrossè, route des pêches',
+    phone: '+229 21 30 45 10',
+    desc: 'Poissons, langoustes et gambas dans une ambiance festive de bord de mer. Barbecue tous les dimanches.',
+    img: 'https://images.unsplash.com/photo-1559847844-5315695dadae?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Obama Beach',
+    city: 'Cotonou',
+    category: 'mer',
+    tag: 'Grillades & plage',
+    rating: 4.4,
+    reviews: 128,
+    price: '€',
+    location: 'Fidjrossè',
+    phone: '+229 97 12 33 08',
+    desc: 'Restaurant-paillote les pieds dans le sable, poissons grillés et ambiance reggae.',
+    img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Le Lieu Unique',
+    city: 'Cotonou',
+    category: 'international',
+    tag: 'Cuisine fusion',
+    rating: 4.5,
+    reviews: 94,
+    price: '€€€',
+    location: 'Cotonou centre',
+    phone: '+229 21 31 20 60',
+    desc: 'Carte fusion ouest-africaine et française dans une ambiance lounge sous les étoiles.',
+    img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Kobe Sushi Bar',
+    city: 'Cotonou',
+    category: 'asiatique',
+    tag: 'Japonais · Sushi',
+    rating: 4.7,
+    reviews: 142,
+    price: '€€€',
+    location: 'Karé Ébène Boutik Hôtel, centre-ville',
+    phone: '+229 01 52 40 40 40',
+    desc: 'Live sushi station et carte japonaise raffinée signée de la cheffe Gina, sashimis et poke bowls.',
+    img: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Wasabi Sushi Bar',
+    city: 'Cotonou',
+    category: 'asiatique',
+    tag: 'Japonais · Sushi',
+    rating: 4.3,
+    reviews: 36,
+    price: '€€',
+    location: 'Entrée du pavé, Haie-Vive',
+    phone: '+229 64 07 07 07',
+    desc: 'Nems croustillants, sushis maison et mochis glacés dans un cadre propre et chaleureux.',
+    img: 'https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Restaurant Hai King',
+    city: 'Cotonou',
+    category: 'asiatique',
+    tag: 'Chinois',
+    rating: 3.9,
+    reviews: 29,
+    price: '€€',
+    location: 'Cadjéhoun',
+    phone: '+229 21 30 88 14',
+    desc: 'Cuisine mandarine authentique, réputée comme l\'une des meilleures tables chinoises de la ville.',
+    img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Glacé Bénin',
+    city: 'Cotonou',
+    category: 'glacier',
+    tag: 'Glaces artisanales',
+    rating: 4.6,
+    reviews: 89,
+    price: '€',
+    location: 'Pavés de la Haie-Vive, face au Calypso',
+    phone: '+229 62 06 00 00',
+    desc: 'Glaces artisanales, gaufres, milkshakes et pâtisserie maison. Ouvert tard le soir.',
+    img: 'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Glacier Ci Gusta',
+    city: 'Cotonou',
+    category: 'glacier',
+    tag: 'Glacier · Snack',
+    rating: 4.0,
+    reviews: 61,
+    price: '€',
+    location: 'Cotonou centre',
+    phone: '+229 21 31 55 02',
+    desc: 'Grand choix de parfums de glace, pizzas et pâtisseries dans une salle climatisée lumineuse.',
+    img: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Festival des Glaces',
+    city: 'Cotonou',
+    category: 'glacier',
+    tag: 'Glacier · Fast-food',
+    rating: 4.1,
+    reviews: 73,
+    price: '€',
+    location: 'Avenue Steinmetz',
+    phone: '+229 21 31 40 22',
+    desc: 'Institution cotonoise réputée pour ses glaces, ouverte tous les jours de 7h à 1h du matin.',
+    img: 'https://images.unsplash.com/photo-1488900128323-21503983a07e?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Au Super Pili-Pili',
+    city: 'Cotonou',
+    category: 'traditionnel',
+    tag: 'Béninois',
+    rating: 4.3,
+    reviews: 3,
+    price: '€€',
+    location: 'Boulevard Saint-Michel',
+    phone: '+229 97 95 64 84',
+    desc: 'Poulet et poisson pili-pili emblématiques, une des adresses préférées des Cotonois.',
+    img: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Chez Maman Bénin',
+    city: 'Cotonou',
+    category: 'traditionnel',
+    tag: 'Marmite historique',
+    rating: 4.0,
+    reviews: 47,
+    price: '€',
+    location: 'Rue 201A',
+    phone: '+229 21 32 33 38',
+    desc: 'L\'une des plus vieilles marmites du pays. Poisson braisé, escargots, agouti, riz et aloco.',
+    img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Le Maquis du Port',
+    city: 'Cotonou',
+    category: 'traditionnel',
+    tag: 'Béninois',
+    rating: 4.2,
+    reviews: 58,
+    price: '€',
+    location: 'Ganhi, face à la Loterie Nationale',
+    phone: '+229 97 91 52 01',
+    desc: 'Ancien maquis devenu restaurant reconnu, cadre aéré pour découvrir la cuisine africaine.',
+    img: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'African Foodseum',
+    city: 'Porto-Novo',
+    category: 'traditionnel',
+    tag: 'Musée gastronomique',
+    rating: 4.5,
+    reviews: 52,
+    price: '€€',
+    location: 'Centre historique',
+    phone: '+229 21 21 30 14',
+    desc: 'Restaurant-musée dédié à la gastronomie ouest-africaine, entre héritage et transmission.',
+    img: 'https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Art Residence',
+    city: 'Porto-Novo',
+    category: 'international',
+    tag: 'Table d\'auteur',
+    rating: 4.3,
+    reviews: 8,
+    price: '€€€',
+    location: 'Maison afro-brésilienne, centre-ville',
+    phone: '+229 21 21 44 09',
+    desc: 'Cuisine béninoise revisitée servie dans un cadre patrimonial afro-brésilien.',
+    img: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?q=80&w=800&auto=format&fit=crop',
+  },
+  {
+    name: 'Hakuna Matata',
+    city: 'Ouidah',
+    category: 'mer',
+    tag: 'Plage privée',
+    rating: 4.4,
+    reviews: 66,
+    price: '€€',
+    location: 'Plage de Ouidah',
+    phone: '+229 21 34 12 07',
+    desc: 'Table créole-béninoise les pieds dans le sable, cadre idéal pour un déjeuner face à l\'océan.',
+    img: 'https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=800&auto=format&fit=crop',
+  },
+];
+
+const StarRating = ({ rating }: { rating: number }) => (
+  <div className="flex items-center gap-1">
+    <span className="text-sm font-medium">{rating.toFixed(1)}</span>
+    <div className="flex gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg key={i} viewBox="0 0 20 20" className="w-3 h-3" fill={i < Math.round(rating) ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="1">
+          <path d="M10 1.5l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.1-5.4 3.1 1.3-6-4.6-4.1 6.1-.6z" />
+        </svg>
+      ))}
+    </div>
+  </div>
+);
+
+const AdresseCard = ({ a }: { a: typeof ADRESSES[number] }) => (
+  <article className="group border border-white/10 hover:border-white/40 transition overflow-hidden flex flex-col">
+    <div className="relative aspect-[4/3] overflow-hidden">
+      <img src={a.img} alt={a.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-500 group-hover:scale-105" />
+      <span className="absolute top-3 left-3 bg-black/70 backdrop-blur-sm px-2.5 py-1 text-[10px] tracking-[0.2em] uppercase">{a.tag}</span>
+      <span className="absolute top-3 right-3 bg-black/70 backdrop-blur-sm px-2 py-1 text-[11px]">{a.price}</span>
+    </div>
+    <div className="p-5 flex flex-col gap-3 flex-1">
+      <div className="flex items-start justify-between gap-3">
+        <h4 className="font-display text-xl leading-tight">{a.name}</h4>
+        <StarRating rating={a.rating} />
+      </div>
+      <p className="text-sm text-white/65 leading-relaxed flex-1">{a.desc}</p>
+      <div className="pt-3 border-t border-white/5 space-y-1.5 text-xs text-white/50">
+        <div className="flex items-center gap-2">
+          <svg viewBox="0 0 20 20" className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M10 18s6-5.2 6-9.6A6 6 0 004 8.4C4 12.8 10 18 10 18z" />
+            <circle cx="10" cy="8.4" r="2" />
+          </svg>
+          <span>{a.city} · {a.location}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <svg viewBox="0 0 20 20" className="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M4 4h3l1.5 4-2 1.3a10 10 0 004.2 4.2L12 12l4 1.5v3a1 1 0 01-1 1C8 17.5 2.5 12 2.5 5a1 1 0 011-1H4z" />
+          </svg>
+          <span>{a.phone}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-white/40">{a.reviews} avis</span>
+        </div>
+      </div>
+    </div>
+  </article>
+);
+
+export default function GastronomieClient() {
+  const [active, setActive] = useState('tous');
+  const filtered = useMemo(
+    () => (active === 'tous' ? ADRESSES : ADRESSES.filter((a) => a.category === active)),
+    [active]
+  );
+
+  return (
+    <SiteLayout>
+      <PageHero
+        kicker="Saveurs"
+        title="Gastronomie"
+        script="béninoise"
+        intro="Une cuisine de partage, riche, généreuse, ancrée dans les sols rouges et les pirogues de l'Atlantique."
+        image="/food.jpg"
+      />
+      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+        <Reveal><h2 className="font-display text-3xl md:text-5xl mb-10">Plats emblématiques</h2></Reveal>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {PLATS.map((p, i) => (
+            <Reveal key={p.name} delay={(i % 3) * 0.05}>
+              <article className="p-6 border border-white/10 hover:border-white/40 transition h-full">
+                <div className="flex items-baseline justify-between mb-2">
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-white/40">{p.origin}</span>
+                  <span className="w-1 h-5 bg-gradient-flag-v" />
+                </div>
+                <h3 className="font-display text-2xl">{p.name}</h3>
+                <p className="text-sm text-white/65 mt-3 leading-relaxed">{p.desc}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+        <Reveal>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="inline-block w-8 h-[2px] bg-gradient-flag" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-white/40">Sélection</span>
+          </div>
+        </Reveal>
+        <Reveal><h2 className="font-display text-3xl md:text-5xl mb-10">Adresses gourmandes</h2></Reveal>
+        <Reveal>
+          <div className="flex flex-wrap gap-2 mb-10">
+            {CATEGORIES.map((c) => (
+              <button
+                key={c.id}
+                onClick={() => setActive(c.id)}
+                className={`px-4 py-2 text-xs tracking-[0.1em] uppercase border transition ${active === c.id
+                  ? 'bg-white text-black border-white'
+                  : 'bg-transparent text-white/60 border-white/20 hover:border-white/50 hover:text-white'
+                  }`}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filtered.map((a, i) => (
+            <Reveal key={a.name} delay={(i % 3) * 0.05}>
+              <AdresseCard a={a} />
+            </Reveal>
+          ))}
+        </div>
+      </section>
+    </SiteLayout>
+  );
+}
