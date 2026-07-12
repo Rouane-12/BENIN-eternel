@@ -1,0 +1,14 @@
+// Bénin Éternel — design tokens (SCSS)
+$radius: 0.25rem;
+
+// Drapeau béninois
+$flag-green: #008751;
+$flag-yellow: #fcd116;
+$flag-red: #e8112d;
+
+// Typographie (variables Next.js font)
+$font-inter: var(--font-inter), system-ui, sans-serif;
+$font-display: var(--font-cinzel), var(--font-cormorant-garamond), serif;
+$font-serif-display: var(--font-cormorant-garamond), serif;
+$font-script: var(--font-italianno), var(--font-great-vibes), cursive;
+$font-vibes: var(--font-great-vibes), cursive;

@@ -1,0 +1,452 @@
+[
+    {
+        "id": "angelique-kidjo",
+        "name": "Angélique Kidjo",
+        "type": "solo",
+        "genre": "Afro-funk / World music / Afrobeat",
+        "mostFamousAlbum": "Djin Djin (2007)",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Ang%C3%A9lique+Kidjo+Djin+Djin",
+        "votes": 0
+    },
+    {
+        "id": "zeynab-habib",
+        "name": "Zeynab Habib",
+        "type": "solo",
+        "genre": "World music / Afro-soul",
+        "mostFamousAlbum": "Zeynab (2012)",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Zeynab+Habib",
+        "votes": 0
+    },
+    {
+        "id": "gangbe-brass-band",
+        "name": "Gangbé Brass Band",
+        "type": "groupe",
+        "genre": "Vodun-jazz / Afrobeat / Jazz",
+        "mostFamousAlbum": "Gangbé (1996)",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Gangb%C3%A9+Brass+Band",
+        "votes": 0
+    },
+    {
+        "id": "sagbohan-danialou",
+        "name": "Sagbohan Danialou",
+        "type": "solo",
+        "genre": "Musique traditionnelle / Afrobeat",
+        "mostFamousAlbum": "Sagbohan Danialou",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Sagbohan+Danialou",
+        "votes": 0
+    },
+    {
+        "id": "gnonnas-pedro",
+        "name": "Gnonnas Pedro",
+        "type": "solo",
+        "genre": "Salsa / Afro-Cubain",
+        "mostFamousAlbum": "Solo Gnonnas Pedro",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Gnonnas+Pedro",
+        "votes": 0
+    },
+    {
+        "id": "vincent-ahehehinnou",
+        "name": "Vincent Ahehehinnou",
+        "type": "solo",
+        "genre": "Afrobeat / Funk",
+        "mostFamousAlbum": "Best Woman (2013)",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Vincent+Ahehehinnou",
+        "votes": 0
+    },
+    {
+        "id": "orchestre-poly-rythmo",
+        "name": "Orchestre Poly-Rythmo de Cotonou",
+        "type": "groupe",
+        "genre": "Afrobeat / Funk / Vodun",
+        "mostFamousAlbum": "Poly Rythmo 76 (1976)",
+        "youtubeLink": "https://www.youtube.com/watch?v=LNlGn_6ghus",
+        "votes": 0
+    },
+    {
+        "id": "lokonon-andre",
+        "name": "Lokonon André & Les Volcans",
+        "type": "groupe",
+        "genre": "Afrobeat / Funk",
+        "mostFamousAlbum": "Les Volcans de Cotonou",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Lokonon+Andr%C3%A9+Volcans",
+        "votes": 0
+    },
+    {
+        "id": "ignace-de-souza",
+        "name": "Ignace De Souza & The Melody Aces",
+        "type": "groupe",
+        "genre": "Afrobeat / Soul",
+        "mostFamousAlbum": "The Melody Aces",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Ignace+De+Souza+Melody+Aces",
+        "votes": 0
+    },
+    {
+        "id": "antoine-dougbe",
+        "name": "Antoine Dougbé",
+        "type": "solo",
+        "genre": "Afrobeat / Funk",
+        "mostFamousAlbum": "Antoine Dougbé",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Antoine+Dougb%C3%A9",
+        "votes": 0
+    },
+    {
+        "id": "dibi-dobo",
+        "name": "Dibi Dobo",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "Dibi Dobo",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Dibi+Dobo",
+        "votes": 0
+    },
+    {
+        "id": "axel-merryl",
+        "name": "Axel Merryl",
+        "type": "solo",
+        "genre": "Hip-hop / R&B / Urbain",
+        "mostFamousAlbum": "TEMPERATURE (2023)",
+        "youtubeLink": "https://www.youtube.com/watch?v=51Tz_h5fnDM",
+        "votes": 0
+    },
+    {
+        "id": "x-time",
+        "name": "X-Time",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "X-Time",
+        "youtubeLink": "https://www.youtube.com/results?search_query=X-Time+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "vano-baby",
+        "name": "Vano Baby",
+        "type": "solo",
+        "genre": "Hip-hop / R&B",
+        "mostFamousAlbum": "Vano Baby",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Vano+Baby",
+        "votes": 0
+    },
+    {
+        "id": "tma-crush",
+        "name": "TMA CRUSH",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "TMA CRUSH",
+        "youtubeLink": "https://www.youtube.com/results?search_query=TMA+CRUSH",
+        "votes": 0
+    },
+    {
+        "id": "nikanor",
+        "name": "Nikanor",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "Nikanor",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Nikanor+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "tgang",
+        "name": "Tgang",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Tgang",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Tgang",
+        "votes": 0
+    },
+    {
+        "id": "praouda",
+        "name": "Praouda",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "Praouda",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Praouda",
+        "votes": 0
+    },
+    {
+        "id": "crisba",
+        "name": "Crisba",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Crisba",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Crisba+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "gg-lapino",
+        "name": "GG Lapino",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "GG Lapino",
+        "youtubeLink": "https://www.youtube.com/results?search_query=GG+Lapino",
+        "votes": 0
+    },
+    {
+        "id": "bobo-we",
+        "name": "Bobo Wê",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Bobo Wê",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Bobo+W%C3%AA",
+        "votes": 0
+    },
+    {
+        "id": "fanicko",
+        "name": "Fanicko",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Fanicko",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Fanicko",
+        "votes": 0
+    },
+    {
+        "id": "sessime",
+        "name": "Sessimé",
+        "type": "solo",
+        "genre": "Afrobeat / Urbain",
+        "mostFamousAlbum": "Sessimé",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Sessim%C3%A9",
+        "votes": 0
+    },
+    {
+        "id": "siano-babassa",
+        "name": "Siano Babassa",
+        "type": "solo",
+        "genre": "Afrobeat / Urbain",
+        "mostFamousAlbum": "Siano Babassa",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Siano+Babassa",
+        "votes": 0
+    },
+    {
+        "id": "ghix",
+        "name": "Ghix",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Ghix",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Ghix+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "blaaz",
+        "name": "Blaaz",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "Blaaz",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Blaaz+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "houegnon-gbeze",
+        "name": "Houégnon Gbèzé Junior",
+        "type": "solo",
+        "genre": "Urbain / Afrobeat",
+        "mostFamousAlbum": "Houégnon Gbèzé Junior",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Hou%C3%A9gnon+Gb%C3%A8z%C3%A9+Junior",
+        "votes": 0
+    },
+    {
+        "id": "d-blue",
+        "name": "D-Blue",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "D-Blue",
+        "youtubeLink": "https://www.youtube.com/results?search_query=D-Blue+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "rabby-slo",
+        "name": "Rabby Slo",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "Rabby Slo",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Rabby+Slo",
+        "votes": 0
+    },
+    {
+        "id": "kmal-radji",
+        "name": "Kmal Radji",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Kmal Radji",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Kmal+Radji",
+        "votes": 0
+    },
+    {
+        "id": "richard-flash",
+        "name": "Richard Flash",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Richard Flash",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Richard+Flash+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "ricos-campos",
+        "name": "Ricos Campos",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Ricos Campos",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Ricos+Campos",
+        "votes": 0
+    },
+    {
+        "id": "riss-cool",
+        "name": "Riss Cool",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "Riss Cool",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Riss+Cool",
+        "votes": 0
+    },
+    {
+        "id": "robinson-sipa",
+        "name": "Robinson Sipa",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Robinson Sipa",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Robinson+Sipa",
+        "votes": 0
+    },
+    {
+        "id": "patrick-ruffino",
+        "name": "Patrick Ruffino",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Patrick Ruffino",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Patrick+Ruffino",
+        "votes": 0
+    },
+    {
+        "id": "sabbat-nazaire",
+        "name": "Sabbat Nazaire",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "Sabbat Nazaire",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Sabbat+Nazaire",
+        "votes": 0
+    },
+    {
+        "id": "stan-tohon",
+        "name": "Stan Tohon",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Stan Tohon",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Stan+Tohon",
+        "votes": 0
+    },
+    {
+        "id": "tyaf",
+        "name": "Tyaf",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Tyaf",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Tyaf+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "wilf-enighma",
+        "name": "Wilf Enighma",
+        "type": "solo",
+        "genre": "Hip-hop / Rap",
+        "mostFamousAlbum": "Wilf Enighma",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Wilf+Enighma",
+        "votes": 0
+    },
+    {
+        "id": "gbeze",
+        "name": "Gbèzé",
+        "type": "solo",
+        "genre": "Hip-hop / Urbain",
+        "mostFamousAlbum": "Gbèzé",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Gb%C3%A8z%C3%A9+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "gabo-brown",
+        "name": "Gabo Brown",
+        "type": "solo",
+        "genre": "World music / Afrobeat",
+        "mostFamousAlbum": "Gabo Brown",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Gabo+Brown+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "discafric-band",
+        "name": "Discafric Band",
+        "type": "groupe",
+        "genre": "Afrobeat / Funk",
+        "mostFamousAlbum": "Discafric Band",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Discafric+Band",
+        "votes": 0
+    },
+    {
+        "id": "super-borgou-parakou",
+        "name": "Le Super Borgou de Parakou",
+        "type": "groupe",
+        "genre": "Musique traditionnelle / Afrobeat",
+        "mostFamousAlbum": "Super Borgou de Parakou",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Super+Borgou+de+Parakou",
+        "votes": 0
+    },
+    {
+        "id": "les-sympathics",
+        "name": "Les Sympathics de Porto Novo",
+        "type": "groupe",
+        "genre": "Afrobeat / Funk",
+        "mostFamousAlbum": "Les Sympathics",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Les+Sympathics+de+Porto+Novo",
+        "votes": 0
+    },
+    {
+        "id": "star-feminine-band",
+        "name": "STAR FEMININE BAND",
+        "type": "groupe",
+        "genre": "Afrobeat / Funk",
+        "mostFamousAlbum": "Star Feminine Band",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Star+Feminine+Band",
+        "votes": 0
+    },
+    {
+        "id": "alekpehanhou",
+        "name": "Alèkpèhanhou",
+        "type": "solo",
+        "genre": "Musique traditionnelle / Vodun",
+        "mostFamousAlbum": "Alèkpèhanhou",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Al%C3%A8kp%C3%A8hanhou",
+        "votes": 0
+    },
+    {
+        "id": "jah-baba",
+        "name": "Jah Baba",
+        "type": "solo",
+        "genre": "Reggae / Afrobeat",
+        "mostFamousAlbum": "Jah Baba",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Jah+Baba+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "johnny-sourou",
+        "name": "Johnny Sourou",
+        "type": "solo",
+        "genre": "Afrobeat / Funk",
+        "mostFamousAlbum": "Johnny Sourou",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Johnny+Sourou",
+        "votes": 0
+    },
+    {
+        "id": "jospinto",
+        "name": "Jospinto",
+        "type": "solo",
+        "genre": "Afrobeat / Urbain",
+        "mostFamousAlbum": "Jospinto",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Jospinto",
+        "votes": 0
+    },
+    {
+        "id": "el-jowania",
+        "name": "El Jowania",
+        "type": "solo",
+        "genre": "Afrobeat / Urbain",
+        "mostFamousAlbum": "El Jowania",
+        "youtubeLink": "https://www.youtube.com/results?search_query=El+Jowania",
+        "votes": 0
+    }
+]

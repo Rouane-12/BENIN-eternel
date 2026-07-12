@@ -1,10 +1,20 @@
 'use client';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Sparkles } from 'lucide-react';
+import { Heart, Search, Sparkles } from 'lucide-react';
 import { SiteLayout, PageHero } from '@/components/SiteLayout';
 import { Reveal } from '@/components/Reveal';
-import { INFLUENCEURS, CATEGORIES_STARS, CategorieStars } from '@/data/stars';
+import { CATEGORIES_STARS, CategorieStars } from '@/data/stars';
+import { useVotes } from '@/hooks/useVotes';
+import initialInfluenceurs from '@/data/influenceurs.json';
+
+interface Influenceur {
+  id: string;
+  nom: string;
+  categorie: string;
+  bio: string;
+  votes: number;
+}
 
 function getCategories(categorie: string): CategorieStars[] {
   const c = categorie.toLowerCase();
@@ -15,21 +25,12 @@ function getCategories(categorie: string): CategorieStars[] {
   if (c.includes("divertissement") || c.includes("famille") || c.includes("collectif")) cats.add("Divertissement");
   if (c.includes("cuisine") || c.includes("food")) cats.add("Cuisine / Food");
   if (c.includes("entrepreneuriat")) cats.add("Entrepreneuriat");
-  if (c.includes("actualités")) cats.add("Actualités");
+  if (c.includes("actualité") || c.includes("actualités")) cats.add("Actualité");
   if (c.includes("agriculture")) cats.add("Agriculture");
   return Array.from(cats);
 }
 
-function shuffle<T>(array: T[]): T[] {
-  const result = [...array];
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-  return result;
-}
-
-function InfluencerCard({ influenceur, index }: { influenceur: typeof INFLUENCEURS[0], index: number }) {
+function InfluencerCard({ influenceur, index, onVote, voted }: { influenceur: Influenceur, index: number; onVote: (id: string) => void; voted: boolean }) {
   return (
     <motion.div
       layout
@@ -48,9 +49,17 @@ function InfluencerCard({ influenceur, index }: { influenceur: typeof INFLUENCEU
             <Sparkles className="w-3 h-3" />
             Influenceur
           </span>
-          <span className="text-[10px] font-mono text-white/30">
-            {/* {String(index + 1).padStart(2, "0")} */}
-          </span>
+          <button
+            onClick={() => onVote(influenceur.id)}
+            disabled={voted}
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] tracking-[0.15em] uppercase border transition-colors ${voted
+              ? "border-red-500/50 text-red-400 cursor-not-allowed"
+              : "border-white/15 hover:border-red-500/50 hover:text-red-400"
+              }`}
+          >
+            <Heart className={`w-3 h-3 ${voted ? "fill-red-400" : ""}`} />
+            {influenceur.votes}
+          </button>
         </div>
 
         <h3 className="font-display text-lg md:text-xl text-white leading-tight mb-2">
@@ -72,15 +81,11 @@ function InfluencerCard({ influenceur, index }: { influenceur: typeof INFLUENCEU
 export default function StarsDuBenin() {
   const [search, setSearch] = useState("");
   const [categorie, setCategorie] = useState<CategorieStars>("Tous");
-  const [influenceursShuffled, setInfluenceursShuffled] = useState<typeof INFLUENCEURS>([]);
-
-  useEffect(() => {
-    setInfluenceursShuffled(shuffle(INFLUENCEURS));
-  }, []);
+  const [influenceurs, handleVote, votedItems] = useVotes("influenceurs-votes", initialInfluenceurs as unknown as Influenceur[]);
 
   const filtered = useMemo(() => {
     const query = search.toLowerCase().trim();
-    return influenceursShuffled.filter((i) => {
+    return influenceurs.filter((i) => {
       const matchesSearch =
         !query ||
         i.nom.toLowerCase().includes(query) ||
@@ -89,7 +94,7 @@ export default function StarsDuBenin() {
       const matchesCategorie = categorie === "Tous" || getCategories(i.categorie).includes(categorie);
       return matchesSearch && matchesCategorie;
     });
-  }, [search, categorie, influenceursShuffled]);
+  }, [search, categorie, influenceurs]);
 
   return (
     <SiteLayout>
@@ -168,7 +173,13 @@ export default function StarsDuBenin() {
           <AnimatePresence mode="popLayout">
             {filtered.length > 0 ? (
               filtered.map((influenceur, index) => (
-                <InfluencerCard key={influenceur.nom} influenceur={influenceur} index={index} />
+                <InfluencerCard
+                  key={influenceur.id}
+                  influenceur={influenceur}
+                  index={index}
+                  onVote={handleVote}
+                  voted={votedItems.has(influenceur.id)}
+                />
               ))
             ) : (
               <motion.div
@@ -185,4 +196,3 @@ export default function StarsDuBenin() {
     </SiteLayout>
   );
 }
-

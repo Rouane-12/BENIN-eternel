@@ -261,7 +261,7 @@ export default function HebergementClient() {
         title="Hébergement"
         script="d'exception"
         intro="Hôtels de luxe, villas privées ou appartements meublés — une sélection rigoureuse pour chaque profil de voyageur au Bénin."
-        image="/erevan.webp"
+        image="/plan.jpg"
       />
 
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16">

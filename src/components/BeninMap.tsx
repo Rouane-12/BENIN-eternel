@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useMemo, useState, useCallback, useRef, Component, ErrorInfo } from "react";
 import {
   GoogleMap,

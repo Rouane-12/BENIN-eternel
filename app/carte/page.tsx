@@ -1,4 +1,5 @@
 import CarteClient from './CarteClient';
+import { Suspense } from 'react';
 
 export const metadata = {
   title: "Carte interactive du Bénin — Géolocalisation & sites",
@@ -8,5 +9,9 @@ export const metadata = {
 };
 
 export default function Carte() {
-  return <CarteClient />;
+  return (
+    <Suspense fallback={<div className="min-h-[60vh] bg-white/5 animate-pulse" />}>
+      <CarteClient />
+    </Suspense>
+  );
 }

@@ -28,7 +28,7 @@ export default function MonumentsClient() {
         title="Monuments"
         script="& mémoire"
         intro="Du palais royal d'Abomey à la Porte du Non-Retour, les monuments du Bénin sont autant de récits de pierre, de banco et de mémoire."
-        image="/ouidah.png"
+        image="/plan.jpg"
       />
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-2 gap-6">
         {MONUMENTS.map((m, i) => {

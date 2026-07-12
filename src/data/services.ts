@@ -47,7 +47,7 @@ export const SERVICES: Service[] = [
     ville: "Cotonou",
     telephone: "+229 21 31 22 22",
     description: "Assure la gestion des cotisations sociales, retraites, allocations familiales et prestations sociales.",
-    img: "/Benin app/benin-eternal/src/assets/msilva.png",
+    img: "/msilva.png",
     siteWeb: "https://cnss.bj",
   },
 ];

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState, type ReactNode } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { Nav } from "./Nav";
@@ -64,7 +66,7 @@ export function PageHero({
   image?: string;
 }) {
   return (
-    <section className="relative min-h-[60vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
       {image && (
         <>
           <img src={image} alt="" className="absolute inset-0 w-full h-full object-cover opacity-30" />

@@ -3,10 +3,11 @@ import { SiteLayout, PageHero } from '@/components/SiteLayout';
 import { Reveal } from '@/components/Reveal';
 import { SERVICES_PUBLICS, ServicePublic } from '@/data/services-publics';
 import { useState, useMemo } from 'react';
-import { Search, Globe, Phone, Mail, MapPin, Clock, ExternalLink, ChevronRight } from 'lucide-react';
+import { Search, Phone, Mail, MapPin, Clock, ExternalLink, ChevronRight } from 'lucide-react';
 
 function ServiceCard({ service, index }: { service: ServicePublic; index: number }) {
   const [expanded, setExpanded] = useState(false);
+  const hasMore = Boolean(service.email || service.horaires || (service.services?.length ?? 0) > 0);
 
   return (
     <Reveal delay={index * 0.05}>
@@ -31,55 +32,75 @@ function ServiceCard({ service, index }: { service: ServicePublic; index: number
           </p>
 
           <div className="space-y-3">
-            <div className="flex items-start gap-3 text-[11px] text-white/50">
-              <MapPin size={14} className="mt-0.5 flex-shrink-0" />
-              <span>{service.adresse}</span>
-            </div>
-            <div className="flex items-center gap-3 text-[11px] text-white/50">
-              <Phone size={14} className="flex-shrink-0" />
-              <span>{service.telephone}</span>
-            </div>
+            {service.adresse && (
+              <div className="flex items-start gap-3 text-[11px] text-white/50">
+                <MapPin size={14} className="mt-0.5 flex-shrink-0" />
+                <span>{service.adresse}</span>
+              </div>
+            )}
+            {service.telephone && (
+              <div className="flex items-center gap-3 text-[11px] text-white/50">
+                <Phone size={14} className="flex-shrink-0" />
+                <span>{service.telephone}</span>
+              </div>
+            )}
           </div>
 
-          <div className={`mt-6 pt-6 border-t border-white/5 space-y-4 overflow-hidden transition-all duration-500 ${expanded ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-            <div className="flex items-center gap-3 text-[11px] text-white/50">
-              <Mail size={14} className="flex-shrink-0" />
-              <span>{service.email}</span>
+          {hasMore && (
+            <div className={`mt-6 pt-6 border-t border-white/5 space-y-4 overflow-hidden transition-all duration-500 ${expanded ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+              {service.email && (
+                <div className="flex items-center gap-3 text-[11px] text-white/50">
+                  <Mail size={14} className="flex-shrink-0" />
+                  <span>{service.email}</span>
+                </div>
+              )}
+              {service.horaires && (
+                <div className="flex items-start gap-3 text-[11px] text-white/50">
+                  <Clock size={14} className="mt-0.5 flex-shrink-0" />
+                  <span>{service.horaires}</span>
+                </div>
+              )}
+              {(service.services?.length ?? 0) > 0 && (
+                <div>
+                  <p className="text-[9px] uppercase tracking-[0.2em] text-white/30 mb-2">Services principaux :</p>
+                  <div className="flex flex-wrap gap-2">
+                    {(service.services ?? []).map((s) => (
+                      <span key={s} className="text-[10px] px-2 py-1 bg-white/5 rounded-sm text-white/60">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="flex items-start gap-3 text-[11px] text-white/50">
-              <Clock size={14} className="mt-0.5 flex-shrink-0" />
-              <span>{service.horaires}</span>
-            </div>
-            <div>
-              <p className="text-[9px] uppercase tracking-[0.2em] text-white/30 mb-2">Services principaux :</p>
-              <div className="flex flex-wrap gap-2">
-                {service.services.map((s) => (
-                  <span key={s} className="text-[10px] px-2 py-1 bg-white/5 rounded-sm text-white/60">
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+          )}
 
           <div className="mt-8 flex items-center justify-between">
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="text-[10px] uppercase tracking-[0.2em] text-white/40 hover:text-white flex items-center gap-2 transition-colors"
-            >
-              {expanded ? "Moins d'infos" : "Plus d'infos"}
-              <ChevronRight size={12} className={`transition-transform duration-300 ${expanded ? '-rotate-90' : 'rotate-90'}`} />
-            </button>
+            {hasMore ? (
+              <button
+                onClick={() => setExpanded(!expanded)}
+                className="text-[10px] uppercase tracking-[0.2em] text-white/40 hover:text-white flex items-center gap-2 transition-colors"
+              >
+                {expanded ? "Moins d'infos" : "Plus d'infos"}
+                <ChevronRight size={12} className={`transition-transform duration-300 ${expanded ? '-rotate-90' : 'rotate-90'}`} />
+              </button>
+            ) : (
+              <span className="text-[10px] uppercase tracking-[0.2em] text-white/25">
+                Infos
+              </span>
+            )}
 
-            <a
-              href={service.site_web}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white/60 hover:text-white transition-all"
-              title="Visiter le site web"
-            >
-              <ExternalLink size={16} />
-            </a>
+            {service.site_web && (
+              <a
+                href={service.site_web}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white/60 hover:text-white transition-all"
+                title="Visiter le site web"
+              >
+                <ExternalLink size={16} />
+              </a>
+            )}
           </div>
         </div>
       </article>
@@ -116,7 +137,7 @@ export default function Services() {
         title="Services"
         script="Publics"
         intro="Retrouvez les informations essentielles sur les organismes publics, agences gouvernementales et entreprises d'État du Bénin."
-        image="/ouidah.webp"
+        image="/f2.jpg"
       />
 
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
@@ -154,7 +175,7 @@ export default function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredServices.map((service, i) => (
-            <ServiceCard key={service.sigle} service={service} index={i} />
+            <ServiceCard key={service.slug} service={service} index={i} />
           ))}
         </div>
 

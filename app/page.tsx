@@ -47,7 +47,7 @@ export default function Home() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section ref={heroRef} className="relative h-[120vh] -mt-16">
+      <section ref={heroRef} className="relative min-h-[100vh] -mt-16">
         <div className="sticky top-0 h-screen overflow-hidden">
           <div className="absolute inset-0">
             <AnimatePresence>
@@ -68,16 +68,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/40 to-transparent" />
           <div className="absolute inset-0 noise" />
 
-          <div className="relative h-full max-w-7xl mx-auto px-6 lg:px-12 flex items-center">
+          <div className="relative h-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col justify-start pt-28 md:pt-32 pb-56 md:pb-64">
             <motion.div style={{ opacity: heroOpacity }} className="z-10 max-w-2xl">
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-3 mb-6">
                 <span className="inline-block w-10 h-[3px] bg-gradient-flag" />
                 <span className="text-[10px] tracking-[0.5em] uppercase text-white/80">
                   Afrique de l'Ouest · Côte atlantique
@@ -91,26 +84,26 @@ export default function Home() {
                   Éternel
                 </span>
               </h1>
-              <p className="mt-10 max-w-xl text-lg md:text-xl text-white/75 leading-relaxed">
+              <p className="mt-6 max-w-xl text-lg md:text-xl text-white/75 leading-relaxed">
                 Terre de royaumes, de traditions, de culture et de merveilles naturelles.
                 Bienvenue au berceau du Vodún.
               </p>
-              <div className="mt-12 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href="/tourisme"
-                  className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium tracking-[0.2em] uppercase text-xs rounded-full hover:bg-white/90 transition-all hover:gap-5"
+                  className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium tracking-[0.2em] uppercase text-xs rounded-full hover:bg-white/90 transition-all hover:gap-5 hover:shadow-[0_0_30px_rgba(255,255,255,0.25)]"
                 >
                   Explorer le Bénin <span>→</span>
                 </Link>
                 <Link
                   href="/histoire"
-                  className="inline-flex items-center gap-3 px-8 py-4 border border-white/30 text-white hover:bg-white/10 transition-colors uppercase tracking-[0.2em] text-xs rounded-full backdrop-blur-sm"
+                  className="inline-flex items-center gap-3 px-8 py-4 border border-white/30 text-white hover:bg-white/10 hover:border-white/60 transition-colors uppercase tracking-[0.2em] text-xs rounded-full backdrop-blur-sm"
                 >
                   Découvrir l'histoire
                 </Link>
               </div>
 
-              <div className="mt-14 flex items-center gap-8 text-[10px] tracking-[0.3em] uppercase text-white/50">
+              <div className="mt-8 flex items-center gap-8 text-[10px] tracking-[0.3em] uppercase text-white/50">
                 <div><span className="text-white font-display text-2xl normal-case tracking-normal mr-2">12</span>départements</div>
                 <div><span className="text-white font-display text-2xl normal-case tracking-normal mr-2">77</span>communes</div>
                 <div className="hidden sm:block"><span className="text-white font-display text-2xl normal-case tracking-normal mr-2">UNESCO</span>Abomey</div>
@@ -118,7 +111,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex gap-2 z-10">
             {HERO_SLIDES.map((_, i) => (
               <button
                 key={i}
@@ -133,28 +126,28 @@ export default function Home() {
       </section>
 
       {/* MARQUEE */}
-      <section className="border-y border-white/10 py-20 overflow-hidden bg-[var(--background)] relative z-10">
+      <section className="relative border-t border-white/10 py-6 bg-[var(--background)]">
         <motion.div
-          className="flex gap-16 whitespace-nowrap text-white/40 font-display text-3xl md:text-5xl"
+          className="flex gap-16 whitespace-nowrap text-white/40 font-display text-2xl md:text-4xl"
           animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
         >
           {Array.from({ length: 2 }).map((_, i) => (
             <div key={i} className="flex gap-16 items-center">
-              <span>Dahomey</span><span>·</span>
-              <span>Vodún</span><span>·</span>
-              <span>Amazones</span><span>·</span>
-              <span>Ganvié</span><span>·</span>
-              <span>Pendjari</span><span>·</span>
-              <span>Ouidah</span><span>·</span>
-              <span>Abomey</span><span>·</span>
+              <span>Dahomey</span><span className="text-white/20">·</span>
+              <span>Vodún</span><span className="text-white/20">·</span>
+              <span>Amazones</span><span className="text-white/20">·</span>
+              <span>Ganvié</span><span className="text-white/20">·</span>
+              <span>Pendjari</span><span className="text-white/20">·</span>
+              <span>Ouidah</span><span className="text-white/20">·</span>
+              <span>Abomey</span><span className="text-white/20">·</span>
             </div>
           ))}
         </motion.div>
       </section>
 
       {/* CHAPTERS */}
-      <section className="relative py-32 px-6 lg:px-12 max-w-7xl mx-auto">
+      <section className="relative pt-8 md:pt-10 pb-20 px-6 lg:px-12 max-w-7xl mx-auto">
         <Reveal>
           <div className="text-xs tracking-[0.4em] uppercase text-white/60 mb-4">Chapitres</div>
           <h2 className="font-display text-5xl md:text-7xl mb-4">
@@ -173,7 +166,7 @@ export default function Home() {
                 <motion.article
                   whileHover={{ y: -6 }}
                   transition={{ duration: 0.4 }}
-                  className="group relative overflow-hidden bg-[var(--secondary)] aspect-[4/5] cursor-pointer"
+                  className="group relative overflow-hidden bg-[var(--secondary)] aspect-[4/5] cursor-pointer ring-1 ring-white/0 hover:ring-white/10 transition-all duration-500"
                 >
                   <motion.img
                     src={s.img}
@@ -253,7 +246,7 @@ export default function Home() {
       {/* FESTIVAL CTA */}
       <section className="relative py-32 px-6 lg:px-12 max-w-7xl mx-auto">
         <Reveal>
-          <div className="relative overflow-hidden rounded-sm">
+          <div className="relative overflow-hidden rounded-sm ring-1 ring-white/5">
             <img src={festival.src} alt="Festival béninois" className="absolute inset-0 w-full h-full object-cover opacity-50" />
             <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/40 to-transparent" />
             <div className="relative p-12 md:p-20">
@@ -267,7 +260,7 @@ export default function Home() {
               </p>
               <Link
                 href="/culture"
-                className="mt-8 inline-flex items-center gap-3 px-8 py-4 bg-white text-black uppercase tracking-[0.2em] text-xs rounded-full hover:bg-white/90"
+                className="mt-8 inline-flex items-center gap-3 px-8 py-4 bg-white text-black uppercase tracking-[0.2em] text-xs rounded-full hover:bg-white/90 hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] transition-all"
               >
                 Voir les festivals →
               </Link>

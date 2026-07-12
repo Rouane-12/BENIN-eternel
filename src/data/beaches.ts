@@ -39,3 +39,15 @@ export const PLAGES: Plage[] = [
     img: "/paradisia.webp",
   },
 ];
+
+export type Beach = {
+  name: string;
+  img: string;
+  desc: string;
+};
+
+export const BEACHES: Beach[] = PLAGES.map((p) => ({
+  name: p.nom,
+  img: p.img,
+  desc: p.description,
+}));

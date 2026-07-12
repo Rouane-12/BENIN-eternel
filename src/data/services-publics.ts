@@ -1,3 +1,17 @@
+export type ServicePublic = {
+  slug: string;
+  categorie: string;
+  sigle: string;
+  nom: string;
+  description: string;
+  adresse?: string;
+  telephone?: string;
+  email?: string;
+  horaires?: string;
+  services?: string[];
+  site_web?: string;
+};
+
 export type Service = {
   slug: string;
   title: string;
@@ -6,175 +20,112 @@ export type Service = {
   details?: string[];
 };
 
-export const SERVICES_PUBLICS: Service[] = [
+export const SERVICES_PUBLICS: ServicePublic[] = [
   {
     slug: "impots-dgi",
-    title: "Impôts — DGI / DGID",
-    href: "https://www.impots.bj",
-    description: "Site officiel de la Direction générale des impôts et des droits : e-services, paiement en ligne, fiscalité.",
-  },
-  {
-    slug: "passports-consulats",
-    title: "Passeports, visas et consulats",
-    href: "https://www.beninconsulats.org",
-    description: "Plateforme du réseau consulaire du Bénin.",
-  },
-  {
-    slug: "poste-benin",
-    title: "La Poste du Bénin",
-    href: "https://www.lapostebenin.bj",
-    description: "Services postaux, colis, correspondance, timbres, MoneyGram.",
+    categorie: "Fiscalité",
+    sigle: "DGI / DGID",
+    nom: "Impôts — Direction générale des impôts et des droits",
+    site_web: "https://www.impots.bj",
+    description: "E-services, paiement en ligne, fiscalité.",
+    services: ["Déclarations", "Paiement en ligne", "Informations fiscales"],
   },
   {
     slug: "immatriculation-cnam",
-    title: "Immatriculation (CNAM)",
-    href: "https://www.cnam.bj",
+    categorie: "Identité",
+    sigle: "CNAM",
+    nom: "Immatriculation (CNAM)",
+    site_web: "https://www.cnam.bj",
     description: "Carte nationale d'identification biométrique (CNIB), état civil.",
+    services: ["CNIB", "État civil"],
   },
   {
     slug: "douanes",
-    title: "Douanes du Bénin",
-    href: "https://www.douanes.bj",
-    description: "Administration douanière, formalités portuaires et frontalières.",
+    categorie: "Administration",
+    sigle: "Douanes",
+    nom: "Douanes du Bénin",
+    site_web: "https://www.douanes.bj",
+    description: "Formalités portuaires et frontalières, administration douanière.",
+    services: ["Formalités", "Réglementation", "Procédures"],
+  },
+  {
+    slug: "poste-benin",
+    categorie: "Services",
+    sigle: "Poste",
+    nom: "La Poste du Bénin",
+    site_web: "https://www.lapostebenin.bj",
+    description: "Services postaux, colis, correspondance, timbres, MoneyGram.",
+    services: ["Courrier", "Colis", "Transferts"],
   },
   {
     slug: "snte",
-    title: "SNTE (eau)",
-    href: "https://www.snte.bj",
-    description: "Société nationale des eaux du Bénin : abonnement, facturation, dépannage.",
+    categorie: "Énergie & Eau",
+    sigle: "SNTE",
+    nom: "SNTE (eau)",
+    site_web: "https://www.snte.bj",
+    description: "Abonnement, facturation, dépannage.",
+    services: ["Abonnement", "Facturation", "Dépannage"],
   },
   {
     slug: "see",
-    title: "SBEE (électricité)",
-    href: "https://www.sbee.bj",
+    categorie: "Énergie & Eau",
+    sigle: "SBEE",
+    nom: "SBEE (électricité)",
+    site_web: "https://www.sbee.bj",
     description: "Société béninoise d'énergie électrique.",
-  },
-  {
-    slug: "sonapost",
-    title: "Sonapost / La Poste",
-    description: "Gestion postale, colis, Mandat-Poste, Western Union.",
+    services: ["Abonnement", "Facturation", "Assistance"],
   },
   {
     slug: "airbenin",
-    title: "Aéroport international de Cotonou — Cadjehoun",
-    href: "https://www.airbenin.aero",
-    description: "Horaires, vols, navette aéroport.",
+    categorie: "Transport",
+    sigle: "Aéroport",
+    nom: "Aéroport international de Cotonou — Cadjehoun",
+    site_web: "https://www.airbenin.aero",
+    description: "Horaires, vols, services aéroport.",
+    services: ["Horaires", "Vols", "Infos voyageurs"],
   },
   {
     slug: "port-autonome-cotonou",
-    title: "Port autonome de Cotonou",
-    href: "https://www.pac.bj",
-    description: "Premier port de la côte atlantique ouest-africaine.",
+    categorie: "Transport",
+    sigle: "PAC",
+    nom: "Port autonome de Cotonou",
+    site_web: "https://www.pac.bj",
+    description: "Plateforme portuaire et services logistiques.",
+    services: ["Infos port", "Procédures", "Services"],
   },
   {
     slug: "mairie-cotonou",
-    title: "Mairie de Cotonou",
+    categorie: "Collectivités",
+    sigle: "Mairie",
+    nom: "Mairie de Cotonou",
     description: "Services municipaux de la capitale économique.",
+    services: ["État civil", "Services municipaux"],
   },
   {
     slug: "mairie-porto-novo",
-    title: "Mairie de Porto-Novo",
+    categorie: "Collectivités",
+    sigle: "Mairie",
+    nom: "Mairie de Porto-Novo",
     description: "Services municipaux de la capitale administrative.",
+    services: ["État civil", "Services municipaux"],
   },
   {
     slug: "onu-benin",
-    title: "ONU — système des Nations Unies au Bénin",
-    href: "https://www.bj.un.org",
+    categorie: "International",
+    sigle: "ONU",
+    nom: "Système des Nations Unies au Bénin",
+    site_web: "https://www.bj.un.org",
     description: "Coordination du système des Nations Unies au Bénin.",
+    services: ["Programmes", "Actualités", "Partenariats"],
   },
   {
-    slug: "ambassade-france-cotonou",
-    title: "Ambassade de France au Bénin (Cotonou)",
-    href: "https://franceintheus.org",
-    description: "Services consulaires, visas, coopération.",
-    details: [
-      "Note : Lien générique à compléter par l'URL officielle du service consulaire.",
-    ],
-  },
-  {
-    slug: "ambassade-benin-paris",
-    title: "Ambassade du Bénin en France (Paris)",
-    description: "Représentation diplomatique, consulats honoraire, passeports, légalisations.",
-  },
-  {
-    slug: "ambassade-benin-dakar",
-    title: "Ambassade du Bénin au Sénégal (Dakar)",
-    description: "Représentation régionale pour l'Afrique de l'Ouest.",
-  },
-  {
-    slug: "ambassade-benin-washington",
-    title: "Ambassade du Bénin aux États-Unis (Washington)",
-    description: "Représentation diplomatique en Amérique du Nord.",
-  },
-  {
-    slug: "ambassade-benin-bruxelles",
-    title: "Ambassade du Bénin en Belgique (Bruxelles)",
-    description: "Représentation auprès de l'Union européenne.",
-  },
-  {
-    slug: "ambassade-benin-londres",
-    title: "Ambassade du Bénin au Royaume-Uni (Londres)",
-    description: "Représentation diplomatique.",
-  },
-  {
-    slug: "ambassade-benin-beijing",
-    title: "Ambassade du Bénin en Chine (Beijing)",
-    description: "Coopération économique et culturelle avec la Chine.",
-  },
-  {
-    slug: "ambassade-benin-ouagadougou",
-    title: "Ambassade du Bénin au Burkina Faso (Ouagadougou)",
-    description: "Relations sous-régionales.",
-  },
-  {
-    slug: "ambassade-benin-niamey",
-    title: "Ambassade du Bénin au Niger (Niamey)",
-    description: "Relations sous-régionales.",
-  },
-  {
-    slug: "ambassade-benin-abuja",
-    title: "Ambassade du Bénin au Nigeria (Abuja)",
-    description: "Relations bilatérales et régionales.",
-  },
-  {
-    slug: "ambassade-benin-addis-ababa",
-    title: "Ambassade du Bénin en Éthiopie (Addis-Abeba)",
-    description: "Représentation auprès de l'UA et de l'UNESCO.",
-  },
-  {
-    slug: "ambassade-benin-pretoria",
-    title: "Ambassade du Bénin en Afrique du Sud (Pretoria)",
-    description: "Relations bilatérales.",
-  },
-  {
-    slug: "ambassade-benin-berne",
-    title: "Ambassade du Bénin en Suisse (Berne)",
-    description: "Relations bilatérales.",
-  },
-  {
-    slug: "ambassade-benin-rome",
-    title: "Ambassade du Bénin en Italie (Rome)",
-    description: "Relations bilatérales.",
-  },
-  {
-    slug: "ambassade-benin-berlin",
-    title: "Ambassade du Bénin en Allemagne (Berlin)",
-    description: "Relations bilatérales.",
-  },
-  {
-    slug: "ambassade-benin-moscou",
-    title: "Ambassade du Bénin en Russie (Moscou)",
-    description: "Relations bilatérales.",
-  },
-  {
-    slug: "ambassade-benin-new-york",
-    title: "Mission permanente du Bénin auprès de l'ONU (New York)",
-    description: "Représentation diplomatique multilatérale.",
-  },
-  {
-    slug: "ambassade-benin-geneva",
-    title: "Mission permanente du Bénin auprès de l'ONU à Genève",
-    description: "Représentation auprès des institutions onusiennes européennes.",
+    slug: "passports-consulats",
+    categorie: "Diplomatie",
+    sigle: "Consulats",
+    nom: "Passeports, visas et consulats",
+    site_web: "https://www.beninconsulats.org",
+    description: "Plateforme du réseau consulaire du Bénin.",
+    services: ["Passeports", "Visas", "Réseau consulaire"],
   },
 ];
 

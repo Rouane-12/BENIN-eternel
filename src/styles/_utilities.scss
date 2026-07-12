@@ -1,0 +1,71 @@
+@use "variables" as *;
+
+.bg-adinkra {
+  background-image:
+    radial-gradient(circle at 20% 20%, oklch(1 0 0 / 0.05) 0 2px, transparent 3px),
+    radial-gradient(circle at 80% 60%, oklch(1 0 0 / 0.04) 0 2px, transparent 3px),
+    linear-gradient(135deg, transparent 48%, oklch(1 0 0 / 0.03) 49%, oklch(1 0 0 / 0.03) 51%, transparent 52%);
+  background-size: 60px 60px, 80px 80px, 40px 40px;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, #cfcfcf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-flag {
+  background: linear-gradient(90deg, $flag-green 0%, $flag-yellow 50%, $flag-red 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gradient-flag {
+  background: linear-gradient(90deg, $flag-green 0%, $flag-yellow 50%, $flag-red 100%);
+}
+
+.bg-gradient-flag-v {
+  background: linear-gradient(180deg, $flag-green 0%, $flag-yellow 50%, $flag-red 100%);
+}
+
+.noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.25), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}

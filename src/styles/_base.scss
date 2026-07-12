@@ -1,0 +1,51 @@
+@use "variables" as *;
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: $font-inter;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: $font-display;
+    letter-spacing: 0.005em;
+    font-weight: 500;
+  }
+
+  .font-serif-display {
+    font-family: $font-serif-display;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  .font-script {
+    font-family: $font-script;
+    letter-spacing: 0;
+    font-weight: 400;
+    line-height: 0.9;
+  }
+
+  .font-vibes {
+    font-family: $font-vibes;
+    font-weight: 400;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: var(--flag-yellow);
+    color: var(--ink);
+  }
+}
