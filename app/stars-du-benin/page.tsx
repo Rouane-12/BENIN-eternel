@@ -81,7 +81,7 @@ function InfluencerCard({ influenceur, index, onVote, voted }: { influenceur: In
 export default function StarsDuBenin() {
   const [search, setSearch] = useState("");
   const [categorie, setCategorie] = useState<CategorieStars>("Tous");
-  const [influenceurs, handleVote, votedItems] = useVotes("influenceurs-votes", initialInfluenceurs as unknown as Influenceur[]);
+  const [influenceurs, handleVote, votedItems] = useVotes("/api/votes/influenceurs", initialInfluenceurs as unknown as Influenceur[]);
 
   const filtered = useMemo(() => {
     const query = search.toLowerCase().trim();
