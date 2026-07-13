@@ -62,3 +62,28 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
     }
 }
+
+export async function DELETE(req: NextRequest) {
+    try {
+        const { id } = await req.json();
+        if (!id || typeof id !== "string") {
+            return NextResponse.json({ error: "id manquant" }, { status: 400 });
+        }
+
+        const base = await getBaseData();
+        const item = base.find((i) => i.id === id);
+        if (!item) {
+            return NextResponse.json({ error: "Influenceur introuvable" }, { status: 404 });
+        }
+
+        const current = (await redis.hget<number>(VOTES_KEY, id)) ?? 0;
+        if (current <= 0) {
+            return NextResponse.json({ ...item, votes: 0 });
+        }
+
+        const newCount = await redis.hincrby(VOTES_KEY, id, -1);
+        return NextResponse.json({ ...item, votes: Math.max(0, newCount) });
+    } catch {
+        return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+    }
+}

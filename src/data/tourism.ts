@@ -70,3 +70,57 @@ export const TOURISME: Attraction[] = [
     highlights: ["Fête de la Gaani", "Cavalcade royale", "Palais royal"],
   },
 ];
+
+
+export type LieuDetente = {
+  id: string;
+  nom: string;
+  categorie: string;
+  description: string;
+  localisation: string;
+};
+
+export const LIEUX_DETENTE: LieuDetente[] = [
+  {
+    id: "eka-world",
+    nom: "Eka World",
+    categorie: "Karting & Bowling",
+    description: "Premier karting électrique d'Afrique de l'Ouest. Circuit de karting, piste de quad, bowling en plein air, mur d'escalade, tir à l'arc, tennis et pétanque.",
+    localisation: "Parking P3 de l'Aéroport de Cotonou, face à la Poste, quartier Fidjrossè, Cotonou",
+  },
+  {
+    id: "escape-canalolympia",
+    nom: "Escape by CanalOlympia",
+    categorie: "Escape Game & Arcade",
+    description: "Premier escape game du Bénin. Salles d'énigmes à résoudre en équipe, jeux d'arcade et espace de réalité virtuelle.",
+    localisation: "CanalOlympia Marina et CanalOlympia Wologuède, Cotonou",
+  },
+  {
+    id: "village-enchante",
+    nom: "Village Enchanté",
+    categorie: "Parc d'attractions",
+    description: "Parc d'attractions familial avec manèges, carrousels et animations pour petits et grands.",
+    localisation: "Cotonou, à proximité du Boulevard de la République",
+  },
+  {
+    id: "delta-game-park",
+    nom: "Delta Game Park",
+    categorie: "Parc d'attractions",
+    description: "Parc d'attractions à sensations fortes avec manèges et jeux pour tous les âges.",
+    localisation: "Djèffa, 2e carrefour après le péage à gauche, Cotonou",
+  },
+  {
+    id: "parc-ife",
+    nom: "Parc d'attraction Ifè",
+    categorie: "Parc d'attractions",
+    description: "Parc familial avec manèges, espaces verts et aires de pique-nique, dans la capitale officielle.",
+    localisation: "Rue de l'Inspection, Porto-Novo",
+  },
+  {
+    id: "koba-centre",
+    nom: "Koba Centre",
+    categorie: "Salle de jeux",
+    description: "Espace de jeux couvert pour enfants et familles, avec animations et salles de jeux ouvertes dès 14h.",
+    localisation: "Quartier Jéricho, en face de la Pharmacie Le Nokoué, Cotonou",
+  },
+];

@@ -18,15 +18,6 @@
         "votes": 0
     },
     {
-        "id": "gangbe-brass-band",
-        "name": "Gangbé Brass Band",
-        "type": "groupe",
-        "genre": "Vodun-jazz / Afrobeat / Jazz",
-        "mostFamousAlbum": "Gangbé (1996)",
-        "youtubeLink": "https://www.youtube.com/results?search_query=Gangb%C3%A9+Brass+Band",
-        "votes": 0
-    },
-    {
         "id": "sagbohan-danialou",
         "name": "Sagbohan Danialou",
         "type": "solo",
@@ -438,6 +429,186 @@
         "genre": "Afrobeat / Urbain",
         "mostFamousAlbum": "El Jowania",
         "youtubeLink": "https://www.youtube.com/results?search_query=El+Jowania",
+        "votes": 0
+    },
+    {
+        "id": "petit-miguelito",
+        "name": "Petit Miguélito",
+        "type": "solo",
+        "genre": "Salsa / Rumba / Afro-Zouk",
+        "mostFamousAlbum": "La Prophétie",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Petit+Migu%C3%A9lito+Mon+B%C3%A9b%C3%A9",
+        "votes": 0
+    },
+    {
+        "id": "le-renoi",
+        "name": "Le Renoi",
+        "type": "solo",
+        "genre": "Hip-hop / Drill / Afro",
+        "mostFamousAlbum": "Marchand de coton Vol.1",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Le+Renoi+Djalado",
+        "votes": 0
+    },
+    {
+        "id": "les-freres-guedehoungue",
+        "name": "Les Frères Guèdèhounguè",
+        "type": "groupe",
+        "genre": "Musique traditionnelle / Vodun",
+        "mostFamousAlbum": "Feu de brousse",
+        "youtubeLink": "https://www.youtube.com/channel/UC9q5yCvePsybF1sY-hgtqsg",
+        "votes": 0
+    },
+    {
+        "id": "amikpon",
+        "name": "Amikpon",
+        "type": "solo",
+        "genre": "Musique traditionnelle / Kpalongo",
+        "mostFamousAlbum": "Amikpon",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Amikpon+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "conex-et-don",
+        "name": "Conex & Don",
+        "type": "groupe",
+        "genre": "Amapiano / Reggae / Urbain",
+        "mostFamousAlbum": "Découverte",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Conex+et+Don+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "manzor",
+        "name": "Manzor",
+        "type": "solo",
+        "genre": "Musique urbaine / Yoruba",
+        "mostFamousAlbum": "Import Export",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Manzor+b%C3%A9nin+Ahobobo",
+        "votes": 0
+    },
+    {
+        "id": "semevo-orisha-oke",
+        "name": "Sèmèvo Orisha Oké",
+        "type": "solo",
+        "genre": "Musique traditionnelle / Populaire",
+        "mostFamousAlbum": "Baby",
+        "youtubeLink": "https://www.youtube.com/results?search_query=S%C3%A8m%C3%A8vo+Orisha+Ok%C3%A9+Baby",
+        "votes": 0
+    },
+    {
+        "id": "madano",
+        "name": "Madano",
+        "type": "solo",
+        "genre": "R&B / Afrobeat",
+        "mostFamousAlbum": "Shigoshage",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Madano+Wedou+Wedou",
+        "votes": 0
+    },
+    {
+        "id": "pepe-oleka",
+        "name": "Pépé Oléka",
+        "type": "solo",
+        "genre": "Musique urbaine / Afrobeat",
+        "mostFamousAlbum": "Pépé Oléka",
+        "youtubeLink": "https://www.youtube.com/results?search_query=P%C3%A9p%C3%A9+Ol%C3%A9ka+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "2xcoco-waya",
+        "name": "2xCoco Waya",
+        "type": "solo",
+        "genre": "Afrobeat / Adjapiano",
+        "mostFamousAlbum": "Bénin To",
+        "youtubeLink": "https://www.youtube.com/watch?v=lqsqIsf_ksg",
+        "votes": 0
+    },
+    {
+        "id": "raphael-sheyi",
+        "name": "Raphaël Shéyi",
+        "type": "solo",
+        "genre": "Gospel / Musique urbaine",
+        "mostFamousAlbum": "Okpè",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Raphael+Sheyi+Okp%C3%A8",
+        "votes": 0
+    },
+    {
+        "id": "yobiyo",
+        "name": "Yobiyo",
+        "type": "solo",
+        "genre": "Musique urbaine",
+        "mostFamousAlbum": "Yobiyo",
+        "youtubeLink": "https://www.youtube.com/channel/UCgLf8i-4FOMjHJD_MQzMIzQ",
+        "votes": 0
+    },
+    {
+        "id": "vi-phint",
+        "name": "Vi-Phint",
+        "type": "solo",
+        "genre": "Musique traditionnelle / Vodun",
+        "mostFamousAlbum": "Vi-Phint",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Vi-Phint+Sakpata+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "faty",
+        "name": "Faty",
+        "type": "solo",
+        "genre": "Afro-rock / Tradi-moderne",
+        "mostFamousAlbum": "Toute une vie",
+        "youtubeLink": "https://www.youtube.com/@fatykofficiel",
+        "votes": 0
+    },
+    {
+        "id": "shael",
+        "name": "Shael",
+        "type": "solo",
+        "genre": "Musique urbaine",
+        "mostFamousAlbum": "Shael",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Shael+b%C3%A9nin+artiste",
+        "votes": 0
+    },
+    {
+        "id": "eustache-houenagnon",
+        "name": "Eustache Houénagnon",
+        "type": "solo",
+        "genre": "Musique traditionnelle",
+        "mostFamousAlbum": "Zangbéto do Zanmin",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Eustache+Houenagnon",
+        "votes": 0
+    },
+    {
+        "id": "lecokpon",
+        "name": "Lécokpon",
+        "type": "solo",
+        "genre": "Musique chrétienne / Gospel",
+        "mostFamousAlbum": "Lécokpon",
+        "youtubeLink": "https://www.youtube.com/results?search_query=L%C3%A9cokpon+b%C3%A9nin",
+        "votes": 0
+    },
+    {
+        "id": "pelagie-la-vibreuse",
+        "name": "Pélagie la vibreuse",
+        "type": "solo",
+        "genre": "Musique urbaine",
+        "mostFamousAlbum": "Sokemi",
+        "youtubeLink": "https://www.youtube.com/results?search_query=P%C3%A9lagie+la+vibreuse+Sokemi",
+        "votes": 0
+    },
+    {
+        "id": "norberka",
+        "name": "Norberka",
+        "type": "solo",
+        "genre": "Musique traditionnelle / Zinli Gbété",
+        "mostFamousAlbum": "Kpè dido",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Norberka+Zinli+Gb%C3%A9t%C3%A9",
+        "votes": 0
+    },
+    {
+        "id": "miss-espoir",
+        "name": "Miss Espoir",
+        "type": "solo",
+        "genre": "Musique populaire",
+        "mostFamousAlbum": "Bougez",
+        "youtubeLink": "https://www.youtube.com/results?search_query=Miss+Espoir+Championnat",
         "votes": 0
     }
 ]

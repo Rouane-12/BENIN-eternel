@@ -4,24 +4,28 @@ export function useVotes<T extends { id: string; votes: number }>(
   apiPath: string,
   initialData: T[],
 ): [T[], (id: string) => void, Set<string>, boolean] {
-  const votedKey = `${apiPath}-voted-items`;
+  const votedKey = `${apiPath}-voted-item`;
 
   const [items, setItems] = useState<T[]>(initialData);
   const [loading, setLoading] = useState(true);
+  const [votedId, setVotedId] = useState<string | null>(null);
 
-  // Lecture du localStorage déplacée dans l'initialiseur paresseux (pas d'effet nécessaire)
-  const [votedItems, setVotedItems] = useState<Set<string>>(() => {
-    if (typeof window === "undefined") return new Set(); // sécurité SSR
+  useEffect(() => {
     try {
       const saved = localStorage.getItem(votedKey);
-      return saved ? new Set(JSON.parse(saved)) : new Set();
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setVotedId(parsed[0] ?? null);
+        } else if (typeof parsed === "string") {
+          setVotedId(parsed);
+        }
+      }
     } catch (e) {
       console.error("Erreur lecture votes locaux:", e);
-      return new Set();
     }
-  });
+  }, [votedKey]);
 
-  // Ici on garde l'effet uniquement pour le fetch (vrai appel externe asynchrone)
   useEffect(() => {
     let cancelled = false;
 
@@ -42,20 +46,69 @@ export function useVotes<T extends { id: string; votes: number }>(
     };
   }, [apiPath]);
 
+  const persistVotedId = useCallback(
+    (id: string | null) => {
+      if (id) {
+        localStorage.setItem(votedKey, JSON.stringify(id));
+      } else {
+        localStorage.removeItem(votedKey);
+      }
+    },
+    [votedKey],
+  );
+
   const handleVote = useCallback(
     async (id: string) => {
-      if (votedItems.has(id)) return;
+      const previousId = votedId;
 
-      const newVotedItems = new Set(votedItems).add(id);
-      setVotedItems(newVotedItems);
-      localStorage.setItem(votedKey, JSON.stringify([...newVotedItems]));
+      if (previousId === id) {
+        setVotedId(null);
+        persistVotedId(null);
 
-      // mise à jour optimiste de l'UI
+        setItems((prev) =>
+          prev
+            .map((item) =>
+              item.id === id ? { ...item, votes: Math.max(0, item.votes - 1) } : item,
+            )
+            .sort((a, b) => b.votes - a.votes),
+        );
+
+        try {
+          const res = await fetch(apiPath, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id }),
+          });
+          if (!res.ok) throw new Error("Annulation du vote refusée par le serveur");
+          const updated: T = await res.json();
+          setItems((prev) =>
+            prev
+              .map((item) => (item.id === id ? { ...item, votes: updated.votes } : item))
+              .sort((a, b) => b.votes - a.votes),
+          );
+        } catch (e) {
+          console.error(e);
+          setVotedId(id);
+          persistVotedId(id);
+          setItems((prev) =>
+            prev
+              .map((item) => (item.id === id ? { ...item, votes: item.votes + 1 } : item))
+              .sort((a, b) => b.votes - a.votes),
+          );
+        }
+        return;
+      }
+
+      setVotedId(id);
+      persistVotedId(id);
+
       setItems((prev) =>
         prev
-          .map((item) =>
-            item.id === id ? { ...item, votes: item.votes + 1 } : item,
-          )
+          .map((item) => {
+            if (item.id === id) return { ...item, votes: item.votes + 1 };
+            if (previousId && item.id === previousId) return { ...item, votes: Math.max(0, item.votes - 1) };
+            return item;
+          })
           .sort((a, b) => b.votes - a.votes),
       );
 
@@ -70,28 +123,47 @@ export function useVotes<T extends { id: string; votes: number }>(
 
         setItems((prev) =>
           prev
-            .map((item) =>
-              item.id === id ? { ...item, votes: updated.votes } : item,
-            )
+            .map((item) => (item.id === id ? { ...item, votes: updated.votes } : item))
             .sort((a, b) => b.votes - a.votes),
         );
+
+        if (previousId) {
+          fetch(apiPath, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: previousId }),
+          })
+            .then((res) => (res.ok ? res.json() : null))
+            .then((updatedPrev: T | null) => {
+              if (updatedPrev) {
+                setItems((prev) =>
+                  prev
+                    .map((item) => (item.id === previousId ? { ...item, votes: updatedPrev.votes } : item))
+                    .sort((a, b) => b.votes - a.votes),
+                );
+              }
+            })
+            .catch((e) => console.error("Erreur annulation ancien vote:", e));
+        }
       } catch (e) {
         console.error(e);
-        // rollback si l'API échoue
-        newVotedItems.delete(id);
-        setVotedItems(new Set(newVotedItems));
-        localStorage.setItem(votedKey, JSON.stringify([...newVotedItems]));
+        setVotedId(previousId);
+        persistVotedId(previousId);
         setItems((prev) =>
           prev
-            .map((item) =>
-              item.id === id ? { ...item, votes: item.votes - 1 } : item,
-            )
+            .map((item) => {
+              if (item.id === id) return { ...item, votes: Math.max(0, item.votes - 1) };
+              if (previousId && item.id === previousId) return { ...item, votes: item.votes + 1 };
+              return item;
+            })
             .sort((a, b) => b.votes - a.votes),
         );
       }
     },
-    [apiPath, votedItems, votedKey],
+    [apiPath, votedId, persistVotedId],
   );
+
+  const votedItems = new Set<string>(votedId ? [votedId] : []);
 
   return [items, handleVote, votedItems, loading];
 }

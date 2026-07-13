@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Cinzel, Cormorant_Garamond, Italianno, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { AudioProvider } from "@/context/AudioContext";
+import { BackgroundMusicWidget } from "@/components/BackgroundMusicWidget";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const cinzel = Cinzel({ subsets: ["latin"], variable: "--font-cinzel" });
@@ -25,7 +27,12 @@ export default function RootLayout({
       className={`${inter.variable} ${cinzel.variable} ${cormorantGaramond.variable} ${italianno.variable} ${greatVibes.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Providers>{children}</Providers>
+        <Providers>
+          <AudioProvider src="/audio/bomba-angelique-kidjo.mp3">
+            {children}
+            <BackgroundMusicWidget />
+          </AudioProvider>
+        </Providers>
       </body>
     </html>
   );

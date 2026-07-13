@@ -121,4 +121,20 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     img: "/pendjari.jpg",
     lieuId: "parc-pendjari",
   },
+  {
+    id: "stade-amitie",
+    nom: "Stade de l'Amitié de Kouhounou",
+    ville: "Cotonou",
+    description:
+      "Plus grand stade du Bénin, temple du football national et antre des Écureuils. Lieu de rassemblement populaire lors des grandes compétitions.",
+    img: "/stade.png",
+  },
+  {
+    id: "chutes-tanougou",
+    nom: "Chutes de Tanougou",
+    ville: "Atacora",
+    description:
+      "Cascade naturelle nichée dans la chaîne de l'Atacora, entourée de falaises et de bassins d'eau claire propices à la baignade. Un des joyaux naturels du Nord-Bénin.",
+    img: "/tanougou.png",
+  },
 ];

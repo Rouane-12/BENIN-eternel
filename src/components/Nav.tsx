@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { BeninIcon } from "./BeninIcon";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 const NAV_GROUPS = [
   {
@@ -87,14 +88,33 @@ export function Nav() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between">
         {/* LOGO */}
-        <Link href="/" className="flex items-center gap-4 group relative z-10" onClick={() => { setOpen(false); setActiveGroup(null); }}>
+        <Link
+          href="/"
+          className="flex items-center gap-4 group relative z-10"
+          onClick={() => {
+            setOpen(false);
+            setActiveGroup(null);
+          }}
+        >
           <div className="relative">
-            <BeninIcon className="w-8 h-10 transition-transform duration-500 group-hover:scale-110" />
+            <Image
+              src="/logo.png" // ton logo
+              alt="Logo Bénin"
+              width={40}
+              height={40}
+              className="transition-transform duration-500 group-hover:scale-110 object-contain"
+              priority
+            />
             <div className="absolute inset-0 bg-white/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
+
           <div className="flex flex-col">
-            <span className="font-display tracking-[0.3em] uppercase text-sm leading-tight text-white">Bénin</span>
-            <span className="font-script text-lg text-white/80 -mt-1">Éternel</span>
+            <span className="font-display tracking-[0.3em] uppercase text-sm leading-tight text-white">
+              Bénin
+            </span>
+            <span className="font-script text-lg text-white/80 -mt-1">
+              Éternel
+            </span>
           </div>
         </Link>
 

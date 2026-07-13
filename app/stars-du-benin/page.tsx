@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Search, Sparkles } from 'lucide-react';
 import { SiteLayout, PageHero } from '@/components/SiteLayout';
@@ -81,7 +81,12 @@ function InfluencerCard({ influenceur, index, onVote, voted }: { influenceur: In
 export default function StarsDuBenin() {
   const [search, setSearch] = useState("");
   const [categorie, setCategorie] = useState<CategorieStars>("Tous");
+  const [mounted, setMounted] = useState(false);
   const [influenceurs, handleVote, votedItems] = useVotes("/api/votes/influenceurs", initialInfluenceurs as unknown as Influenceur[]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const filtered = useMemo(() => {
     const query = search.toLowerCase().trim();
@@ -156,7 +161,7 @@ export default function StarsDuBenin() {
           <div className="mb-8 md:mb-10 flex items-end justify-between flex-wrap gap-3">
             <div>
               <div className="flex items-center gap-3 mb-3">
-                <span className="inline-block w-8 h-[2px] bg-gradient-to-r from-oklch(0.55 0.14 152) to-oklch(0.88 0.17 92" />
+                <span className="inline-block w-8 h-[2px] bg-gradient-to-r from-oklch(0.55 0.14 152) to-oklch(0.88 0.17 92)" />
                 <span className="text-[10px] tracking-[0.4em] uppercase text-white/60">Créateurs Numériques</span>
               </div>
               <h2 className="font-display text-3xl md:text-4xl">
@@ -178,7 +183,7 @@ export default function StarsDuBenin() {
                   influenceur={influenceur}
                   index={index}
                   onVote={handleVote}
-                  voted={votedItems.has(influenceur.id)}
+                  voted={mounted && votedItems.has(influenceur.id)}
                 />
               ))
             ) : (

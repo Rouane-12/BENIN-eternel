@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Heart, Mic2, Play, Search, Users } from 'lucide-react';
 import { SiteLayout, PageHero } from '@/components/SiteLayout';
@@ -117,7 +117,13 @@ function ArtistCard({ artiste, index, onVote, voted }: { artiste: Artiste; index
 export default function ArtistesClient() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<Category>("Tous");
+  const [mounted, setMounted] = useState(false);
   const [artistes, handleVote, votedItems] = useVotes<Artiste>("/api/votes/artistes", initialArtistes as unknown as Artiste[]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const filtered = useMemo(() => {
     const query = search.toLowerCase().trim();
     return artistes.filter((a) => {
@@ -213,7 +219,7 @@ export default function ArtistesClient() {
                   artiste={artiste}
                   index={index}
                   onVote={handleVote}
-                  voted={votedItems.has(artiste.id)}
+                  voted={mounted && votedItems.has(artiste.id)}
                 />
               ))
             ) : (
