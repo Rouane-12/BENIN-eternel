@@ -1,8 +1,12 @@
+// src/app/api/votes/artistes/route.ts
 import { NextRequest, NextResponse } from "next/server";
+import { Redis } from "@upstash/redis";
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const redis = Redis.fromEnv();
 const DATA_FILE = path.join(process.cwd(), "src", "data", "artistes.json");
+const VOTES_KEY = "votes:artistes"; // hash { [id]: count }
 
 interface Artiste {
   id: string;
@@ -10,25 +14,24 @@ interface Artiste {
   [key: string]: unknown;
 }
 
-let writeQueue: Promise<unknown> = Promise.resolve();
-function queueWrite<T>(task: () => Promise<T>): Promise<T> {
-  const result = writeQueue.then(task, task);
-  writeQueue = result.catch(() => {});
-  return result;
-}
-
-async function readData(): Promise<Artiste[]> {
+async function getBaseData(): Promise<Artiste[]> {
   const raw = await fs.readFile(DATA_FILE, "utf-8");
   return JSON.parse(raw);
 }
 
-async function writeData(data: Artiste[]) {
-  await fs.writeFile(DATA_FILE, JSON.stringify(data, null, 4), "utf-8");
+// Fusionne les données statiques (json, lu en lecture seule) avec les votes stockés dans Redis
+async function getMergedData(): Promise<Artiste[]> {
+  const base = await getBaseData();
+  const votes = (await redis.hgetall<Record<string, number>>(VOTES_KEY)) ?? {};
+  return base.map((a) => ({
+    ...a,
+    votes: Number(votes[a.id] ?? a.votes ?? 0),
+  }));
 }
 
 export async function GET() {
   try {
-    const data = await readData();
+    const data = await getMergedData();
     return NextResponse.json(data);
   } catch {
     return NextResponse.json(
@@ -45,22 +48,19 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "id manquant" }, { status: 400 });
     }
 
-    const updatedItem = await queueWrite(async () => {
-      const data = await readData();
-      const item = data.find((a) => a.id === id);
-      if (!item) return null;
-      item.votes += 1;
-      await writeData(data);
-      return item;
-    });
-
-    if (!updatedItem) {
+    const base = await getBaseData();
+    const exists = base.some((a) => a.id === id);
+    if (!exists) {
       return NextResponse.json(
         { error: "Artiste introuvable" },
         { status: 404 },
       );
     }
-    return NextResponse.json(updatedItem);
+
+    const newCount = await redis.hincrby(VOTES_KEY, id, 1);
+    const item = base.find((a) => a.id === id)!;
+
+    return NextResponse.json({ ...item, votes: newCount });
   } catch {
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
