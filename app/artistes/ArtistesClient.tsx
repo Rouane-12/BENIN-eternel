@@ -117,8 +117,7 @@ function ArtistCard({ artiste, index, onVote, voted }: { artiste: Artiste; index
 export default function ArtistesClient() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<Category>("Tous");
-  const [artistes, handleVote, votedItems] = useVotes("artistes-votes", initialArtistes as unknown as Artiste[]);
-
+  const [artistes, handleVote, votedItems] = useVotes<Artiste>("/api/votes/artistes", initialArtistes as unknown as Artiste[]);
   const filtered = useMemo(() => {
     const query = search.toLowerCase().trim();
     return artistes.filter((a) => {
