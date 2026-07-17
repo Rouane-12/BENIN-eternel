@@ -82,7 +82,8 @@ export default function StarsDuBenin() {
   const [search, setSearch] = useState("");
   const [categorie, setCategorie] = useState<CategorieStars>("Tous");
   const [mounted, setMounted] = useState(false);
-  const [influenceurs, handleVote, votedItems] = useVotes("/api/votes/influenceurs", initialInfluenceurs as unknown as Influenceur[]);
+  const scope = categorie === "Tous" ? "global" : categorie;
+  const [influenceurs, handleVote, votedItems] = useVotes("/api/votes/influenceurs", initialInfluenceurs as unknown as Influenceur[], scope);
 
   useEffect(() => {
     setMounted(true);

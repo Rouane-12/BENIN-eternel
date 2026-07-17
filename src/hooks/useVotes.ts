@@ -3,14 +3,16 @@ import { useState, useEffect, useCallback } from "react";
 export function useVotes<T extends { id: string; votes: number }>(
   apiPath: string,
   initialData: T[],
+  scope: string = "global",
 ): [T[], (id: string) => void, Set<string>, boolean] {
-  const votedKey = `${apiPath}-voted-item`;
+  const votedKey = `${apiPath}-voted-item-${scope}`;
 
   const [items, setItems] = useState<T[]>(initialData);
   const [loading, setLoading] = useState(true);
   const [votedId, setVotedId] = useState<string | null>(null);
 
   useEffect(() => {
+    setVotedId(null);
     try {
       const saved = localStorage.getItem(votedKey);
       if (saved) {
@@ -28,8 +30,9 @@ export function useVotes<T extends { id: string; votes: number }>(
 
   useEffect(() => {
     let cancelled = false;
+    setLoading(true);
 
-    fetch(apiPath)
+    fetch(`${apiPath}?scope=${encodeURIComponent(scope)}`)
       .then((res) => res.json())
       .then((data: T[]) => {
         if (!cancelled) {
@@ -44,7 +47,7 @@ export function useVotes<T extends { id: string; votes: number }>(
     return () => {
       cancelled = true;
     };
-  }, [apiPath]);
+  }, [apiPath, scope]);
 
   const persistVotedId = useCallback(
     (id: string | null) => {
@@ -77,7 +80,7 @@ export function useVotes<T extends { id: string; votes: number }>(
           const res = await fetch(apiPath, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id }),
+            body: JSON.stringify({ id, scope }),
           });
           if (!res.ok) throw new Error("Annulation du vote refusée par le serveur");
           const updated: T = await res.json();
@@ -116,7 +119,7 @@ export function useVotes<T extends { id: string; votes: number }>(
         const res = await fetch(apiPath, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id }),
+          body: JSON.stringify({ id, scope }),
         });
         if (!res.ok) throw new Error("Vote refusé par le serveur");
         const updated: T = await res.json();
@@ -131,7 +134,7 @@ export function useVotes<T extends { id: string; votes: number }>(
           fetch(apiPath, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: previousId }),
+            body: JSON.stringify({ id: previousId, scope }),
           })
             .then((res) => (res.ok ? res.json() : null))
             .then((updatedPrev: T | null) => {
@@ -160,7 +163,7 @@ export function useVotes<T extends { id: string; votes: number }>(
         );
       }
     },
-    [apiPath, votedId, persistVotedId],
+    [apiPath, votedId, persistVotedId, scope],
   );
 
   const votedItems = new Set<string>(votedId ? [votedId] : []);

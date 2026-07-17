@@ -1,4 +1,3 @@
-// src/app/api/votes/influenceurs/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 import fs from "node:fs/promises";
@@ -6,7 +5,6 @@ import path from "node:path";
 
 const redis = Redis.fromEnv();
 const DATA_FILE = path.join(process.cwd(), "src", "data", "influenceurs.json");
-const VOTES_KEY = "votes:influenceurs"; // hash { [id]: count }
 
 interface Influenceur {
     id: string;
@@ -14,23 +12,29 @@ interface Influenceur {
     [key: string]: unknown;
 }
 
+function getVotesKey(scope: string) {
+    return `votes:influenceurs:${scope}`;
+}
+
 async function getBaseData(): Promise<Influenceur[]> {
     const raw = await fs.readFile(DATA_FILE, "utf-8");
     return JSON.parse(raw);
 }
 
-async function getMergedData(): Promise<Influenceur[]> {
+async function getMergedData(scope: string): Promise<Influenceur[]> {
     const base = await getBaseData();
-    const votes = (await redis.hgetall<Record<string, number>>(VOTES_KEY)) ?? {};
+    const votes = (await redis.hgetall<Record<string, number>>(getVotesKey(scope))) ?? {};
     return base.map((i) => ({
         ...i,
-        votes: Number(votes[i.id] ?? i.votes ?? 0),
+        votes: Number(votes[i.id] ?? 0),
     }));
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     try {
-        const data = await getMergedData();
+        const { searchParams } = new URL(req.url);
+        const scope = searchParams.get("scope") || "global";
+        const data = await getMergedData(scope);
         return NextResponse.json(data);
     } catch {
         return NextResponse.json(
@@ -42,10 +46,11 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     try {
-        const { id } = await req.json();
+        const { id, scope } = await req.json();
         if (!id || typeof id !== "string") {
             return NextResponse.json({ error: "id manquant" }, { status: 400 });
         }
+        const finalScope = typeof scope === "string" && scope ? scope : "global";
 
         const base = await getBaseData();
         const item = base.find((i) => i.id === id);
@@ -56,7 +61,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const newCount = await redis.hincrby(VOTES_KEY, id, 1);
+        const newCount = await redis.hincrby(getVotesKey(finalScope), id, 1);
         return NextResponse.json({ ...item, votes: newCount });
     } catch {
         return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
@@ -65,10 +70,11 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
     try {
-        const { id } = await req.json();
+        const { id, scope } = await req.json();
         if (!id || typeof id !== "string") {
             return NextResponse.json({ error: "id manquant" }, { status: 400 });
         }
+        const finalScope = typeof scope === "string" && scope ? scope : "global";
 
         const base = await getBaseData();
         const item = base.find((i) => i.id === id);
@@ -76,12 +82,12 @@ export async function DELETE(req: NextRequest) {
             return NextResponse.json({ error: "Influenceur introuvable" }, { status: 404 });
         }
 
-        const current = (await redis.hget<number>(VOTES_KEY, id)) ?? 0;
+        const current = (await redis.hget<number>(getVotesKey(finalScope), id)) ?? 0;
         if (current <= 0) {
             return NextResponse.json({ ...item, votes: 0 });
         }
 
-        const newCount = await redis.hincrby(VOTES_KEY, id, -1);
+        const newCount = await redis.hincrby(getVotesKey(finalScope), id, -1);
         return NextResponse.json({ ...item, votes: Math.max(0, newCount) });
     } catch {
         return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });

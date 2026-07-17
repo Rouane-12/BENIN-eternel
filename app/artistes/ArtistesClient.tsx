@@ -118,7 +118,8 @@ export default function ArtistesClient() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<Category>("Tous");
   const [mounted, setMounted] = useState(false);
-  const [artistes, handleVote, votedItems] = useVotes<Artiste>("/api/votes/artistes", initialArtistes as unknown as Artiste[]);
+  const scope = category === "Tous" ? "global" : category;
+  const [artistes, handleVote, votedItems] = useVotes<Artiste>("/api/votes/artistes", initialArtistes as unknown as Artiste[], scope);
 
   useEffect(() => {
     setMounted(true);

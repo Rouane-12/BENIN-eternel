@@ -20,6 +20,14 @@ export const SITES_TOURISTIQUES: SiteTouristique[] = [
   { name: "Lac Nokoué", type: "Nature", region: "Atlantique", coords: "6.45°N, 2.50°E", desc: "Plus grand lac du Bénin, écosystème lagunaire, pêche traditionnelle aux acadjas.", img: "/nokoue.webp" },
   { name: "Tata Somba", type: "Patrimoine", region: "Atacora", coords: "10.50°N, 1.10°E", desc: "Châteaux-fortins en banco des Otammari, architecture vernaculaire unique.", img: "/somba.png" },
   { name: "Abomey", type: "UNESCO", region: "Zou", coords: "7.186°N, 1.991°E", desc: "Palais royaux du Dahomey, classés UNESCO, musée historique et bas-reliefs.", img: "/abomey.webp" },
+  {
+    name: "Chutes de Tanougou",
+    type: "Patrimoine",
+    region: "Atacora",
+    coords: "7.186°N, 1.991°E",
+    desc: "Cascade naturelle nichée dans la chaîne de l'Atacora, entourée de falaises et de bassins d'eau claire propices à la baignade. Un des joyaux naturels du Nord-Bénin.",
+    img: "/tanougou.png",
+  },
 ];
 
 export type Attraction = {
