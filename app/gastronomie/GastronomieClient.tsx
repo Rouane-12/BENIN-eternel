@@ -5,16 +5,84 @@ import { Reveal } from '@/components/Reveal';
 
 
 const PLATS = [
-  { name: 'Amiwo', origin: 'Pays fon', desc: 'Pâte de maïs rouge à la tomate, servie avec poulet braisé ou poisson grillé. Plat emblématique des fêtes.' },
-  { name: 'Pâte rouge', origin: 'Sud du Bénin', desc: 'Variante de l\'amiwo, mijotée à la tomate et à l\'huile rouge de palme, accompagnée de viande ou de poisson.' },
-  { name: 'Akassa', origin: 'Pays fon & goun', desc: 'Pâte fermentée de maïs blanc, présentée en feuilles. Indispensable du petit-déjeuner et des sauces.' },
-  { name: 'Ablo', origin: 'Sud du Bénin', desc: 'Petit pain de maïs cuit à la vapeur, légèrement sucré, idéal avec sauce de poisson.' },
-  { name: 'Wagashi', origin: 'Pays Peulh', desc: 'Fromage frais de lait de vache, souvent grillé, originaire des éleveurs peulhs du nord.' },
-  { name: 'Dakouin', origin: 'Pays fon', desc: 'Boulettes de farine de maïs et niébé, ancien plat royal aujourd\'hui rare.' },
-  { name: 'Talon', origin: 'Centre du Bénin', desc: 'Riz au gras parfumé, mijoté avec viande fumée, oignon et bouillon traditionnel.' },
-  { name: 'Atassi', origin: 'Pays yoruba', desc: 'Riz aux haricots niébé, populaire dans tout le sud-est, plat de partage.' },
-  { name: 'Poisson braisé', origin: 'Côte atlantique', desc: 'Barracuda, capitaine ou dorade, mariné aux épices puis grillé au feu de bois, servi avec atiéké.' },
-  { name: 'Poulet bicyclette', origin: 'Toute l\'Afrique de l\'Ouest', desc: 'Poulet de basse-cour mariné, grillé lentement, à la chair ferme et aux épices marquées.' },
+  {
+    name: 'Amíwò',
+    origin: 'Pays fon',
+    desc: 'Pâte de maïs rouge préparée avec de la tomate et de l’huile de palme, servie avec du poulet, du poisson ou de la viande.',
+    image: '/plats/amiwo.webp'
+  },
+  {
+    name: 'Akassa',
+    origin: 'Pays fon et goun',
+    desc: 'Pâte fermentée de maïs blanc, accompagnée de sauces au poisson ou à la viande.',
+    image: '/plats/akassa.webp'
+  },
+  {
+    name: 'Ablɔ',
+    origin: 'Pays fon',
+    desc: 'Petit pain de maïs cuit à la vapeur, légèrement sucré, servi avec des sauces ou du poisson.',
+    image: '/plats/ablo.webp'
+  },
+  {
+    name: 'Atassi',
+    origin: 'Pays yoruba',
+    desc: 'Riz mélangé aux haricots niébé, un grand classique de la cuisine béninoise.',
+    image: '/plats/atassi.webp'
+  },
+  {
+    name: 'Agoun',
+    origin: 'Centre et Sud du Bénin',
+    desc: 'Igname pilée au mortier jusqu’à obtenir une pâte souple, servie avec différentes sauces traditionnelles.',
+    image: '/plats/agoun.webp'
+  },
+  {
+    name: 'Wassa-Wassa',
+    origin: 'Nord du Bénin',
+    desc: 'Semoule de manioc cuite à la vapeur, servie avec une sauce tomate, de la viande ou du poisson.',
+    image: '/plats/wassa-wassa.webp'
+  },
+  {
+    name: 'Wagashi',
+    origin: 'Pays peulh',
+    desc: 'Fromage frais de lait de vache, souvent grillé ou frit avant d’être dégusté.',
+    image: '/plats/wagashi.webp'
+  },
+  {
+    name: 'Abobo',
+    origin: 'Pays fon',
+    desc: 'Haricots cuits assaisonnés d’huile rouge, d’oignons et de piment.',
+    image: '/plats/haricot.webp'
+  },
+  {
+    name: 'Yovo Doko',
+    origin: 'Pays fon',
+    desc: 'Petits beignets sucrés de farine, très populaires dans les rues du Bénin.',
+    image: '/plats/doco.webp'
+  },
+  {
+    name: 'Igname bouillie',
+    origin: 'Tout le Bénin',
+    desc: 'Igname cuite à l’eau, servie avec une sauce tomate, du poisson, de la viande ou des œufs.',
+    image: '/plats/igname.webp'
+  },
+  {
+    name: 'Poisson braisé',
+    origin: 'Côte béninoise',
+    desc: 'Poisson mariné aux épices puis grillé au feu de bois, servi avec de l’akassa, de l’ablo ou de l’igname.',
+    image: '/plats/braisé.webp'
+  },
+  {
+    name: 'Poulet bicyclette',
+    origin: 'Tout le Bénin',
+    desc: 'Poulet fermier mariné puis grillé, accompagné d’igname, d’attiéké ou de pâte.',
+    image: '/plats/poulet.webp'
+  },
+  {
+    name: 'Dakouin',
+    origin: 'Pays fon',
+    desc: 'Préparation traditionnelle à base de maïs et de niébé, héritée de la cuisine ancienne.',
+    image: '/plats/dakouin.webp'
+  }
 ];
 
 const CATEGORIES = [
@@ -116,18 +184,27 @@ export default function GastronomieClient() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PLATS.map((p, i) => (
             <Reveal key={p.name} delay={(i % 3) * 0.05}>
-              <article className="p-6 border border-white/10 hover:border-white/40 transition h-full">
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="text-[10px] tracking-[0.3em] uppercase text-white/40">{p.origin}</span>
-                  <span className="w-1 h-5 bg-gradient-flag-v" />
+              <article className="relative overflow-hidden border border-white/10 hover:border-white/40 transition h-full min-h-[240px]">
+                <div
+                  className="absolute inset-0 bg-cover bg-center scale-105 group-hover:scale-110 transition-transform duration-500"
+                  style={{ backgroundImage: `url(${p.image})` }}
+                />
+                <div className="absolute inset-0 bg-black/70" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
+                <div className="relative z-10 p-6 flex flex-col h-full">
+                  <div className="flex items-baseline justify-between mb-2">
+                    <span className="text-[10px] tracking-[0.3em] uppercase text-white/50">{p.origin}</span>
+                    <span className="w-1 h-5 bg-gradient-flag-v" />
+                  </div>
+                  <h3 className="font-display text-2xl">{p.name}</h3>
+                  <p className="text-sm text-white/70 mt-3 leading-relaxed">{p.desc}</p>
                 </div>
-                <h3 className="font-display text-2xl">{p.name}</h3>
-                <p className="text-sm text-white/65 mt-3 leading-relaxed">{p.desc}</p>
               </article>
             </Reveal>
           ))}
         </div>
       </section>
+
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
         <Reveal>
           <div className="flex items-center gap-3 mb-3">
