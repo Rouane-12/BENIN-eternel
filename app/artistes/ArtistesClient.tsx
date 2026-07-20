@@ -90,17 +90,19 @@ function VoteButton({ votes, voted, onVote }: { votes: number; voted: boolean; o
   );
 }
 
-// Position, taille et cadence d'entrée de chaque marche du podium.
+// Position et cadence d'entrée de chaque marche du podium.
 // 1er au centre (le plus haut), 2e à droite, 3e à gauche.
+// Les CARTES ont toutes la même taille — seule la hauteur de la
+// marche colorée varie, pour garder un vrai effet de podium.
 const PODIUM_META = {
-  1: { order: "md:order-2", step: 132, avatar: 88, title: "text-2xl md:text-[1.75rem]", card: "md:p-7", delay: 0.32, label: "Le plus voté", z: 30 },
-  2: { order: "md:order-3", step: 92, avatar: 60, title: "text-lg", card: "p-5", delay: 0.14, label: "#2", z: 20 },
-  3: { order: "md:order-1", step: 76, avatar: 56, title: "text-lg", card: "p-5", delay: 0, label: "#3", z: 20 },
+  1: { order: "md:order-2", step: 116, delay: 0.32, label: "Le plus voté", z: 30 },
+  2: { order: "md:order-3", step: 76, delay: 0.14, label: "#2", z: 20 },
+  3: { order: "md:order-1", step: 76, delay: 0, label: "#3", z: 20 },
 } as const;
 
 // Carte "podium" — réservée aux 3 artistes les plus votés du moment.
-// Rendue en colonne : carte flottante + marche colorée sous elle,
-// alignées sur la même ligne de base pour un vrai effet de podium.
+// Rendue en colonne : carte flottante (taille identique pour les 3)
+// + marche colorée sous elle, alignées sur la même ligne de base.
 function PodiumCard({
   artiste,
   rank,
@@ -121,7 +123,7 @@ function PodiumCard({
       initial={{ opacity: 0, y: 70, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 220, damping: 20, delay: meta.delay }}
-      className={`relative flex flex-col items-center ${meta.order}`}
+      className={`relative flex flex-col items-center w-full sm:w-[17rem] ${meta.order}`}
       style={{ zIndex: meta.z }}
     >
       {first && (
@@ -146,7 +148,7 @@ function PodiumCard({
       <motion.div
         whileHover={{ y: -6, scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className={`relative z-10 w-full max-w-[17rem] flex flex-col overflow-hidden rounded-2xl border bg-white/[0.04] backdrop-blur-sm ${meta.card}`}
+        className="relative z-10 w-full h-[300px] flex flex-col overflow-hidden rounded-2xl border bg-white/[0.04] backdrop-blur-sm p-6"
         style={{
           borderColor: `color-mix(in oklch, ${color} 50%, transparent)`,
           boxShadow: first ? `0 0 0 1px color-mix(in oklch, ${color} 20%, transparent), 0 20px 40px -20px color-mix(in oklch, ${color} 55%, transparent)` : undefined,
@@ -163,14 +165,13 @@ function PodiumCard({
           <VoteButton votes={artiste.votes} voted={voted} onVote={(e) => { e.preventDefault(); onVote(artiste.id); }} />
         </div>
 
-        <a href={artiste.youtubeLink} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center">
+        <a href={artiste.youtubeLink} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center flex-1 min-h-0">
           <div
-            className="flex items-center justify-center rounded-full font-display text-white shrink-0 mb-3 ring-2"
+            className="flex items-center justify-center rounded-full font-display text-white text-[1.1rem] shrink-0 mb-3 ring-2"
             style={{
-              width: meta.avatar,
-              height: meta.avatar,
+              width: 64,
+              height: 64,
               background: `linear-gradient(135deg, ${color}, oklch(0.2 0 0))`,
-              fontSize: first ? '1.4rem' : '1.05rem',
               ['--tw-ring-color' as any]: `color-mix(in oklch, ${color} 40%, transparent)`,
             }}
           >
@@ -181,19 +182,19 @@ function PodiumCard({
             {artiste.type === "groupe" ? <Users className="w-3 h-3" /> : <Mic2 className="w-3 h-3" />}
             {artiste.type === "groupe" ? "Groupe" : "Solo"}
           </div>
-          <h3 className={`font-display text-white leading-tight text-center ${meta.title}`}>
+          <h3 className="font-display text-white leading-tight text-center text-lg line-clamp-1">
             {artiste.name}
           </h3>
-          <p className="text-[11px] tracking-wide text-white/45 mt-1 text-center">{artiste.genre}</p>
+          <p className="text-[11px] tracking-wide text-white/45 mt-1 text-center line-clamp-1">{artiste.genre}</p>
         </a>
 
         <a
           href={artiste.youtubeLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 pt-3 border-t border-white/5 flex items-center justify-center gap-2 text-[10px] tracking-[0.2em] uppercase text-white/35 hover:text-white/70 transition-colors text-center"
+          className="mt-3 pt-3 border-t border-white/5 flex items-center justify-center gap-2 text-[10px] tracking-[0.2em] uppercase text-white/35 hover:text-white/70 transition-colors text-center line-clamp-1"
         >
-          <Play className="w-3 h-3" />
+          <Play className="w-3 h-3 shrink-0" />
           {artiste.mostFamousAlbum}
         </a>
       </motion.div>
@@ -202,13 +203,18 @@ function PodiumCard({
         initial={{ height: 0 }}
         animate={{ height: meta.step }}
         transition={{ duration: 0.5, delay: meta.delay + 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-0 w-full max-w-[17rem] mt-[-14px] rounded-b-xl flex items-start justify-center pt-4 overflow-hidden"
+        className="relative z-0 w-full mt-[-14px] rounded-b-xl flex items-center justify-center overflow-hidden"
         style={{
-          background: `linear-gradient(180deg, color-mix(in oklch, ${color} 55%, transparent), color-mix(in oklch, ${color} 12%, transparent))`,
-          boxShadow: `inset 0 1px 0 color-mix(in oklch, ${color} 70%, white)`,
+          background: `linear-gradient(180deg, color-mix(in oklch, ${color} 60%, transparent), color-mix(in oklch, ${color} 18%, transparent))`,
+          boxShadow: `inset 0 1px 0 color-mix(in oklch, ${color} 75%, white)`,
         }}
       >
-        <span className="font-display text-4xl md:text-5xl text-black/70 select-none">{rank}</span>
+        <div
+          className="flex items-center justify-center rounded-full ring-2 ring-white/25 shadow-lg"
+          style={{ width: 44, height: 44, background: 'color-mix(in oklch, black 35%, transparent)' }}
+        >
+          <span className="font-display text-xl font-bold text-white select-none leading-none">{rank}</span>
+        </div>
       </motion.div>
     </motion.div>
   );
