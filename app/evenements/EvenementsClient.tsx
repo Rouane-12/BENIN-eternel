@@ -14,7 +14,7 @@ const FEATURED_EVENEMENTS = [
 
 const OTHER_EVENEMENTS = [
   'Festival International de Porto-Novo', 'Festival des Masques',
-  'Cotonou Couleurs Jazz', 'Fête du Vodún', 'Festival Danxomè',
+  'Cotonou Couleurs Jazz', 'Festival Danxomè',
   'Festival Kokoussi', 'Foire Internationale de Cotonou',
   'Bénin Fashion Week', 'Festival des Arts et Cultures',
   'Marathon International de Cotonou', 'Festival des Saveurs du Bénin',

@@ -20,6 +20,14 @@ export const SITES_TOURISTIQUES: SiteTouristique[] = [
   { name: "Lac Nokoué", type: "Nature", region: "Atlantique", coords: "6.45°N, 2.50°E", desc: "Plus grand lac du Bénin, écosystème lagunaire, pêche traditionnelle aux acadjas.", img: "/nokoue.webp" },
   { name: "Tata Somba", type: "Patrimoine", region: "Atacora", coords: "10.50°N, 1.10°E", desc: "Châteaux-fortins en banco des Otammari, architecture vernaculaire unique.", img: "/somba.png" },
   { name: "Abomey", type: "UNESCO", region: "Zou", coords: "7.186°N, 1.991°E", desc: "Palais royaux du Dahomey, classés UNESCO, musée historique et bas-reliefs.", img: "/abomey.webp" },
+  {
+    name: "Chutes de Tanougou",
+    type: "Patrimoine",
+    region: "Atacora",
+    coords: "7.186°N, 1.991°E",
+    desc: "Cascade naturelle nichée dans la chaîne de l'Atacora, entourée de falaises et de bassins d'eau claire propices à la baignade. Un des joyaux naturels du Nord-Bénin.",
+    img: "/tanougou.png",
+  },
 ];
 
 export type Attraction = {
@@ -68,5 +76,59 @@ export const TOURISME: Attraction[] = [
     description: "Royaume bariba et sa grande fête annuelle de la Gaani.",
     img: "/nikki.webp",
     highlights: ["Fête de la Gaani", "Cavalcade royale", "Palais royal"],
+  },
+];
+
+
+export type LieuDetente = {
+  id: string;
+  nom: string;
+  categorie: string;
+  description: string;
+  localisation: string;
+};
+
+export const LIEUX_DETENTE: LieuDetente[] = [
+  {
+    id: "eka-world",
+    nom: "Eka World",
+    categorie: "Karting & Bowling",
+    description: "Premier karting électrique d'Afrique de l'Ouest. Circuit de karting, piste de quad, bowling en plein air, mur d'escalade, tir à l'arc, tennis et pétanque.",
+    localisation: "Parking P3 de l'Aéroport de Cotonou, face à la Poste, quartier Fidjrossè, Cotonou",
+  },
+  {
+    id: "escape-canalolympia",
+    nom: "Escape by CanalOlympia",
+    categorie: "Escape Game & Arcade",
+    description: "Premier escape game du Bénin. Salles d'énigmes à résoudre en équipe, jeux d'arcade et espace de réalité virtuelle.",
+    localisation: "CanalOlympia Marina et CanalOlympia Wologuède, Cotonou",
+  },
+  {
+    id: "village-enchante",
+    nom: "Village Enchanté",
+    categorie: "Parc d'attractions",
+    description: "Parc d'attractions familial avec manèges, carrousels et animations pour petits et grands.",
+    localisation: "Cotonou, à proximité du Boulevard de la République",
+  },
+  {
+    id: "delta-game-park",
+    nom: "Delta Game Park",
+    categorie: "Parc d'attractions",
+    description: "Parc d'attractions à sensations fortes avec manèges et jeux pour tous les âges.",
+    localisation: "Djèffa, 2e carrefour après le péage à gauche, Cotonou",
+  },
+  {
+    id: "parc-ife",
+    nom: "Parc d'attraction Ifè",
+    categorie: "Parc d'attractions",
+    description: "Parc familial avec manèges, espaces verts et aires de pique-nique, dans la capitale officielle.",
+    localisation: "Rue de l'Inspection, Porto-Novo",
+  },
+  {
+    id: "koba-centre",
+    nom: "Koba Centre",
+    categorie: "Salle de jeux",
+    description: "Espace de jeux couvert pour enfants et familles, avec animations et salles de jeux ouvertes dès 14h.",
+    localisation: "Quartier Jéricho, en face de la Pharmacie Le Nokoué, Cotonou",
   },
 ];

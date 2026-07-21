@@ -16,8 +16,17 @@ const MONUMENTS = [
   { name: 'Musée da Silva', city: 'Porto-Novo', desc: 'Demeure afro-brésilienne du XIXᵉ siècle consacrée aux traditions et à l\'héritage des descendants d\'esclaves affranchis revenus du Brésil.', img: '/msilva.png', lieuId: 'musee-da-silva' },
   { name: 'Statue du Roi Béhanzin', city: 'Cotonou', desc: 'Imposante statue de bronze du dernier grand roi du Dahomey, érigée place Lénine en hommage à sa résistance à la colonisation.', img: '/dept-zou.jpg', lieuId: 'statue-behanzin' },
   { name: 'Cathédrale Notre-Dame de l\'Immaculée Conception', city: 'Cotonou', desc: 'Cathédrale aux rayures rouge et blanc emblématiques, repère architectural du centre-ville depuis le début du XXᵉ siècle.', img: '/ndame.jpg', lieuId: 'cathedrale-cotonou' },
-  { name: 'Tata Somba', city: 'Boukoumbé', desc: 'Habitations fortifiées en terre typiques des Batammariba, à l\'architecture défensive unique classée au patrimoine mondial de l\'UNESCO.', img: '/martyr.png', lieuId: 'tata-somba-boukoumbe' },
-  { name: 'Place des Martyrs', city: 'Cotonou', desc: 'Monument et esplanade dédiés à la mémoire des victimes de l\'histoire politique du pays, lieu de rassemblements et de commémorations.', img: '/somba.png', lieuId: 'place-martyrs-cotonou' },
+  { name: 'Tata Somba', city: 'Boukoumbé', desc: 'Habitations fortifiées en terre typiques des Batammariba, à l\'architecture défensive unique classée au patrimoine mondial de l\'UNESCO.', img: '/somba.png', lieuId: 'tata-somba-boukoumbe' },
+  { name: 'Place des Martyrs', city: 'Cotonou', desc: 'Monument et esplanade dédiés à la mémoire des victimes de l\'histoire politique du pays, lieu de rassemblements et de commémorations.', img: '/martyr.png', lieuId: 'place-martyrs-cotonou' },
+  {
+    id: "place-amazone",
+    name: "Place de l'Amazone",
+    city: "Cotonou",
+    desc:
+      "Monument géant représentant les Amazones du Dahomey. Un des sites les plus visités de Cotonou. Très beau de jour comme de nuit grâce à l'éclairage.",
+    img: "/amazone.webp",
+    lieuId: 'place-amazone'
+  },
 ];
 
 export default function MonumentsClient() {

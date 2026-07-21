@@ -98,8 +98,8 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     lieuId: "marche-dantokpa",
   },
   {
-    id: "place-souvenir",
-    nom: "Place du Souvenir",
+    id: "Place des Martyrs",
+    nom: "Place des Martyrs",
     ville: "Cotonou",
     description: "Esplanade en bord de lagune dédiée à la mémoire collective, prisée pour les promenades en soirée.",
     img: "/martyr.png",
@@ -121,4 +121,13 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     img: "/pendjari.jpg",
     lieuId: "parc-pendjari",
   },
+  {
+    id: "stade-amitie",
+    nom: "Stade de l'Amitié de Kouhounou",
+    ville: "Cotonou",
+    description:
+      "Plus grand stade du Bénin, temple du football national et antre des Écureuils. Lieu de rassemblement populaire lors des grandes compétitions.",
+    img: "/stade.png",
+  },
+
 ];

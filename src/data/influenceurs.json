@@ -36,7 +36,7 @@
   },
   {
     "id": "regie-boyz-er",
-    "nom": "Régie Boyz'er",
+    "nom": "Régie Boyzz'er",
     "categorie": "Humour, Collectif",
     "bio": "Collectif de créateurs de contenu connu pour ses productions humoristiques, ses mises en scène originales et ses collaborations.",
     "votes": 0
@@ -64,14 +64,14 @@
   },
   {
     "id": "theme-yorou",
-    "nom": "Thème Yorou",
+    "nom": "Théma Yorou",
     "categorie": "Lifestyle, Danse",
     "bio": "Créatrice de contenu mettant en avant la danse, le lifestyle et les tendances des réseaux sociaux.",
     "votes": 0
   },
   {
     "id": "jules-citonne",
-    "nom": "Jules Citonne",
+    "nom": "Jules Citronné",
     "categorie": "Humour",
     "bio": "Humoriste béninois apprécié pour ses sketchs spontanés et ses vidéos inspirées de la vie quotidienne.",
     "votes": 0
@@ -127,14 +127,14 @@
   },
   {
     "id": "abib-ahandessi",
-    "nom": "Abib Ahandessi",
+    "nom": "Habib Ahandessi",
     "categorie": "Divertissement",
     "bio": "Créateur de contenu et influenceur proposant des vidéos axées sur les tendances et le divertissement.",
     "votes": 0
   },
   {
-    "id": "2x-aressif",
-    "nom": "2x Aressif",
+    "id": "2x-agressif",
+    "nom": "2x Agressif",
     "categorie": "Musique, Humour",
     "bio": "Artiste et créateur de contenu mêlant musique, humour et divertissement sur les plateformes sociales.",
     "votes": 0
@@ -162,14 +162,14 @@
   },
   {
     "id": "edern-food",
-    "nom": "Edern Food",
+    "nom": "Eden Food",
     "categorie": "Cuisine, Food",
     "bio": "Créateur de contenu spécialisé dans la gastronomie, les découvertes culinaires et la promotion des spécialités locales.",
     "votes": 0
   },
   {
-    "id": "yedjadouwemin",
-    "nom": "Yedjadouwemin",
+    "id": "yédjadouwémin",
+    "nom": "Yédjadouwémin",
     "categorie": "Humour",
     "bio": "Créateur de contenu humoristique mettant en scène des situations inspirées du quotidien et de la culture béninoise.",
     "votes": 0
@@ -182,8 +182,8 @@
     "votes": 0
   },
   {
-    "id": "tranqillin",
-    "nom": "Tranqillin",
+    "id": "tranquillin",
+    "nom": "Tranquillin",
     "categorie": "Humour",
     "bio": "Créateur digital proposant des contenus humoristiques destinés à divertir un public jeune.",
     "votes": 0
