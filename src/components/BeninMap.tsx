@@ -6,11 +6,10 @@ import {
   Marker,
   InfoWindow,
   useJsApiLoader,
-  Autocomplete,
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { LIEUX, type Lieu } from "@/data/lieux";
-import { MapPin, Navigation, Compass, Map as MapIcon, X, Car, Footprints, Bike, Bus, Search, AlertCircle } from "lucide-react";
+import { MapPin, Navigation, Compass, Map as MapIcon, X, AlertCircle } from "lucide-react";
 
 const containerStyle = {
   width: "100%",
@@ -18,9 +17,7 @@ const containerStyle = {
   borderRadius: "4px",
 };
 
-// Correct coordinates for Cotonou, Benin
 const COTONOU = { lat: 6.3653, lng: 2.4183 };
-// Initial center for whole Benin
 const BENIN_CENTER = { lat: 9.3077, lng: 2.3158 };
 
 const categoryColors: Record<string, string> = {
@@ -34,9 +31,6 @@ const categoryColors: Record<string, string> = {
   culture: "#ec4899",
 };
 
-type TravelMode = "DRIVING" | "WALKING" | "BICYCLING" | "TRANSIT";
-
-// Fix issue #3: Move libraries array outside component to prevent recreation
 const GOOGLE_MAPS_LIBRARIES: ("places")[] = ["places"];
 
 interface BeninMapProps {
@@ -45,7 +39,6 @@ interface BeninMapProps {
   focusName?: string;
 }
 
-// Local ErrorBoundary for issue #2
 class BeninMapErrorBoundary extends Component<
   { children: React.ReactNode },
   { hasError: boolean; error: Error | null }
@@ -80,40 +73,35 @@ class BeninMapErrorBoundary extends Component<
   }
 }
 
-// Actual BeninMap content component
 function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [userPos, setUserPos] = useState<google.maps.LatLngLiteral | null>(null);
   const [destination, setDestination] = useState<Lieu | null>(null);
   const [directions, setDirections] = useState<google.maps.DirectionsResult | null>(null);
-  const [travelMode, setTravelMode] = useState<TravelMode>("DRIVING");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>(null);
   const [status, setStatus] = useState("");
+  const [routeLoading, setRouteLoading] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState<Lieu | null>(null);
   const [activeMarkerId, setActiveMarkerId] = useState<string | null>(null);
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: apiKey, // No fallback, use only env variable
+    googleMapsApiKey: apiKey,
     id: "benin-google-map",
-    libraries: GOOGLE_MAPS_LIBRARIES, // Use constant array
+    libraries: GOOGLE_MAPS_LIBRARIES,
   });
 
   const directionsServiceRef = useRef<google.maps.DirectionsService | null>(null);
 
-  // Initialize Directions Service
   useEffect(() => {
     if (isLoaded && !directionsServiceRef.current) {
       directionsServiceRef.current = new google.maps.DirectionsService();
     }
   }, [isLoaded]);
 
-  // Get user's location
   const locateUser = useCallback(() => {
     if (!navigator.geolocation) {
-      setStatus("Géolocalisation non supportée par ce navigateur");
+      console.error("Géolocalisation non supportée par ce navigateur");
       setUserPos(COTONOU);
       return;
     }
@@ -122,28 +110,13 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
 
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        console.log("GPS OK:", pos.coords.latitude, pos.coords.longitude);
         const position = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         setUserPos(position);
         setStatus("");
       },
       (err) => {
-        console.error("GPS ERROR:", err.code, err.message);
-        // Show clear error message based on error code
-        let errorMessage = "Position indisponible.";
-        switch (err.code) {
-          case 1:
-            errorMessage = "Veuillez autoriser l'accès à votre position pour utiliser cette fonctionnalité.";
-            break;
-          case 2:
-            errorMessage = "Impossible de déterminer votre position (GPS/Wi-Fi inactif).";
-            break;
-          case 3:
-            errorMessage = "La recherche de votre position a pris trop de temps.";
-            break;
-        }
-        setStatus(errorMessage);
-        // Fallback ONLY to Benin (Cotonou), no random IP position
+        console.error("Géolocalisation erreur:", err.code, err.message);
+        setStatus("");
         setUserPos(COTONOU);
       },
       { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
@@ -154,7 +127,6 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
     locateUser();
   }, [locateUser]);
 
-  // Handle focus from props
   useEffect(() => {
     if (focusLat != null && focusLng != null) {
       const focusPlace: Lieu = {
@@ -171,48 +143,12 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
     }
   }, [focusLat, focusLng, focusName]);
 
-  // Handle place selection from autocomplete
-  const handlePlaceChanged = useCallback(() => {
-    if (!autocomplete) return;
-    const place = autocomplete.getPlace();
-
-    if (!place.geometry || !place.geometry.location) {
-      // Search our local data
-      const matchedLieu = LIEUX.find((l) =>
-        l.nom.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        l.ville.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      if (matchedLieu) {
-        setDestination(matchedLieu);
-        setSelectedPlace(matchedLieu);
-        setActiveMarkerId(matchedLieu.id);
-      }
-      return;
-    }
-
-    // Create temp Lieu from Google place
-    const tempLieu: Lieu = {
-      id: "google-place-" + Date.now(),
-      nom: place.name || "Destination",
-      categorie: "site",
-      lat: place.geometry.location.lat(),
-      lng: place.geometry.location.lng(),
-      ville: place.vicinity || "Bénin",
-      description: place.formatted_address,
-    };
-    setDestination(tempLieu);
-    setSelectedPlace(tempLieu);
-    setActiveMarkerId(tempLieu.id);
-  }, [autocomplete, searchQuery]);
-
-  // Handle marker click
   const handleMarkerClick = useCallback((lieu: Lieu) => {
     setDestination(lieu);
     setSelectedPlace(lieu);
     setActiveMarkerId(lieu.id);
   }, []);
 
-  // Calculate directions when origin/destination/mode change
   useEffect(() => {
     if (!isLoaded || !directionsServiceRef.current || !userPos || !destination) {
       setDirections(null);
@@ -222,13 +158,17 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
     const origin = new google.maps.LatLng(userPos.lat, userPos.lng);
     const dest = new google.maps.LatLng(destination.lat, destination.lng);
 
+    setRouteLoading(true);
+    setStatus("");
+
     directionsServiceRef.current.route(
       {
-        origin: origin,
+        origin,
         destination: dest,
-        travelMode: travelMode as unknown as google.maps.TravelMode,
+        travelMode: google.maps.TravelMode.DRIVING,
       },
       (result, statusResult) => {
+        setRouteLoading(false);
         if (statusResult === "OK" && result) {
           setDirections(result);
           if (map) {
@@ -238,11 +178,12 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
             map.fitBounds(bounds);
           }
         } else {
-          setStatus("Impossible de calculer l'itinéraire");
+          console.error("Directions API erreur:", statusResult);
+          setDirections(null);
         }
       }
     );
-  }, [userPos, destination, travelMode, isLoaded, map]);
+  }, [userPos, destination, isLoaded, map]);
 
   const mapCenter = useMemo(() => {
     if (destination) return { lat: destination.lat, lng: destination.lng };
@@ -252,16 +193,6 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
 
   const mapZoom = destination ? 14 : (userPos ? 14 : 6);
 
-  const filteredLieux = useMemo(() => {
-    if (!searchQuery) return LIEUX;
-    return LIEUX.filter((l) =>
-      l.nom.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      l.ville.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      l.categorie.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [searchQuery]);
-
-  // Find position for active marker
   const activeMarkerPosition = useMemo(() => {
     if (!activeMarkerId) return null;
 
@@ -281,51 +212,14 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
     return null;
   }, [activeMarkerId, focusLat, focusLng, selectedPlace]);
 
-  // Render error state if no API key first (issue #1)
   if (!apiKey || apiKey.trim() === "") {
-    return (
-      <div className="w-full">
-        <div className="mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            <MapIcon className="w-6 h-6 text-white/80" />
-            <h3 className="font-display text-2xl text-white">Carte interactive du Bénin</h3>
-          </div>
-        </div>
-        <div className="bg-white/5 border border-white/20 rounded-sm p-8 flex flex-col items-center justify-center">
-          <AlertCircle className="w-12 h-12 text-red-400 mb-4" />
-          <h4 className="text-white text-lg font-display mb-2">Clé API Google Maps manquante</h4>
-          <p className="text-white/70 text-center max-w-md mb-4">
-            Ajoutez une clé API Google Maps dans un fichier .env à la racine du projet :
-          </p>
-          <code className="bg-white/10 px-4 py-2 rounded text-sm text-white/80 mb-6">
-            NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=votre-cle-api
-          </code>
-          <p className="text-white/50 text-xs">
-            Obtenez une clé sur : https://console.cloud.google.com/
-          </p>
-        </div>
-      </div>
-    );
+    console.error("Clé API Google Maps manquante");
+    return null;
   }
 
   if (loadError) {
-    return (
-      <div className="w-full">
-        <div className="mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            <MapIcon className="w-6 h-6 text-white/80" />
-            <h3 className="font-display text-2xl text-white">Carte interactive du Bénin</h3>
-          </div>
-        </div>
-        <div className="bg-white/5 border border-white/20 rounded-sm p-8 flex flex-col items-center justify-center">
-          <AlertCircle className="w-12 h-12 text-red-400 mb-4" />
-          <h4 className="text-white text-lg font-display mb-2">Erreur de chargement de Google Maps</h4>
-          <p className="text-white/70 text-center max-w-md">
-            Vérifiez votre clé API Google Maps et vos permissions.
-          </p>
-        </div>
-      </div>
-    );
+    console.error("Erreur de chargement de Google Maps:", loadError);
+    return null;
   }
 
   if (!isLoaded) {
@@ -346,87 +240,14 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
 
   return (
     <div className="w-full">
-      {/* Header */}
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-4">
           <MapIcon className="w-6 h-6 text-white/80" />
           <h3 className="font-display text-2xl text-white">Carte interactive du Bénin</h3>
         </div>
-
-        {/* Search bar */}
-        <div className="relative mb-4">
-          <div className="absolute inset-y-0 left-0 flex items-center pl-4">
-            <Search className="w-4 h-4 text-white/50" />
-          </div>
-          <Autocomplete
-            onLoad={setAutocomplete}
-            onPlaceChanged={handlePlaceChanged}
-          >
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Rechercher un lieu, une ville..."
-              className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 text-white placeholder-white/40 focus:outline-none focus:border-white/30 transition-all rounded-sm"
-            />
-          </Autocomplete>
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery("")}
-              className="absolute inset-y-0 right-4 flex items-center text-white/40 hover:text-white"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          )}
-        </div>
-
-        {/* Travel mode selector */}
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setTravelMode("DRIVING")}
-            className={`flex items-center gap-2 px-4 py-2 text-xs tracking-[0.15em] uppercase font-medium transition-all border rounded-sm ${travelMode === "DRIVING"
-              ? "bg-white text-black border-white"
-              : "bg-transparent text-white/60 border-white/20 hover:border-white/50 hover:text-white"
-              }`}
-          >
-            <Car className="w-4 h-4" />
-            Voiture
-          </button>
-          <button
-            onClick={() => setTravelMode("WALKING")}
-            className={`flex items-center gap-2 px-4 py-2 text-xs tracking-[0.15em] uppercase font-medium transition-all border rounded-sm ${travelMode === "WALKING"
-              ? "bg-white text-black border-white"
-              : "bg-transparent text-white/60 border-white/20 hover:border-white/50 hover:text-white"
-              }`}
-          >
-            <Footprints className="w-4 h-4" />
-            Marcher
-          </button>
-          <button
-            onClick={() => setTravelMode("BICYCLING")}
-            className={`flex items-center gap-2 px-4 py-2 text-xs tracking-[0.15em] uppercase font-medium transition-all border rounded-sm ${travelMode === "BICYCLING"
-              ? "bg-white text-black border-white"
-              : "bg-transparent text-white/60 border-white/20 hover:border-white/50 hover:text-white"
-              }`}
-          >
-            <Bike className="w-4 h-4" />
-            Vélo
-          </button>
-          <button
-            onClick={() => setTravelMode("TRANSIT")}
-            className={`flex items-center gap-2 px-4 py-2 text-xs tracking-[0.15em] uppercase font-medium transition-all border rounded-sm ${travelMode === "TRANSIT"
-              ? "bg-white text-black border-white"
-              : "bg-transparent text-white/60 border-white/20 hover:border-white/50 hover:text-white"
-              }`}
-          >
-            <Bus className="w-4 h-4" />
-            Transport
-          </button>
-        </div>
       </div>
 
       <div className="grid lg:grid-cols-[1fr_380px] gap-6">
-        {/* Map */}
         <div className="relative rounded-sm overflow-hidden border border-white/10">
           <GoogleMap
             mapContainerStyle={containerStyle}
@@ -441,7 +262,6 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
               fullscreenControl: true,
             }}
           >
-            {/* User position */}
             {userPos && (
               <Marker
                 position={userPos}
@@ -467,8 +287,7 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
               </Marker>
             )}
 
-            {/* Places */}
-            {filteredLieux.map((lieu) => (
+            {LIEUX.map((lieu) => (
               <Marker
                 key={lieu.id}
                 position={{ lat: lieu.lat, lng: lieu.lng }}
@@ -482,7 +301,6 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
                 }}
                 onClick={() => handleMarkerClick(lieu)}
               >
-                {/* Only render InfoWindow when explicitly active and position is valid */}
                 {activeMarkerId === lieu.id && activeMarkerPosition && (
                   <InfoWindow
                     position={activeMarkerPosition}
@@ -492,19 +310,12 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
                       <p className="text-black font-display text-lg">{lieu.nom}</p>
                       <p className="text-xs uppercase tracking-[0.2em] text-gray-500 mt-1">{lieu.categorie} • {lieu.ville}</p>
                       {lieu.description && <p className="text-sm text-gray-600 mt-2">{lieu.description}</p>}
-                      <button
-                        onClick={() => handleMarkerClick(lieu)}
-                        className="mt-3 w-full text-xs uppercase tracking-[0.2em] bg-[var(--gold)] text-[var(--ink)] py-2 px-3 rounded-sm font-semibold"
-                      >
-                        Y aller
-                      </button>
                     </div>
                   </InfoWindow>
                 )}
               </Marker>
             ))}
 
-            {/* Directions */}
             {directions && (
               <DirectionsRenderer
                 directions={directions}
@@ -521,9 +332,7 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
           </GoogleMap>
         </div>
 
-        {/* Sidebar */}
         <div className="bg-white/[0.03] border border-white/10 p-6 rounded-sm space-y-6">
-          {/* Locate button */}
           <button
             onClick={locateUser}
             className="w-full px-6 py-4 bg-[var(--gold)] text-[var(--ink)] font-semibold tracking-wide hover:bg-[var(--accent)] transition-all flex items-center justify-center gap-3 rounded-sm"
@@ -532,11 +341,16 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
             Me localiser
           </button>
 
-          {status && (
+          {routeLoading && (
+            <p className="text-sm text-white/70 text-center py-2 border border-white/10 rounded-sm">
+              Calcul de l'itinéraire…
+            </p>
+          )}
+
+          {!routeLoading && status && (
             <p className="text-sm text-white/70 text-center py-2 border border-white/10 rounded-sm">{status}</p>
           )}
 
-          {/* Route info */}
           {directions && directions.routes[0] && directions.routes[0].legs[0] && (
             <div className="bg-[var(--gold)]/10 border border-[var(--gold)]/30 p-4 rounded-sm">
               <div className="flex items-center gap-2 mb-3">
@@ -575,6 +389,7 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
                   setSelectedPlace(null);
                   setDirections(null);
                   setActiveMarkerId(null);
+                  setStatus("");
                 }}
                 className="w-full mt-4 flex items-center justify-center gap-2 px-4 py-2 text-xs tracking-[0.2em] uppercase text-white/70 border border-white/10 rounded-sm hover:bg-white/5 transition-all"
               >
@@ -584,16 +399,13 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
             </div>
           )}
 
-          {/* Nearest places */}
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Compass className="w-5 h-5 text-white/70" />
-              <h4 className="font-display text-xl text-white">
-                {searchQuery ? "Résultats" : "Sites incontournables"}
-              </h4>
+              <h4 className="font-display text-xl text-white">Sites incontournables</h4>
             </div>
             <ul className="space-y-4">
-              {filteredLieux.slice(0, 5).map((p) => (
+              {LIEUX.slice(0, 5).map((p) => (
                 <li
                   key={p.id}
                   onClick={() => handleMarkerClick(p)}
@@ -610,7 +422,6 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
             </ul>
           </div>
 
-          {/* Legend */}
           <div className="pt-4 border-t border-white/10">
             <h5 className="text-xs uppercase tracking-[0.2em] text-white/50 mb-4">Légende</h5>
             <div className="grid grid-cols-2 gap-3">
@@ -628,7 +439,6 @@ function BeninMapContent({ focusLat, focusLng, focusName }: BeninMapProps) {
   );
 }
 
-// Export component wrapped in ErrorBoundary
 export function BeninMap(props: BeninMapProps) {
   return (
     <BeninMapErrorBoundary>

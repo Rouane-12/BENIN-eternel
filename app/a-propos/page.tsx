@@ -16,69 +16,71 @@ const FLAG = {
   or: "oklch(0.88 0.17 92)",
   vert: "oklch(0.55 0.14 152)",
   rouge: "oklch(0.56 0.23 27)",
+  bleu: "oklch(0.62 0.16 250)",
 } as const;
 
-const EQUIPE = {
-  fondateur: {
-    nom: "Evans DJOSSOUVI",
-    role: "Fondateur & Superviseur",
-    bio: "À l’origine de l’idée du projet, il structure la vision du site, guide sa direction numérique et met en valeur l’identité du Bénin à travers une expérience moderne et cohérente.",
-    skills: ["Leadership", "React / Next.js", "Node.js", "Product Thinking"],
-    photo: "/team/evans-djossouvi.webp",
+const TEAM = [
+  {
+    nom: "Evans",
+    role: "SUPERVISEUR DEV",
+    email: "johnsonevans686@gmail.com",
+    phone: "+2290194677352",
     accent: FLAG.or,
+    description:
+      "Coordination technique, supervision du développement et cohérence globale de l’application.",
+    tags: ["Direction technique", "Architecture", "Supervision"],
   },
-  groupes: [
-    {
-      pole: "Développement Web & Mobile",
-      couleur: FLAG.vert,
-      description: "Ce pôle développe les expériences web et mobile du projet sur le temps libre de l’équipe.",
-      membres: [
-        {
-          nom: "DJOSSOUVI Rouane",
-          role: "Développeur Web Frontend",
-          bio: "Basé à Gbodjè, il met l’accent sur des interfaces claires et performantes avec React et Next.js, tout en gardant une forte sensibilité au mobile.",
-          skills: ["React", "Next.js", "MongoDB", "Python"],
-          photo: "/team/rouane-djossouvi.jpg",
-        },
-        {
-          nom: "DOSSOU Prince",
-          role: "Développeur Web & Mobile",
-          bio: "Polyvalent et ancré à Cococodji, il conçoit des applications web et mobiles modernes, du front au back, avec une vraie sensibilité produit.",
-          skills: ["React / Next.js", "React Native", "Node.js", "Prisma"],
-          photo: "/team/prince-dossou.png",
-        },
-      ],
-    },
-    {
-      pole: "Design UI/UX",
-      couleur: FLAG.rouge,
-      description: "Ce pôle donne au projet sa cohérence visuelle, son rythme éditorial et son caractère mémorable.",
-      membres: [
-        {
-          nom: "Meryl AMOUSSOU",
-          role: "Graphic Design UI/UX",
-          bio: "Designer sensible au storytelling visuel, elle structure des expériences élégantes, accessibles et porteuses d’émotion.",
-          skills: ["UI Design", "UX Thinking", "Branding", "Figma"],
-          photo: "/team/meryl-amoussou.jpeg",
-        },
-        {
-          nom: "SEWADE Creprin",
-          role: "Graphic Design UI/UX",
-          bio: "À l’aise entre identité visuelle et expérience numérique, elle cherche à rendre chaque interface à la fois claire et forte.",
-          skills: ["Visual Design", "Wireframes", "Design Systems", "Prototypage"],
-          photo: "/team/creprin-sewade.png",
-        },
-        {
-          nom: "TOSSAH Zod",
-          role: "Graphic Design UI/UX",
-          bio: "Designer créatif qui combine sensibilité graphique et logique de parcours pour produire des interfaces sobres et engageantes.",
-          skills: ["Interface Design", "Motion", "UX Writing", "Prototype"],
-          photo: "/team/zod-tossa.jpeg",
-        },
-      ],
-    },
-  ],
-} as const;
+  {
+    nom: "Meryl",
+    role: "SUPERVISEUR DESIGNER",
+    email: "amoussoumeryl0@gmail.com",
+    phone: "+2290146463623",
+    accent: FLAG.rouge,
+    description:
+      "Direction artistique, identité visuelle et cohérence UI/UX de l’expérience.",
+    tags: ["UI/UX", "Identité visuelle", "Direction artistique"],
+  },
+  {
+    nom: "Rouane",
+    role: "DEV PRINCIPAL",
+    email: "djossouvirouane6@gmail.com",
+    phone: "+2290146449300",
+    accent: FLAG.vert,
+    description:
+      "Développement principal de l’application et intégration des composants majeurs.",
+    tags: ["Frontend", "Intégration", "Performance"],
+  },
+  {
+    nom: "Prince",
+    role: "DEV SECONDAIRE",
+    email: "princedossou465@gmail.com",
+    phone: "+2290151879255",
+    accent: FLAG.bleu,
+    description:
+      "Support développement, ajustements techniques et renfort sur les livrables.",
+    tags: ["Support dev", "Maintenance", "Optimisation"],
+  },
+  {
+    nom: "Crepin",
+    role: "DESIGNER 1",
+    email: "sewadecrepin0@gmail.com",
+    phone: "+2290156454729",
+    accent: FLAG.or,
+    description:
+      "Création d’éléments visuels, mise en forme des interfaces et harmonie graphique.",
+    tags: ["Graphisme", "Maquettes", "UI"],
+  },
+  {
+    nom: "Zod",
+    role: "DESIGNER 2",
+    email: "nephtalitossah4@gmail.com",
+    phone: "+2290154206835",
+    accent: FLAG.rouge,
+    description:
+      "Aide au design, finitions visuelles et renforcement de l’univers graphique.",
+    tags: ["Design", "Finitions", "Créativité"],
+  },
+] as const;
 
 function initials(nom: string) {
   return nom
@@ -89,6 +91,93 @@ function initials(nom: string) {
     .join("");
 }
 
+function TeamCard({
+  nom,
+  role,
+  email,
+  phone,
+  accent,
+  description,
+  tags,
+}: (typeof TEAM)[number]) {
+  return (
+    <article
+      className="group relative h-full overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-6 sm:p-7 lg:p-8 shadow-[0_30px_100px_rgba(0,0,0,0.32)] transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
+      style={{
+        boxShadow:
+          "0 28px 80px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)",
+      }}
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.10),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.05),transparent_40%)] opacity-70" />
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+      <div className="relative flex h-full flex-col">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start gap-4">
+            <div
+              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[22px] border border-white/10 text-lg font-bold text-white shadow-xl"
+              style={{
+                background: `linear-gradient(135deg, ${accent}, rgba(255,255,255,0.10))`,
+              }}
+            >
+              {initials(nom)}
+            </div>
+
+            <div className="min-w-0">
+              <h3 className="font-display text-[1.4rem] sm:text-[1.55rem] lg:text-[1.7rem] text-white leading-tight">
+                {nom}
+              </h3>
+              <p
+                className="mt-1 text-[11px] sm:text-[12px] uppercase tracking-[0.34em] font-medium"
+                style={{ color: accent }}
+              >
+                {role}
+              </p>
+            </div>
+          </div>
+
+          <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white/70">
+            Team
+          </span>
+        </div>
+
+        <p className="mt-6 max-w-[36rem] text-sm sm:text-[15px] leading-7 sm:leading-8 text-white/72">
+          {description}
+        </p>
+
+        <div className="mt-7 grid gap-3">
+          <a
+            href={`mailto:${email}`}
+            className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm text-white/80 transition hover:border-white/20 hover:bg-white/[0.06]"
+          >
+            <span className="text-white/45">Email</span>
+            <span className="min-w-0 truncate text-right text-white">{email}</span>
+          </a>
+
+          <a
+            href={`tel:${phone}`}
+            className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm text-white/80 transition hover:border-white/20 hover:bg-white/[0.06]"
+          >
+            <span className="text-white/45">Téléphone</span>
+            <span className="min-w-0 truncate text-right text-white">{phone}</span>
+          </a>
+        </div>
+
+        <div className="mt-6 flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-white/65"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function AProposPage() {
   return (
     <SiteLayout>
@@ -96,182 +185,80 @@ export default function AProposPage() {
         kicker="Notre mission"
         title="À propos"
         script="de Bénin Éternel"
-        intro="Une plateforme premium dédiée à la découverte, à la transmission et à la mise en valeur du patrimoine béninois — naturel, historique et culturel."
+        intro="Une plateforme dédiée à la découverte, à la transmission et à la mise en valeur du patrimoine béninois — naturel, historique et culturel."
         image="/festival.jpg"
       />
-      <section className="max-w-3xl mx-auto px-6 lg:px-0 py-12 space-y-6 text-white/75 leading-relaxed text-lg">
+
+      <section className="mx-auto max-w-4xl px-6 py-12 lg:px-0">
         <Reveal>
-          <p>
-            Bénin Éternel a été conçu comme une bibliothèque numérique vivante. Notre ambition est
-            simple : offrir aux voyageurs, aux étudiants, aux chercheurs et aux Béninois eux-mêmes
-            une plateforme contemporaine, fluide et émotionnelle pour redécouvrir le pays.
-          </p>
-          <p>
-            De l'histoire des rois du Dahomey à la cuisine de rue de Cotonou, de la cité lacustre de
-            Ganvié aux Tata Somba de l'Atacora, chaque page est pensée comme un chapitre d'un grand
-            récit en mouvement.
-          </p>
-          <p className="font-script text-4xl text-white">« Mi kúabɔ̀ Bénin »</p>
-          <p className="text-[10px] uppercase tracking-[0.4em] text-white/40">Bienvenue au Bénin.</p>
+          <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-6 sm:p-8 lg:p-10 text-white/75 shadow-[0_24px_80px_rgba(0,0,0,0.24)]">
+            <div className="mb-8 flex items-center gap-3">
+              <span
+                className="h-2.5 w-2.5 rounded-full shadow-[0_0_18px_rgba(255,255,255,0.25)]"
+                style={{ background: FLAG.or }}
+              />
+              <span className="text-[10px] uppercase tracking-[0.38em] text-white/45">
+                Présentation
+              </span>
+            </div>
+
+            <div className=" lg:gap-10">
+              <p className="text-sm sm:text-base lg:text-[15px] leading-7 sm:leading-8 text-white/78">
+                Bénin Éternel a été conçu comme une bibliothèque numérique vivante. Notre ambition est
+                simple : offrir aux voyageurs, aux étudiants, aux chercheurs et aux Béninois eux-mêmes
+                une plateforme contemporaine, fluide et émotionnelle pour découvrir le pays.
+                <br />
+                <br />
+                De l’histoire des rois du Dahomey à la cuisine de rue de Cotonou, de la cité lacustre de
+                Ganvié aux Tata Somba de l’Atacora, chaque page est pensée comme un chapitre d’un grand
+                récit en mouvement.
+              </p>
+
+
+            </div>
+
+            <div className="mt-8 flex flex-col gap-2">
+              <p className="font-script text-4xl sm:text-5xl text-white">« Mi kúabɔ̀ Bénin »</p>
+              <p className="text-[10px] uppercase tracking-[0.4em] text-white/40">
+                Bienvenue au Bénin.
+              </p>
+            </div>
+          </div>
         </Reveal>
       </section>
 
       <div className="border-t border-white/5" />
 
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-12 md:py-16">
+      <section className="mx-auto max-w-7xl px-6 py-12 md:py-16 lg:px-10">
         <Reveal>
-          <div className="flex items-center gap-3 mb-10 justify-center">
-            <span
-              className="inline-block w-8 h-[2px]"
-              style={{ background: `linear-gradient(90deg, ${FLAG.or}, ${FLAG.rouge})` }}
-            />
-            <span className="text-[10px] tracking-[0.4em] uppercase text-white/60">L'équipe</span>
-            <span
-              className="inline-block w-8 h-[2px]"
-              style={{ background: `linear-gradient(90deg, ${FLAG.rouge}, ${FLAG.or})` }}
-            />
+          <div className="mb-12 grid gap-4 rounded-[32px] border border-white/10 bg-white/[0.03] p-5 sm:p-6 lg:grid-cols-3 lg:p-7">
+            <div className="rounded-[24px] border border-white/10 bg-black/20 p-5 sm:p-6">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-white/45">Vision</p>
+              <p className="mt-3 text-sm sm:text-[15px] leading-7 text-white/75">
+                Créer une expérience digitale élégante et cohérente autour du Bénin.
+              </p>
+            </div>
+
+            <div className="rounded-[24px] border border-white/10 bg-black/20 p-5 sm:p-6">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-white/45">Design</p>
+              <p className="mt-3 text-sm sm:text-[15px] leading-7 text-white/75">
+                Garder une identité premium, sombre, moderne et immersive.
+              </p>
+            </div>
+
+            <div className="rounded-[24px] border border-white/10 bg-black/20 p-5 sm:p-6">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-white/45">Exécution</p>
+              <p className="mt-3 text-sm sm:text-[15px] leading-7 text-white/75">
+                Transformer les idées en interface claire, fluide et performante.
+              </p>
+            </div>
           </div>
         </Reveal>
 
-        <Reveal>
-          <div className="mb-10 flex justify-center">
-            <article
-              className="w-full max-w-3xl overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] shadow-[0_30px_80px_rgba(0,0,0,0.28)]"
-              style={{ boxShadow: `0 24px 70px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)` }}
-            >
-              <div className="relative h-48 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5" />
-                <img
-                  src={EQUIPE.fondateur.photo}
-                  alt={EQUIPE.fondateur.nom}
-                  className="h-100 w-full object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-                <div
-                  className="absolute bottom-4 left-4 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-white"
-                  style={{ background: `linear-gradient(90deg, ${FLAG.or}, rgba(255,255,255,0.16))` }}
-                >
-                  Fondateur & superviseur
-                </div>
-                <div
-                  data-fallback
-                  className="hidden absolute inset-0 items-center justify-center bg-gradient-to-br from-white/12 via-transparent to-white/5 text-5xl font-display text-white"
-                >
-                  {initials(EQUIPE.fondateur.nom)}
-                </div>
-              </div>
-
-              <div className="p-6 md:p-8">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.3em] text-white/50">Vision & direction</p>
-                    <h3 className="mt-2 font-display text-2xl text-white">{EQUIPE.fondateur.nom}</h3>
-                    <p className="mt-2 text-[11px] uppercase tracking-[0.28em]" style={{ color: FLAG.or }}>
-                      {EQUIPE.fondateur.role}
-                    </p>
-                  </div>
-                  <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white/70">
-                    01
-                  </span>
-                </div>
-
-                <p className="mt-5 text-sm leading-7 text-white/72">{EQUIPE.fondateur.bio}</p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {EQUIPE.fondateur.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[10px] uppercase tracking-[0.2em] text-white/70"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          </div>
-        </Reveal>
-
-        <div className="grid gap-8 lg:grid-cols-2">
-          {EQUIPE.groupes.map((groupe, groupIndex) => (
-            <Reveal key={groupe.pole} delay={groupIndex * 0.05}>
-              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-5 md:p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
-                <div className="flex items-center gap-3 mb-6">
-                  <span
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-[10px] font-medium uppercase tracking-[0.3em]"
-                    style={{ color: groupe.couleur }}
-                  >
-                    {groupe.pole.split(" ")[0][0]}
-                  </span>
-                  <div>
-                    <p
-                      className="text-[11px] tracking-[0.2em] uppercase"
-                      style={{ color: groupe.couleur }}
-                    >
-                      {groupe.pole}
-                    </p>
-                    <p className="text-sm text-white/45">{groupe.description}</p>
-                  </div>
-                </div>
-
-                <div className="grid gap-4">
-                  {groupe.membres.map((membre, index) => (
-                    <Reveal key={membre.nom} delay={index * 0.04}>
-                      <article className="group overflow-hidden rounded-[22px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_rgba(0,0,0,0.24)]">
-                        <div className="relative h-44 overflow-hidden">
-                          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5" />
-                          <img
-                            src={membre.photo}
-                            alt={membre.nom}
-                            loading="lazy"
-                            className="h-100 w-full object-center object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                          <div
-                            className="absolute bottom-4 left-4 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-white"
-                            style={{ background: `linear-gradient(90deg, ${groupe.couleur}, rgba(255,255,255,0.14))` }}
-                          >
-                            {groupe.pole}
-                          </div>
-                          <div
-                            data-fallback
-                            className="hidden absolute inset-0 items-center justify-center bg-gradient-to-br from-white/10 via-transparent to-white/5 text-5xl font-display text-white"
-                          >
-                            {initials(membre.nom)}
-                          </div>
-                        </div>
-
-                        <div className="p-5">
-                          <div className="flex items-start justify-between gap-3">
-                            <div>
-                              <h3 className="font-display text-xl text-white">{membre.nom}</h3>
-                              <p className="mt-1 text-[11px] uppercase tracking-[0.25em]" style={{ color: groupe.couleur }}>
-                                {membre.role}
-                              </p>
-                            </div>
-                            <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/10 text-[11px] uppercase tracking-[0.2em] text-white/60">
-                              {index + 1}
-                            </span>
-                          </div>
-
-                          <p className="mt-4 text-sm leading-6 text-white/70">{membre.bio}</p>
-
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {membre.skills.map((skill) => (
-                              <span
-                                key={skill}
-                                className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[10px] uppercase tracking-[0.2em] text-white/70"
-                              >
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </article>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
+        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {TEAM.map((member, index) => (
+            <Reveal key={member.nom} delay={index * 0.05}>
+              <TeamCard {...member} />
             </Reveal>
           ))}
         </div>

@@ -2,6 +2,7 @@
 import { useState, useMemo } from 'react';
 import { SiteLayout, PageHero } from '@/components/SiteLayout';
 import { Reveal } from '@/components/Reveal';
+import { ListingCallout } from '@/components/ListingCallout';
 
 
 const PLATS = [
@@ -82,7 +83,67 @@ const PLATS = [
     origin: 'Pays fon',
     desc: 'Préparation traditionnelle à base de maïs et de niébé, héritée de la cuisine ancienne.',
     image: '/plats/dakouin.webp'
-  }
+  },
+  {
+    name: 'Telibo',
+    origin: 'Nord Bénin',
+    desc: 'Pâte noire semi-solide obtenue à partir de farine de cossette d\'igname séchée, se mange avec une sauce gluante, la sauce légume ou la sauce d\'arachide.',
+    image: '/plats/telibo.png'
+  },
+  {
+    name: 'Agbeli',
+    origin: 'Sud Bénin',
+    desc: 'Pâte de manioc fermenté, cousine du gari et du placali, servie avec une sauce d\'arachide ou une sauce tomate relevée.',
+    image: '/plats/agbeli.png'
+  },
+  {
+    name: 'Sauce Gboman',
+    origin: 'Tout le Bénin',
+    desc: 'Sauce traditionnelle préparée à base de feuilles de gboman (morelle noire). Très appréciée pour sa saveur légèrement amère, elle accompagne parfaitement la pâte de maïs, l’akassa, le télibo ou l’igname.',
+    image: '/plats/gboman.webp'
+  },
+  {
+    name: 'Sauce Gombo',
+    origin: 'Tout le Bénin',
+    desc: 'Sauce onctueuse à base de gombo frais finement coupé. Sa texture légèrement gluante en fait un accompagnement incontournable de la pâte, du télibo, de l’akassa ou du riz.',
+    image: '/plats/Sauce-G.png'
+  },
+  {
+    name: 'Sauce Arachide',
+    origin: 'Tout le Bénin',
+    desc: 'Sauce riche et savoureuse préparée avec une pâte d’arachides, souvent agrémentée de viande, de poisson ou de crabe. Elle est traditionnellement servie avec de la pâte, du riz, de l’igname ou de l’akassa.',
+    image: '/plats/arachide.webp'
+  },
+  {
+    name: 'Tchoukoutou',
+    origin: 'Nord Bénin (Atacora)',
+    desc: 'Bière traditionnelle brassée à base de mil ou de sorgho fermenté, servie fraîche dans des calebasses lors des fêtes et rassemblements.',
+    image: '/plats/Tchoukoutou.png'
+  },
+  {
+    name: 'Toubani',
+    origin: 'Nord Bénin',
+    desc: 'Petit pain cuit à la vapeur à base de farine de haricot niébé et de cossette d\'igname, souvent pris au petit-déjeuner avec piment sec et huile.',
+    image: '/plats/toubani.png'
+  },
+  {
+    name: 'Amon Soja',
+    origin: 'Tout le Bénin',
+    desc: 'Fromage de soja façonné en losanges puis frit dans l\'huile d\'arachide, un incontournable du street-food béninois riche en protéines.',
+    image: '/plats/Amon-s.png'
+  },
+  {
+    name: 'Wanzou',
+    origin: 'Nord Bénin',
+    desc: 'Préparation traditionnelle du nord à base de légumineuses, appréciée en période de soudure.',
+    image: '/plats/wanzou.png'
+  },
+  {
+    name: 'Tale-tale',
+    origin: 'Tout le Bénin',
+    desc: 'Beignets moelleux à base de bananes très mûres écrasées, un goûter populaire vendu dans la rue l\'après-midi.',
+    image: '/plats/tale-tale.png'
+  },
 ];
 
 const CATEGORIES = [
@@ -237,6 +298,15 @@ export default function GastronomieClient() {
           ))}
         </div>
       </section>
+      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-16">
+        <ListingCallout
+          title="Votre restaurant, maquis ou glacier mérite sa place ici"
+          description="Vous gérez une adresse gourmande au Bénin et souhaitez apparaître sur cette page ? Écrivez-nous, nous étudierons votre demande avec plaisir."
+          email="djossouvirouane@gmail.com"
+        />
+      </section>
+      <br />
+      <br />
     </SiteLayout>
   );
 }
