@@ -5,7 +5,7 @@ import { Reveal } from '@/components/Reveal';
 
 function Section({ title, kicker, children, image }: { title: string; kicker: string; children: React.ReactNode; image?: string }) {
   return (
-    <section className="max-w-5xl mx-auto px-6 lg:px-10 py-16 border-b border-white/10">
+    <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-16 border-b border-white/10">
       <Reveal>
         <div className="text-[10px] tracking-[0.4em] uppercase text-white/60 mb-2">{kicker}</div>
         <h2 className="font-display text-3xl md:text-5xl mb-6">{title}</h2>
@@ -24,7 +24,7 @@ export default function CultureClient() {
         title="Culture"
         script="& arts"
         intro="Religion vodun, rythmes ancestraux, masques sacrés, bronzes d'Abomey, architecture Tata Somba, patrimoine afro-brésilien, fêtes traditionnelles et tradition orale : entrez dans l'âme vivante du Bénin, considéré comme le berceau mondial du vodun."
-        image="/art.jpg"
+        image="/art.webp"
       />
 
       <Section title="Vodun" kicker="Religion d'État">
@@ -94,7 +94,7 @@ export default function CultureClient() {
         </ul>
       </Section>
 
-      <Section title="Artisanat et arts visuels" kicker="Mains d'or sans or" image="/ba.png">
+      <Section title="Artisanat et arts visuels" kicker="Mains d'or sans or" image="/ba.webp">
         <p>
           Les bronzes d'Abomey, coulés selon la technique de la cire perdue héritée des fondeurs royaux,
           représentent scènes de cour, animaux totémiques et symboles de règne : chaque roi du Dahomey
@@ -116,7 +116,7 @@ export default function CultureClient() {
         </p>
       </Section>
 
-      <Section title="Architecture" kicker="Bâtir l'histoire" image="/somba.png">
+      <Section title="Architecture" kicker="Bâtir l'histoire" image="/somba.webp">
         <p>
           Les Tata Somba de l'Atacora, châteaux-fortins en banco hérissés de tourelles et surmontés de
           greniers coniques, témoignent du génie défensif des Otammari face aux razzias esclavagistes

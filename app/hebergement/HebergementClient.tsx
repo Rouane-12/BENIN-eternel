@@ -195,10 +195,10 @@ export default function HebergementClient() {
         title="Hébergement"
         script="d'exception"
         intro="Hôtels de luxe, villas privées ou appartements meublés — une sélection rigoureuse pour chaque profil de voyageur au Bénin."
-        image="/plan.jpg"
+        image="/plan.webp"
       />
 
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16">
         <SegmentedTabs tabs={TABS} active={activeTab} onChange={setActiveTab} className="mb-16" />
 
         {activeCategory && (

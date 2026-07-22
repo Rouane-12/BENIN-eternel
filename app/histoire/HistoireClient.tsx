@@ -26,11 +26,11 @@ export default function HistoireClient() {
         title="L'Histoire"
         script="éternelle"
         intro="Du plateau d'Abomey aux côtes atlantiques, parcourez quatre siècles de royaumes, de résistances et de renaissance. Une bibliothèque numérique vivante consacrée à la grande histoire du Bénin."
-        image="/histoire.jpg"
+        image="/histoire.webp"
       />
 
       {/* TIMELINE */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-10 py-20">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
         <Reveal>
           <div className="text-xs tracking-[0.4em] uppercase text-white/60 mb-4">Chronologie</div>
           <h2 className="font-display text-4xl md:text-5xl mb-12">Du Dahomey au Bénin moderne</h2>
@@ -55,7 +55,7 @@ export default function HistoireClient() {
       </section>
 
       {/* KINGS */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
         <Reveal>
           <div className="text-xs tracking-[0.4em] uppercase text-white/60 mb-4">Les Grands Rois du Dahomey</div>
           <h2 className="font-display text-4xl md:text-6xl mb-4">
@@ -88,7 +88,7 @@ export default function HistoireClient() {
       </section>
 
       {/* OTHER KINGDOMS */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
         <Reveal>
           <div className="text-xs tracking-[0.4em] uppercase text-white/60 mb-4">Autres royaumes</div>
           <h2 className="font-display text-4xl md:text-5xl mb-8">Le Bénin avant le Bénin</h2>
@@ -118,7 +118,7 @@ export default function HistoireClient() {
       </section>
 
       {/* PEOPLES AND CHIEFDOMS */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
         <Reveal>
           <div className="text-xs tracking-[0.4em] uppercase text-white/60 mb-4">La mosaïque des peuples du Bénin</div>
           <h2 className="font-display text-4xl md:text-5xl mb-4">Des sociétés sans roi, mais avec toute leur histoire</h2>
@@ -139,7 +139,7 @@ export default function HistoireClient() {
       </section>
 
       {/* AMAZONES */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-10 py-20">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
         <Reveal>
           <div className="text-xs tracking-[0.4em] uppercase text-white/60 mb-4">Les Amazones du Dahomey</div>
           <h2 className="font-display text-4xl md:text-6xl mb-8">

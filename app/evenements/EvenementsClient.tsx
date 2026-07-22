@@ -109,10 +109,10 @@ export default function EvenementsClient() {
         title="Événements"
         script="au Bénin"
         intro="Les festivals, cérémonies, compétitions et grands rendez-vous qui animent la vie culturelle, artistique et sportive du pays."
-        image="/festival.jpg"
+        image="/histoire.webp"
       />
 
-      <section className="max-w-3xl mx-auto px-6 lg:px-10 py-8 md:py-12">
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-10 py-8 md:py-12">
         <Reveal>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-oklch(0.88 0.17 92) to-oklch(0.56 0.23 27) opacity-20 blur-xl rounded-xl" />
@@ -140,7 +140,7 @@ export default function EvenementsClient() {
 
       <div className="border-t border-white/5" />
 
-      <section className="max-w-5xl mx-auto px-6 lg:px-10 py-10 md:py-16">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-10 md:py-16">
         <Reveal>
           <div className="mb-8 md:mb-12">
             <div className="flex items-center gap-3 mb-3">

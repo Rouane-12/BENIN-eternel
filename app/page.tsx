@@ -5,17 +5,17 @@ import { SiteLayout } from '@/components/SiteLayout';
 import { Reveal } from '@/components/Reveal';
 import Link from 'next/link';
 import ganvie from '@/assets/ganvie.webp';
-import mask from '@/assets/mask.jpg';
-import abomey from '@/assets/royaume.png';
-import pendjari from '@/assets/pendjari.jpg';
+import mask from '@/assets/mask.webp';
+import abomey from '@/assets/royaume.webp';
+import pendjari from '@/assets/pendjari.webp';
 import beach from '@/assets/erevan.webp';
-import fond from '@/assets/fond.jpg';
-import festival from '@/assets/festival.jpg';
+import fond from '@/assets/fond.webp';
+import festival from '@/assets/festival.webp';
 import ouidah from '@/assets/ouidah.webp';
-import femme from '@/assets/femme.png';
-import africa from '@/assets/africa.png';
-import f1 from '@/assets/f1.jpg';
-import f2 from '@/assets/f2.jpg';
+import femme from '@/assets/femme.webp';
+import africa from '@/assets/africa.webp';
+import f1 from '@/assets/f1.webp';
+import f2 from '@/assets/f2.webp';
 
 const CHAPTERS = [
   { id: "histoire", href: "/histoire", title: "Les royaumes", kicker: "Mémoire", img: abomey.src, text: "De Gangnihessou à Béhanzin — trois siècles de monarchie fon racontés." },
@@ -68,7 +68,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/40 to-transparent" />
           <div className="absolute inset-0 noise" />
 
-          <div className="relative h-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col justify-start pt-28 md:pt-32 pb-56 md:pb-64">
+          <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col justify-start pt-28 md:pt-32 pb-56 md:pb-64">
             <motion.div style={{ opacity: heroOpacity }} className="z-10 max-w-2xl">
               <div className="flex items-center gap-3 mb-6">
                 <span className="inline-block w-10 h-[3px] bg-gradient-flag" />
@@ -77,14 +77,14 @@ export default function Home() {
                 </span>
               </div>
               <h1 className="leading-[0.85]">
-                <span className="block font-display text-5xl md:text-7xl lg:text-[6.5rem] tracking-tight text-white">
+                <span className="block font-display text-4xl sm:text-5xl md:text-7xl lg:text-[6.5rem] tracking-tight text-white">
                   BÉNIN
                 </span>
-                <span className="block font-script text-6xl md:text-8xl lg:text-[9rem] text-white/95 -mt-2 md:-mt-4">
+                <span className="block font-script text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] text-white/95 -mt-2 md:-mt-4">
                   Éternel
                 </span>
               </h1>
-              <p className="mt-6 max-w-xl text-lg md:text-xl text-white/75 leading-relaxed">
+              <p className="mt-6 max-w-xl text-base sm:text-lg md:text-xl text-white/75 leading-relaxed">
                 Terre de royaumes, de traditions, de culture et de merveilles naturelles.
                 Bienvenue au berceau du Vodún.
               </p>

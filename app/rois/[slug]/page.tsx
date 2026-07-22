@@ -24,7 +24,7 @@ export default function KingPage() {
         title={king.name}
         script={king.epithet}
         intro={king.summary}
-        image="/abomey.jpg"
+        image="/abomey.webp"
       />
       <article className="max-w-3xl mx-auto px-6 lg:px-0 py-16">
         <Reveal>

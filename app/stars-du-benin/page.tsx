@@ -274,7 +274,7 @@ export default function StarsDuBenin() {
         title="Influenceurs"
         script="du Bénin"
         intro="Les voix du numérique béninois : créateurs de contenu, influenceurs et personnalités qui animent les réseaux sociaux."
-        image="/mask.jpg"
+        image="/mask.webp"
       />
 
       <section className="max-w-5xl mx-auto px-6 lg:px-10 pt-8 md:pt-10 pb-4">

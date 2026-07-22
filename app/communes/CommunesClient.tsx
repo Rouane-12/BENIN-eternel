@@ -26,11 +26,11 @@ export default function CommunesClient() {
             title="12 Départements"
             script="77 Communes"
             intro="Du nord aux savanes de l'Atacora au sud aux lagunes du Mono, le territoire béninois se déploie en douze départements et soixante-dix-sept communes."
-            image="/plan.jpg"
+            image="/plan.webp"
           />
         </div>
       </section>
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16">
         <Reveal>
           <div className="grid grid-cols-3 gap-6 mb-12 max-w-2xl">
             <Stat n="12" l="Départements" />

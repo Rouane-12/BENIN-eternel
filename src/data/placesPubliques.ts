@@ -61,7 +61,7 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     nom: "Place de l'Étoile Rouge",
     ville: "Cotonou",
     description: "Ancien symbole de la période révolutionnaire, aujourd'hui carrefour emblématique et repère central de la ville.",
-    img: "/etoile.png",
+    img: "/etoile.webp",
   },
   {
     id: "porte-non-retour",
@@ -69,7 +69,7 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     ville: "Ouidah",
     description:
       "Mémorial en bord de mer marquant le dernier point de départ des esclaves vers les Amériques. Lieu de mémoire majeur du Bénin.",
-    img: "/ouidah.png",
+    img: "/ouidah.webp",
     lieuId: "porte-non-retour",
   },
   {
@@ -94,7 +94,7 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     nom: "Marché Dantokpa",
     ville: "Cotonou",
     description: "Plus grand marché à ciel ouvert d'Afrique de l'Ouest. Textiles, épices, artisanat et vie locale intense.",
-    img: "/dantokpa.png",
+    img: "/dantokpa.webp",
     lieuId: "marche-dantokpa",
   },
   {
@@ -102,7 +102,7 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     nom: "Place des Martyrs",
     ville: "Cotonou",
     description: "Esplanade en bord de lagune dédiée à la mémoire collective, prisée pour les promenades en soirée.",
-    img: "/martyr.png",
+    img: "/martyr.webp",
   },
   {
     id: "place-jean-bayol",
@@ -110,7 +110,7 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     ville: "Cotonou",
     description:
       "Place historique proche du marché Dantokpa, portant le nom de l'explorateur français ayant négocié avec le roi Béhanzin.",
-    img: "/pbayol.png",
+    img: "/pbayol.webp",
   },
   {
     id: "parc-pendjari",
@@ -118,7 +118,7 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     ville: "Atacora",
     description:
       "Réserve naturelle emblématique du Nord, refuge des éléphants, lions et buffles. Un des derniers grands écosystèmes sauvages d'Afrique de l'Ouest.",
-    img: "/pendjari.jpg",
+    img: "/pendjari.webp",
     lieuId: "parc-pendjari",
   },
   {
@@ -127,7 +127,7 @@ export const PLACES_PUBLIQUES: PlacePublique[] = [
     ville: "Cotonou",
     description:
       "Plus grand stade du Bénin, temple du football national et antre des Écureuils. Lieu de rassemblement populaire lors des grandes compétitions.",
-    img: "/stade.png",
+    img: "/stade.webp",
   },
 
 ];

@@ -88,13 +88,13 @@ const PLATS = [
     name: 'Telibo',
     origin: 'Nord Bénin',
     desc: 'Pâte noire semi-solide obtenue à partir de farine de cossette d\'igname séchée, se mange avec une sauce gluante, la sauce légume ou la sauce d\'arachide.',
-    image: '/plats/telibo.png'
+    image: '/plats/telibo.webp'
   },
   {
     name: 'Agbeli',
     origin: 'Sud Bénin',
     desc: 'Pâte de manioc fermenté, cousine du gari et du placali, servie avec une sauce d\'arachide ou une sauce tomate relevée.',
-    image: '/plats/agbeli.png'
+    image: '/plats/agbeli.webp'
   },
   {
     name: 'Sauce Gboman',
@@ -106,7 +106,7 @@ const PLATS = [
     name: 'Sauce Gombo',
     origin: 'Tout le Bénin',
     desc: 'Sauce onctueuse à base de gombo frais finement coupé. Sa texture légèrement gluante en fait un accompagnement incontournable de la pâte, du télibo, de l’akassa ou du riz.',
-    image: '/plats/Sauce-G.png'
+    image: '/plats/Sauce-G.webp'
   },
   {
     name: 'Sauce Arachide',
@@ -118,31 +118,31 @@ const PLATS = [
     name: 'Tchoukoutou',
     origin: 'Nord Bénin (Atacora)',
     desc: 'Bière traditionnelle brassée à base de mil ou de sorgho fermenté, servie fraîche dans des calebasses lors des fêtes et rassemblements.',
-    image: '/plats/Tchoukoutou.png'
+    image: '/plats/Tchoukoutou.webp'
   },
   {
     name: 'Toubani',
     origin: 'Nord Bénin',
     desc: 'Petit pain cuit à la vapeur à base de farine de haricot niébé et de cossette d\'igname, souvent pris au petit-déjeuner avec piment sec et huile.',
-    image: '/plats/toubani.png'
+    image: '/plats/toubani.webp'
   },
   {
     name: 'Amon Soja',
     origin: 'Tout le Bénin',
     desc: 'Fromage de soja façonné en losanges puis frit dans l\'huile d\'arachide, un incontournable du street-food béninois riche en protéines.',
-    image: '/plats/Amon-s.png'
+    image: '/plats/Amon-s.webp'
   },
   {
     name: 'Wanzou',
     origin: 'Nord Bénin',
     desc: 'Préparation traditionnelle du nord à base de légumineuses, appréciée en période de soudure.',
-    image: '/plats/wanzou.png'
+    image: '/plats/wanzou.webp'
   },
   {
     name: 'Tale-tale',
     origin: 'Tout le Bénin',
     desc: 'Beignets moelleux à base de bananes très mûres écrasées, un goûter populaire vendu dans la rue l\'après-midi.',
-    image: '/plats/tale-tale.png'
+    image: '/plats/tale-tale.webp'
   },
 ];
 
@@ -238,9 +238,9 @@ export default function GastronomieClient() {
         title="Gastronomie"
         script="béninoise"
         intro="Une cuisine de partage, riche, généreuse, ancrée dans les sols rouges et les pirogues de l'Atlantique."
-        image="/food.jpg"
+        image="/food.webp"
       />
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16">
         <Reveal><h2 className="font-display text-3xl md:text-5xl mb-10">Plats emblématiques</h2></Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PLATS.map((p, i) => (
@@ -266,7 +266,7 @@ export default function GastronomieClient() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16">
         <Reveal>
           <div className="flex items-center gap-3 mb-3">
             <span className="inline-block w-8 h-[2px] bg-gradient-flag" />
@@ -298,7 +298,7 @@ export default function GastronomieClient() {
           ))}
         </div>
       </section>
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pb-16">
         <ListingCallout
           title="Votre restaurant, maquis ou glacier mérite sa place ici"
           description="Vous gérez une adresse gourmande au Bénin et souhaitez apparaître sur cette page ? Écrivez-nous, nous étudierons votre demande avec plaisir."

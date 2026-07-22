@@ -102,20 +102,20 @@ function TeamCard({
 }: (typeof TEAM)[number]) {
   return (
     <article
-      className="group relative h-full overflow-hidden rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-6 sm:p-7 lg:p-8 shadow-[0_30px_100px_rgba(0,0,0,0.32)] transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
+      className="group relative mx-auto h-full w-full max-w-[340px] overflow-hidden rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] p-4 sm:p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
       style={{
         boxShadow:
-          "0 28px 80px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.06)",
+          "0 24px 70px rgba(0,0,0,0.26), inset 0 1px 0 rgba(255,255,255,0.06)",
       }}
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.10),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.05),transparent_40%)] opacity-70" />
       <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent_45%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-      <div className="relative flex h-full flex-col">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-start gap-4">
+      <div className="relative flex h-full min-w-0 flex-col">
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex min-w-0 items-start gap-3">
             <div
-              className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[22px] border border-white/10 text-lg font-bold text-white shadow-xl"
+              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[18px] border border-white/10 text-base font-bold text-white shadow-xl"
               style={{
                 background: `linear-gradient(135deg, ${accent}, rgba(255,255,255,0.10))`,
               }}
@@ -124,11 +124,11 @@ function TeamCard({
             </div>
 
             <div className="min-w-0">
-              <h3 className="font-display text-[1.4rem] sm:text-[1.55rem] lg:text-[1.7rem] text-white leading-tight">
+              <h3 className="font-display text-[1.2rem] sm:text-[1.35rem] text-white leading-tight">
                 {nom}
               </h3>
               <p
-                className="mt-1 text-[11px] sm:text-[12px] uppercase tracking-[0.34em] font-medium"
+                className="mt-1 text-[10px] uppercase tracking-[0.28em] font-medium"
                 style={{ color: accent }}
               >
                 {role}
@@ -136,38 +136,46 @@ function TeamCard({
             </div>
           </div>
 
-          <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white/70">
+          <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[9px] uppercase tracking-[0.22em] text-white/70">
             Team
           </span>
         </div>
 
-        <p className="mt-6 max-w-[36rem] text-sm sm:text-[15px] leading-7 sm:leading-8 text-white/72">
+        <p className="mt-4 max-w-[32rem] text-[13px] sm:text-sm leading-6 sm:leading-7 text-white/72">
           {description}
         </p>
 
-        <div className="mt-7 grid gap-3">
+        <div className="mt-5 flex w-full flex-col gap-2">
           <a
             href={`mailto:${email}`}
-            className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm text-white/80 transition hover:border-white/20 hover:bg-white/[0.06]"
+            className="flex w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-white/10 bg-black/20 px-3 py-2 text-white/80 transition hover:border-white/20 hover:bg-white/[0.06]"
           >
-            <span className="text-white/45">Email</span>
-            <span className="min-w-0 truncate text-right text-white">{email}</span>
+            <span className="shrink-0 text-[9px] uppercase tracking-wider text-white/45">
+              Email
+            </span>
+            <span className="min-w-0 flex-1 truncate text-right text-[10px] sm:text-[11px] text-white">
+              {email}
+            </span>
           </a>
 
           <a
             href={`tel:${phone}`}
-            className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3.5 text-sm text-white/80 transition hover:border-white/20 hover:bg-white/[0.06]"
+            className="flex w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-white/10 bg-black/20 px-3 py-2 text-white/80 transition hover:border-white/20 hover:bg-white/[0.06]"
           >
-            <span className="text-white/45">Téléphone</span>
-            <span className="min-w-0 truncate text-right text-white">{phone}</span>
+            <span className="shrink-0 text-[9px] uppercase tracking-wider text-white/45">
+              Tél
+            </span>
+            <span className="min-w-0 flex-1 truncate text-right text-[10px] sm:text-[11px] text-white">
+              {phone}
+            </span>
           </a>
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-1.5 sm:gap-2">
           {tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] text-white/65"
+              className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/65"
             >
               {tag}
             </span>
@@ -186,12 +194,12 @@ export default function AProposPage() {
         title="À propos"
         script="de Bénin Éternel"
         intro="Une plateforme dédiée à la découverte, à la transmission et à la mise en valeur du patrimoine béninois — naturel, historique et culturel."
-        image="/festival.jpg"
+        image="/festival.webp"
       />
 
-      <section className="mx-auto max-w-4xl px-6 py-12 lg:px-0">
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 py-12 lg:px-0">
         <Reveal>
-          <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-6 sm:p-8 lg:p-10 text-white/75 shadow-[0_24px_80px_rgba(0,0,0,0.24)]">
+          <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-5 sm:p-6 lg:p-10 text-white/75 shadow-[0_24px_80px_rgba(0,0,0,0.24)]">
             <div className="mb-8 flex items-center gap-3">
               <span
                 className="h-2.5 w-2.5 rounded-full shadow-[0_0_18px_rgba(255,255,255,0.25)]"
@@ -202,7 +210,7 @@ export default function AProposPage() {
               </span>
             </div>
 
-            <div className=" lg:gap-10">
+            <div className="lg:gap-10">
               <p className="text-sm sm:text-base lg:text-[15px] leading-7 sm:leading-8 text-white/78">
                 Bénin Éternel a été conçu comme une bibliothèque numérique vivante. Notre ambition est
                 simple : offrir aux voyageurs, aux étudiants, aux chercheurs et aux Béninois eux-mêmes
@@ -213,12 +221,10 @@ export default function AProposPage() {
                 Ganvié aux Tata Somba de l’Atacora, chaque page est pensée comme un chapitre d’un grand
                 récit en mouvement.
               </p>
-
-
             </div>
 
             <div className="mt-8 flex flex-col gap-2">
-              <p className="font-script text-4xl sm:text-5xl text-white">« Mi kúabɔ̀ Bénin »</p>
+              <p className="font-script text-3xl sm:text-4xl lg:text-5xl text-white">« Mi kúabɔ̀ Bénin »</p>
               <p className="text-[10px] uppercase tracking-[0.4em] text-white/40">
                 Bienvenue au Bénin.
               </p>
@@ -229,33 +235,33 @@ export default function AProposPage() {
 
       <div className="border-t border-white/5" />
 
-      <section className="mx-auto max-w-7xl px-6 py-12 md:py-16 lg:px-10">
+      <section className="mx-auto max-w-6xl overflow-x-hidden px-4 sm:px-6 py-10 md:py-14 lg:px-8">
         <Reveal>
-          <div className="mb-12 grid gap-4 rounded-[32px] border border-white/10 bg-white/[0.03] p-5 sm:p-6 lg:grid-cols-3 lg:p-7">
-            <div className="rounded-[24px] border border-white/10 bg-black/20 p-5 sm:p-6">
+          <div className="mb-10 grid gap-3 rounded-[28px] border border-white/10 bg-white/[0.03] p-4 sm:p-5 lg:grid-cols-3 lg:gap-4">
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-4 sm:p-5">
               <p className="text-[10px] uppercase tracking-[0.3em] text-white/45">Vision</p>
-              <p className="mt-3 text-sm sm:text-[15px] leading-7 text-white/75">
+              <p className="mt-2 text-sm sm:text-[15px] leading-6 text-white/75">
                 Créer une expérience digitale élégante et cohérente autour du Bénin.
               </p>
             </div>
 
-            <div className="rounded-[24px] border border-white/10 bg-black/20 p-5 sm:p-6">
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-4 sm:p-5">
               <p className="text-[10px] uppercase tracking-[0.3em] text-white/45">Design</p>
-              <p className="mt-3 text-sm sm:text-[15px] leading-7 text-white/75">
+              <p className="mt-2 text-sm sm:text-[15px] leading-6 text-white/75">
                 Garder une identité premium, sombre, moderne et immersive.
               </p>
             </div>
 
-            <div className="rounded-[24px] border border-white/10 bg-black/20 p-5 sm:p-6">
+            <div className="rounded-[22px] border border-white/10 bg-black/20 p-4 sm:p-5">
               <p className="text-[10px] uppercase tracking-[0.3em] text-white/45">Exécution</p>
-              <p className="mt-3 text-sm sm:text-[15px] leading-7 text-white/75">
+              <p className="mt-2 text-sm sm:text-[15px] leading-6 text-white/75">
                 Transformer les idées en interface claire, fluide et performante.
               </p>
             </div>
           </div>
         </Reveal>
 
-        <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid w-full justify-items-center gap-4 sm:gap-5 sm:grid-cols-2 xl:grid-cols-3">
           {TEAM.map((member, index) => (
             <Reveal key={member.nom} delay={index * 0.05}>
               <TeamCard {...member} />

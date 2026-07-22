@@ -74,18 +74,18 @@ export function PageHero({
         </>
       )}
       <div className="absolute inset-0 noise" />
-      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-10 py-24">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-24">
         <div className="flex items-center gap-3 mb-6">
           <span className="inline-block w-10 h-[2px] bg-gradient-flag" />
           <span className="text-[10px] tracking-[0.5em] uppercase text-white/70">{kicker}</span>
         </div>
-        <h1 className="font-display text-5xl md:text-7xl leading-[1.05]">
+        <h1 className="font-display text-3xl sm:text-4xl md:text-7xl leading-[1.05]">
           {title}
           {script && (
-            <span className="block font-script text-6xl md:text-8xl text-white/95 mt-2">{script}</span>
+            <span className="block font-script text-4xl sm:text-5xl md:text-8xl text-white/95 mt-2">{script}</span>
           )}
         </h1>
-        <p className="mt-8 max-w-2xl text-lg text-white/70 leading-relaxed">{intro}</p>
+        <p className="mt-8 max-w-2xl text-base sm:text-lg text-white/70 leading-relaxed">{intro}</p>
       </div>
     </section>
   );

@@ -11,7 +11,7 @@ export default function Plages() {
         title="Plages"
         script="d'or"
         intro="125 kilomètres de côte, du Mono à Sèmè-Podji. Pirogues colorées, palmiers, embruns et soirées sans fin."
-        image="/beach.jpg"
+        image="/beach.webp"
       />
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-2 gap-6">
         {BEACHES.map((p, i) => (
