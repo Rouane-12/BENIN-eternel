@@ -307,10 +307,10 @@ export default function ArtistesClient() {
         title="Artistes"
         script="du Bénin"
         intro="Les voix, les rythmes et les talents qui font rayonner la culture musicale béninoise à travers le monde."
-        image="/art.jpg"
+        image="/art.webp"
       />
 
-      <section className="max-w-5xl mx-auto px-6 lg:px-10 pt-8 md:pt-10 pb-4">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 pt-8 md:pt-10 pb-4">
         <Reveal>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-oklch(0.55 0.14 152) via-oklch(0.88 0.17 92) to-oklch(0.56 0.23 27) opacity-20 blur-xl rounded-xl" />
@@ -362,7 +362,7 @@ export default function ArtistesClient() {
       <div className="border-t border-white/5" />
 
       {showPodium && (
-        <section className="max-w-6xl mx-auto px-6 lg:px-10 py-10 md:py-14">
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-10 md:py-14">
           <Reveal>
             <div className="flex items-center gap-3 mb-6">
               <span className="inline-block w-8 h-[2px] bg-gradient-to-r from-oklch(0.88 0.17 92) to-oklch(0.56 0.23 27)" />
@@ -379,7 +379,7 @@ export default function ArtistesClient() {
 
       <div className="border-t border-white/5" />
 
-      <section className="max-w-6xl mx-auto px-6 lg:px-10 py-10 md:py-14">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-10 md:py-14">
         <Reveal>
           <div className="mb-8 md:mb-10 flex items-end justify-between flex-wrap gap-3">
             <div>

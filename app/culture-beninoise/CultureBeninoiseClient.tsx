@@ -232,7 +232,7 @@ export default function CultureBeninoiseClient() {
       />
 
       {/* BARRE DE RECHERCHE */}
-      <section className="max-w-3xl mx-auto px-6 lg:px-10 py-12">
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-10 py-12">
         <Reveal>
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-oklch(0.55 0.14 152) via-oklch(0.88 0.17 92) to-oklch(0.56 0.23 27) opacity-20 blur-xl rounded-2xl" />
@@ -261,7 +261,7 @@ export default function CultureBeninoiseClient() {
       <div className="border-t border-white/5" />
 
       {/* ARTISTES */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-10 py-20">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
         <Reveal>
           <div className="mb-16">
             <div className="flex items-center gap-3 mb-4">
@@ -295,7 +295,7 @@ export default function CultureBeninoiseClient() {
       <div className="border-t border-white/5" />
 
       {/* INFLUENCEURS */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-10 py-20">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
         <Reveal>
           <div className="mb-16">
             <div className="flex items-center gap-3 mb-4">
@@ -329,7 +329,7 @@ export default function CultureBeninoiseClient() {
       <div className="border-t border-white/5" />
 
       {/* ÉVÉNEMENTS */}
-      <section className="max-w-5xl mx-auto px-6 lg:px-10 py-20">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 py-20">
         <Reveal>
           <div className="mb-16">
             <div className="flex items-center gap-3 mb-4">

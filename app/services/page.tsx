@@ -137,7 +137,7 @@ export default function Services() {
         title="Services"
         script="Publics"
         intro="Retrouvez les informations essentielles sur les organismes publics, agences gouvernementales et entreprises d'État du Bénin."
-        image="/f2.jpg"
+        image="/f2.webp"
       />
 
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-12">

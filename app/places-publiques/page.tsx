@@ -11,7 +11,7 @@ export default function PlacesPubliques() {
         title="Places"
         script="& Rivages"
         intro="Des monuments majestueux de Cotonou aux rivages sauvages de l'Atlantique, explorez les lieux de rassemblement et de détente du Bénin."
-        image="/plan.jpg"
+        image="/plan.webp"
       />
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-2 gap-8">
         {PLACES_PUBLIQUES.map((p, i) => (
@@ -26,9 +26,7 @@ export default function PlacesPubliques() {
                 </div>
                 <h3 className="font-display text-3xl mb-4 group-hover:text-white transition-colors">{p.nom}</h3>
                 <p className="text-sm text-white/60 leading-relaxed max-w-md">{p.description}</p>
-                <div className="mt-6 flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-white/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  Découvrir le lieu <span>→</span>
-                </div>
+
               </div>
               <div className="absolute top-4 right-4 text-[10px] font-mono text-white/20">
                 {String(i + 1).padStart(2, "0")}

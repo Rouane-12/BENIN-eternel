@@ -19,9 +19,9 @@ export default function CarteClient() {
         title="Carte"
         script="interactive"
         intro="Autorisez la géolocalisation pour découvrir les sites les plus proches et calculer votre distance à chacun d'eux."
-        image="/plan.jpg"
+        image="/plan.webp"
       />
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12">
         <Suspense fallback={<div className="h-[520px] bg-white/5 animate-pulse" />}>
           <BeninMap focusLat={lat} focusLng={lng} focusName={name} />
         </Suspense>
