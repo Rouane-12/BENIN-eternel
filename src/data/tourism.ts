@@ -4,6 +4,8 @@ export type SiteTouristique = {
   region: string;
   coords: string;
   desc: string;
+  lat: number;
+  lng: number;
   img: string;
 };
 
