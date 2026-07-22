@@ -2,32 +2,40 @@
 import { SiteLayout, PageHero } from '@/components/SiteLayout';
 import { Reveal } from '@/components/Reveal';
 import { LIEUX } from '@/data/lieux';
+import { MapPin } from 'lucide-react';
+
+const MAPS_BASE = 'https://www.google.com/maps/search/?api=1&query=';
+function mapsUrl(lat: number, lng: number) {
+  return `${MAPS_BASE}${lat},${lng}`;
+}
 
 const MONUMENTS = [
-  { name: 'Palais Royaux d\'Abomey', city: 'Abomey', desc: 'Classés UNESCO depuis 1985, dix palais successifs des rois du Dahomey, bas-reliefs en banco, trônes et tentures historiques.', img: '/abomey.webp', lieuId: 'palais-royaux-abomey' },
-  { name: 'Porte du Non-Retour', city: 'Ouidah', desc: 'Monument à la mémoire des millions de captifs déportés. Dressé face à l\'Atlantique au bout des 4 km de la Route des Esclaves.', img: '/ouidah.webp', lieuId: 'porte-non-retour' },
-  { name: 'Temple des Pythons', city: 'Ouidah', desc: 'Sanctuaire dédié au vodun Dangbé, où vivent en liberté plusieurs dizaines de pythons sacrés.', img: '/tpython.webp', lieuId: 'temple-pythons' },
-  { name: 'Grande Mosquée de Porto-Novo', city: 'Porto-Novo', desc: 'Édifice du XIXᵉ siècle aux façades roses et vertes inspirées du style afro-brésilien de Bahia.', img: '/gmp.webp', lieuId: 'grande-mosquee-porto-novo' },
-  { name: 'Musée Honmè', city: 'Porto-Novo', desc: 'Ancien palais royal du roi Toffa, devenu musée d\'histoire de la dynastie de Hogbonou.', img: '/museh.webp', lieuId: 'musee-honme' },
-  { name: 'Place Toffa', city: 'Porto-Novo', desc: 'Cœur cérémoniel de la capitale, dominé par la statue du roi Toffa Iᵉʳ.', img: '/toffa.webp', lieuId: 'place-toffa' },
-  { name: 'Forêt sacrée de Kpassè', city: 'Ouidah', desc: 'Bois sacré où, selon la tradition, le roi Kpassè se serait métamorphosé en arbre iroko.', img: '/foretp.webp', lieuId: 'foret-sacree-kpasse' },
-  { name: 'Basilique Notre-Dame d\'Arigbo', city: 'Dassa-Zoumè', desc: 'Haut lieu de pèlerinage marial, niché entre les collines sacrées des Idaatcha.', img: '/Basilique.webp', lieuId: 'basilique-arigbo' },
-  { name: 'Fort Portugais São João Baptista de Ajudá', city: 'Ouidah', desc: 'Ancien comptoir colonial portugais du XVIIᵉ siècle, aujourd\'hui musée d\'histoire retraçant la traite négrière et les royaumes du Dahomey.', img: '/fortp.webp', lieuId: 'fort-portugais-ouidah' },
-  { name: 'Musée da Silva', city: 'Porto-Novo', desc: 'Demeure afro-brésilienne du XIXᵉ siècle consacrée aux traditions et à l\'héritage des descendants d\'esclaves affranchis revenus du Brésil.', img: '/msilva.webp', lieuId: 'musee-da-silva' },
-  { name: 'Statue du Roi Béhanzin', city: 'Cotonou', desc: 'Imposante statue de bronze du dernier grand roi du Dahomey, érigée place Lénine en hommage à sa résistance à la colonisation.', img: '/dept-zou.webp', lieuId: 'statue-behanzin' },
-  { name: 'Cathédrale Notre-Dame de l\'Immaculée Conception', city: 'Cotonou', desc: 'Cathédrale aux rayures rouge et blanc emblématiques, repère architectural du centre-ville depuis le début du XXᵉ siècle.', img: '/ndame.webp', lieuId: 'cathedrale-cotonou' },
-  { name: 'Tata Somba', city: 'Boukoumbé', desc: 'Habitations fortifiées en terre typiques des Batammariba, à l\'architecture défensive unique classée au patrimoine mondial de l\'UNESCO.', img: '/somba.webp', lieuId: 'tata-somba-boukoumbe' },
-  { name: 'Place des Martyrs', city: 'Cotonou', desc: 'Monument et esplanade dédiés à la mémoire des victimes de l\'histoire politique du pays, lieu de rassemblements et de commémorations.', img: '/martyr.webp', lieuId: 'place-martyrs-cotonou' },
+  { name: 'Palais Royaux d\'Abomey', city: 'Abomey', lat: 7.1860, lng: 1.9910, desc: 'Classés UNESCO depuis 1985, dix palais successifs des rois du Dahomey, bas-reliefs en banco, trônes et tentures historiques.', img: '/abomey.webp', lieuId: 'palais-royaux-abomey' },
+  { name: 'Porte du Non-Retour', city: 'Ouidah', lat: 6.3475, lng: 2.0830, desc: 'Monument à la mémoire des millions de captifs déportés. Dressé face à l\'Atlantique au bout des 4 km de la Route des Esclaves.', img: '/ouidah.webp', lieuId: 'porte-non-retour' },
+  { name: 'Temple des Pythons', city: 'Ouidah', lat: 6.3623, lng: 2.0852, desc: 'Sanctuaire dédié au vodun Dangbé, où vivent en liberté plusieurs dizaines de pythons sacrés.', img: '/tpython.webp', lieuId: 'temple-pythons' },
+  { name: 'Grande Mosquée de Porto-Novo', city: 'Porto-Novo', lat: 6.4964, lng: 2.6282, desc: 'Édifice du XIXᵉ siècle aux façades roses et vertes inspirées du style afro-brésilien de Bahia.', img: '/gmp.webp', lieuId: 'grande-mosquee-porto-novo' },
+  { name: 'Musée Honmè', city: 'Porto-Novo', lat: 6.4966, lng: 2.6283, desc: 'Ancien palais royal du roi Toffa, devenu musée d\'histoire de la dynastie de Hogbonou.', img: '/museh.webp', lieuId: 'musee-honme' },
+  { name: 'Place Toffa', city: 'Porto-Novo', lat: 6.4965, lng: 2.6281, desc: 'Cœur cérémoniel de la capitale, dominé par la statue du roi Toffa Iᵉʳ.', img: '/toffa.webp', lieuId: 'place-toffa' },
+  { name: 'Forêt sacrée de Kpassè', city: 'Ouidah', lat: 6.3610, lng: 2.0700, desc: 'Bois sacré où, selon la tradition, le roi Kpassè se serait métamorphosé en arbre iroko.', img: '/foretp.webp', lieuId: 'foret-sacree-kpasse' },
+  { name: 'Basilique Notre-Dame d\'Arigbo', city: 'Dassa-Zoumè', lat: 7.7800, lng: 2.1800, desc: 'Haut lieu de pèlerinage marial, niché entre les collines sacrées des Idaatcha.', img: '/Basilique.webp', lieuId: 'basilique-arigbo' },
+  { name: 'Fort Portugais São João Baptista de Ajudá', city: 'Ouidah', lat: 6.3635, lng: 2.0848, desc: 'Ancien comptoir colonial portugais du XVIIᵉ siècle, aujourd\'hui musée d\'histoire retraçant la traite négrière et les royaumes du Dahomey.', img: '/fortp.webp', lieuId: 'fort-portugais-ouidah' },
+  { name: 'Musée da Silva', city: 'Porto-Novo', lat: 6.4962, lng: 2.6275, desc: 'Demeure afro-brésilienne du XIXᵉ siècle consacrée aux traditions et à l\'héritage des descendants d\'esclaves affranchis revenus du Brésil.', img: '/msilva.webp', lieuId: 'musee-da-silva' },
+  { name: 'Statue du Roi Béhanzin', city: 'Cotonou', lat: 6.3730, lng: 2.3900, desc: 'Imposante statue de bronze du dernier grand roi du Dahomey, érigée place Lénine en hommage à sa résistance à la colonisation.', img: '/dept-zou.webp', lieuId: 'statue-behanzin' },
+  { name: 'Cathédrale Notre-Dame de l\'Immaculée Conception', city: 'Cotonou', lat: 6.3740, lng: 2.3910, desc: 'Cathédrale aux rayures rouge et blanc emblématiques, repère architectural du centre-ville depuis le début du XXᵉ siècle.', img: '/ndame.webp', lieuId: 'cathedrale-cotonou' },
+  { name: 'Tata Somba', city: 'Boukoumbé', lat: 10.1740, lng: 1.0920, desc: 'Habitations fortifiées en terre typiques des Batammariba, à l\'architecture défensive unique classée au patrimoine mondial de l\'UNESCO.', img: '/somba.webp', lieuId: 'tata-somba-boukoumbe' },
+  { name: 'Place des Martyrs', city: 'Cotonou', lat: 6.3720, lng: 2.4000, desc: 'Monument et esplanade dédiés à la mémoire des victimes de l\'histoire politique du pays, lieu de rassemblements et de commémorations.', img: '/martyr.webp', lieuId: 'place-martyrs-cotonou' },
   {
     id: "place-amazone",
     name: "Place de l'Amazone",
     city: "Cotonou",
+    lat: 6.3725, lng: 2.3970,
     desc:
       "Monument géant représentant les Amazones du Dahomey. Un des sites les plus visités de Cotonou. Très beau de jour comme de nuit grâce à l'éclairage.",
     img: "/amazone.webp",
     lieuId: 'place-amazone'
   },
 ];
+
 
 export default function MonumentsClient() {
   return (
@@ -58,6 +66,15 @@ export default function MonumentsClient() {
                   </div>
                   <h3 className="font-display text-3xl mb-3">{m.name}</h3>
                   <p className="text-sm text-white/70 leading-relaxed line-clamp-3 mb-4">{m.desc}</p>
+                  <a
+                    href={mapsUrl(m.lat, m.lng)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/15 hover:border-white/40 hover:bg-white/5 text-white/70 hover:text-white transition-all duration-400 text-[9px] tracking-[0.3em] uppercase"
+                  >
+                    <MapPin className="w-3 h-3" />
+                    Voir l'emplacement
+                  </a>
                 </div>
               </article>
             </Reveal>

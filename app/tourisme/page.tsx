@@ -25,6 +25,14 @@ export default function Tourisme() {
                   <div className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-1">{site.type}</div>
                   <h3 className="font-display text-2xl mb-3">{site.name}</h3>
                   <p className="text-sm text-white/65 mt-auto leading-relaxed">{site.desc}</p>
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${site.lat},${site.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 text-xs tracking-[0.2em] uppercase border border-white/15 hover:border-white/40 hover:bg-white/5 transition-colors text-white/70"
+                  >
+                    Voir l'emplacement
+                  </a>
                 </div>
               </article>
             </Reveal>

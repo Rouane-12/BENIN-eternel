@@ -18,6 +18,12 @@ const TABS: Tab[] = [
   { key: 'agence', label: 'Agences' },
 ];
 
+const MAPS_BASE = 'https://www.google.com/maps/search/?api=1&query=';
+
+function mapsUrl(lat: number, lng: number) {
+  return `${MAPS_BASE}${lat},${lng}`;
+}
+
 function StarRating({ count }: { count: number }) {
   return (
     <div className="flex gap-0.5">
@@ -85,7 +91,14 @@ function HotelCard({ h, index }: { h: typeof HEBERGEMENTS[number]; index: number
           <div className="space-y-2.5 pt-5 border-t border-white/5 text-[12px] text-white/60">
             <div className="flex items-center gap-2.5">
               <MapPin className="w-3.5 h-3.5 text-white/25 shrink-0" />
-              <span>{h.localisation}</span>
+              <a
+                href={mapsUrl(h.lat, h.lng)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                {h.localisation}
+              </a>
             </div>
             <div className="flex items-center gap-2.5">
               <Phone className="w-3.5 h-3.5 text-white/25 shrink-0" />
@@ -99,10 +112,17 @@ function HotelCard({ h, index }: { h: typeof HEBERGEMENTS[number]; index: number
             )}
           </div>
 
-
+          <a
+            href={mapsUrl(h.lat, h.lng)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 block w-full py-3 text-center border border-white/10 hover:border-white/30 hover:bg-white/5 text-white/70 hover:text-white transition-all duration-400 text-[9px] tracking-[0.3em] uppercase"
+          >
+            Voir l'emplacement
+          </a>
           <a
             href={`tel:${h.telephone.replace(/\s/g, '')}`}
-            className="mt-6 block w-full py-3.5 text-center bg-white/[0.04] hover:bg-white text-white hover:text-black border border-white/10 hover:border-white transition-all duration-400 text-[9px] tracking-[0.3em] uppercase"
+            className="mt-3 block w-full py-3.5 text-center bg-white/[0.04] hover:bg-white text-white hover:text-black border border-white/10 hover:border-white transition-all duration-400 text-[9px] tracking-[0.3em] uppercase"
           >
             Réserver
           </a>
@@ -145,7 +165,14 @@ function AgencyCard({ h, index }: { h: typeof HEBERGEMENTS[number]; index: numbe
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5 text-[12px] text-white/60">
               <MapPin className="w-3.5 h-3.5 text-white/25 shrink-0" />
-              <span>{h.localisation}</span>
+              <a
+                href={mapsUrl(h.lat, h.lng)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                {h.localisation}
+              </a>
             </div>
           </div>
           <div className="flex items-center justify-between">
@@ -162,6 +189,15 @@ function AgencyCard({ h, index }: { h: typeof HEBERGEMENTS[number]; index: numbe
             </div>
           )}
         </div>
+
+        <a
+          href={mapsUrl(h.lat, h.lng)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 block w-full py-3 text-center border border-white/10 hover:border-white/30 hover:bg-white/5 text-white/70 hover:text-white transition-all duration-400 text-[9px] tracking-[0.3em] uppercase"
+        >
+          Voir l'emplacement
+        </a>
       </article>
     </Reveal>
   );

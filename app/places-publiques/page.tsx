@@ -2,6 +2,12 @@
 import { SiteLayout, PageHero } from '@/components/SiteLayout';
 import { Reveal } from '@/components/Reveal';
 import { PLACES_PUBLIQUES } from '@/data/placesPubliques';
+import { MapPin } from 'lucide-react';
+
+const MAPS_BASE = 'https://www.google.com/maps/search/?api=1&query=';
+function mapsUrl(lat: number, lng: number) {
+  return `${MAPS_BASE}${lat},${lng}`;
+}
 
 export default function PlacesPubliques() {
   return (
@@ -25,8 +31,16 @@ export default function PlacesPubliques() {
                   <div className="w-8 h-[1px] bg-white/20" />
                 </div>
                 <h3 className="font-display text-3xl mb-4 group-hover:text-white transition-colors">{p.nom}</h3>
-                <p className="text-sm text-white/60 leading-relaxed max-w-md">{p.description}</p>
-
+                <p className="text-sm text-white/60 leading-relaxed max-w-md mb-4">{p.description}</p>
+                <a
+                  href={mapsUrl(p.lat, p.lng)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 border border-white/15 hover:border-white/40 hover:bg-white/5 text-white/70 hover:text-white transition-all duration-400 text-[9px] tracking-[0.3em] uppercase w-fit"
+                >
+                  <MapPin className="w-3 h-3" />
+                  Voir l'emplacement
+                </a>
               </div>
               <div className="absolute top-4 right-4 text-[10px] font-mono text-white/20">
                 {String(i + 1).padStart(2, "0")}
