@@ -34,8 +34,8 @@ const NAV_GROUPS = [
     links: [
       { href: "/communes", label: "Communes" },
       { href: "/services", label: "Services Publics" },
-      { href: "/carte", label: "Carte" },
       { href: "/a-propos", label: "À propos" },
+      { href: "/contact", label: "Contact" },
     ],
   },
 ];

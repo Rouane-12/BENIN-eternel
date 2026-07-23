@@ -110,15 +110,6 @@ export const SERVICES_PUBLICS: ServicePublic[] = [
     services: ["État civil", "Services municipaux"],
   },
   {
-    slug: "onu-benin",
-    categorie: "International",
-    sigle: "ONU",
-    nom: "Système des Nations Unies au Bénin",
-    site_web: "https://www.bj.un.org",
-    description: "Coordination du système des Nations Unies au Bénin.",
-    services: ["Programmes", "Actualités", "Partenariats"],
-  },
-  {
     slug: "passports-consulats",
     categorie: "Diplomatie",
     sigle: "Consulats",

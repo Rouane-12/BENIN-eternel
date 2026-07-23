@@ -1,7 +1,7 @@
 'use client';
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Search, Sparkles, Crown, Award } from 'lucide-react';
+import { Heart, Search, Sparkles, Crown, Award, Play } from 'lucide-react';
 import { SiteLayout, PageHero } from '@/components/SiteLayout';
 import { Reveal } from '@/components/Reveal';
 import { CATEGORIES_STARS, CategorieStars } from '@/data/stars';
@@ -14,6 +14,7 @@ interface Influenceur {
   categorie: string;
   bio: string;
   votes: number;
+  tiktokLink?: string;
 }
 
 // Palette drapeau du Bénin : or, vert, rouge — utilisée pour hiérarchiser
@@ -23,7 +24,7 @@ const FLAG = {
   vert: 'oklch(0.55 0.14 152)',
   rouge: 'oklch(0.56 0.23 27)',
 } as const;
-const PODIUM_COLORS = [FLAG.or, FLAG.vert, FLAG.rouge];
+const PODIUM_COLORS = [FLAG.vert, FLAG.or, FLAG.rouge];
 
 function getCategories(categorie: string): CategorieStars[] {
   const c = categorie.toLowerCase();
@@ -152,25 +153,59 @@ function PodiumCard({
           <VoteButton votes={influenceur.votes} voted={voted} onVote={() => onVote(influenceur.id)} />
         </div>
 
-        <div
-          className="flex items-center justify-center rounded-full font-display text-white text-[1.1rem] shrink-0 mx-auto mb-3 ring-2"
-          style={{
-            width: 64,
-            height: 64,
-            background: `linear-gradient(135deg, ${color}, oklch(0.2 0 0))`,
-            ['--tw-ring-color' as any]: `color-mix(in oklch, ${color} 40%, transparent)`,
-          }}
-        >
-          {initials(influenceur.nom)}
-        </div>
+        {influenceur.tiktokLink ? (
+          <a href={influenceur.tiktokLink} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center flex-1 min-h-0">
+            <div
+              className="flex items-center justify-center rounded-full font-display text-white text-[1.1rem] shrink-0 mx-auto mb-3 ring-2"
+              style={{
+                width: 64,
+                height: 64,
+                background: `linear-gradient(135deg, ${color}, oklch(0.2 0 0))`,
+                ['--tw-ring-color' as any]: `color-mix(in oklch, ${color} 40%, transparent)`,
+              }}
+            >
+              {initials(influenceur.nom)}
+            </div>
 
-        <h3 className="font-display text-white leading-tight text-center text-lg">
-          {influenceur.nom}
-        </h3>
-        <p className="text-[11px] tracking-wide text-white/45 mt-1 text-center mb-3">{influenceur.categorie}</p>
+            <h3 className="font-display text-white leading-tight text-center text-lg line-clamp-1">
+              {influenceur.nom}
+            </h3>
+            <p className="text-[11px] tracking-wide text-white/45 mt-1 text-center mb-3">{influenceur.categorie}</p>
+          </a>
+        ) : (
+          <>
+            <div
+              className="flex items-center justify-center rounded-full font-display text-white text-[1.1rem] shrink-0 mx-auto mb-3 ring-2"
+              style={{
+                width: 64,
+                height: 64,
+                background: `linear-gradient(135deg, ${color}, oklch(0.2 0 0))`,
+                ['--tw-ring-color' as any]: `color-mix(in oklch, ${color} 40%, transparent)`,
+              }}
+            >
+              {initials(influenceur.nom)}
+            </div>
+
+            <h3 className="font-display text-white leading-tight text-center text-lg line-clamp-1">
+              {influenceur.nom}
+            </h3>
+            <p className="text-[11px] tracking-wide text-white/45 mt-1 text-center mb-3">{influenceur.categorie}</p>
+          </>
+        )}
         <p className="text-[11px] text-white/55 leading-relaxed text-center line-clamp-2">
           {influenceur.bio}
         </p>
+        {influenceur.tiktokLink && (
+          <a
+            href={influenceur.tiktokLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto pt-3 border-t border-white/5 flex items-center justify-center gap-2 text-[10px] tracking-[0.2em] uppercase text-white/35 hover:text-white/70 transition-colors text-center"
+          >
+            <Play className="w-3 h-3 shrink-0" />
+            TikTok
+          </a>
+        )}
       </motion.div>
 
       <motion.div
@@ -197,7 +232,7 @@ function PodiumCard({
 
 // Carte compacte pour l'annuaire complet (masonry).
 function DirectoryCard({ influenceur, index, onVote, voted }: { influenceur: Influenceur, index: number; onVote: (id: string) => void; voted: boolean }) {
-  const color = accentFor(influenceur.categorie);
+  const color = PODIUM_COLORS[index % 3];
   return (
     <motion.div
       layout
@@ -217,9 +252,31 @@ function DirectoryCard({ influenceur, index, onVote, voted }: { influenceur: Inf
         <VoteButton votes={influenceur.votes} voted={voted} onVote={() => onVote(influenceur.id)} />
       </div>
 
-      <h3 className="font-display text-lg text-white leading-tight mb-1.5">{influenceur.nom}</h3>
-      <p className="text-[11px] tracking-wide mb-2.5" style={{ color }}>{influenceur.categorie}</p>
-      <p className="text-[12px] text-white/55 leading-relaxed">{influenceur.bio}</p>
+      {influenceur.tiktokLink ? (
+        <a href={influenceur.tiktokLink} target="_blank" rel="noopener noreferrer" className="block group/link">
+          <h3 className="font-display text-lg text-white leading-tight mb-1.5 group-hover/link:text-white/90 transition-colors">
+            {influenceur.nom}
+          </h3>
+          <p className="text-[11px] tracking-wide mb-1.5" style={{ color }}>{influenceur.categorie}</p>
+        </a>
+      ) : (
+        <>
+          <h3 className="font-display text-lg text-white leading-tight mb-1.5">{influenceur.nom}</h3>
+          <p className="text-[11px] tracking-wide mb-1.5" style={{ color }}>{influenceur.categorie}</p>
+        </>
+      )}
+      <p className="text-[12px] text-white/55 leading-relaxed mb-3">{influenceur.bio}</p>
+      {influenceur.tiktokLink && (
+        <a
+          href={influenceur.tiktokLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-[10px] tracking-[0.2em] uppercase text-white/35 group-hover/link:text-white/70 transition-colors"
+        >
+          <Play className="w-3 h-3" />
+          TikTok
+        </a>
+      )}
     </motion.div>
   );
 }

@@ -13,29 +13,18 @@ export const metadata = {
 };
 
 const FLAG = {
-  or: "oklch(0.88 0.17 92)",
   vert: "oklch(0.55 0.14 152)",
+  or: "oklch(0.88 0.17 92)",
   rouge: "oklch(0.56 0.23 27)",
-  bleu: "oklch(0.62 0.16 250)",
 } as const;
 
 const TEAM = [
-  {
-    nom: "Evans",
-    role: "SUPERVISEUR DEV",
-    email: "johnsonevans686@gmail.com",
-    phone: "+2290194677352",
-    accent: FLAG.or,
-    description:
-      "Coordination technique, supervision du développement et cohérence globale de l’application.",
-    tags: ["Direction technique", "Architecture", "Supervision"],
-  },
   {
     nom: "Meryl",
     role: "SUPERVISEUR DESIGNER",
     email: "amoussoumeryl0@gmail.com",
     phone: "+2290146463623",
-    accent: FLAG.rouge,
+    accent: FLAG.vert,
     description:
       "Direction artistique, identité visuelle et cohérence UI/UX de l’expérience.",
     tags: ["UI/UX", "Identité visuelle", "Direction artistique"],
@@ -45,7 +34,7 @@ const TEAM = [
     role: "DEV PRINCIPAL",
     email: "djossouvirouane6@gmail.com",
     phone: "+2290146449300",
-    accent: FLAG.vert,
+    accent: FLAG.or,
     description:
       "Développement principal de l’application et intégration des composants majeurs.",
     tags: ["Frontend", "Intégration", "Performance"],
@@ -55,7 +44,7 @@ const TEAM = [
     role: "DEV SECONDAIRE",
     email: "princedossou465@gmail.com",
     phone: "+2290151879255",
-    accent: FLAG.bleu,
+    accent: FLAG.rouge,
     description:
       "Support développement, ajustements techniques et renfort sur les livrables.",
     tags: ["Support dev", "Maintenance", "Optimisation"],
@@ -65,7 +54,7 @@ const TEAM = [
     role: "DESIGNER 1",
     email: "sewadecrepin0@gmail.com",
     phone: "+2290156454729",
-    accent: FLAG.or,
+    accent: FLAG.vert,
     description:
       "Création d’éléments visuels, mise en forme des interfaces et harmonie graphique.",
     tags: ["Graphisme", "Maquettes", "UI"],
@@ -75,10 +64,20 @@ const TEAM = [
     role: "DESIGNER 2",
     email: "nephtalitossah4@gmail.com",
     phone: "+2290154206835",
-    accent: FLAG.rouge,
+    accent: FLAG.or,
     description:
       "Aide au design, finitions visuelles et renforcement de l’univers graphique.",
     tags: ["Design", "Finitions", "Créativité"],
+  },
+  {
+    nom: "Evans",
+    role: "SUPERVISEUR DEV",
+    email: "johnsonevans686@gmail.com",
+    phone: "+2290194677352",
+    accent: FLAG.rouge,
+    description:
+      "Coordination technique, supervision du développement et cohérence globale de l’application.",
+    tags: ["Direction technique", "Architecture", "Supervision"],
   },
 ] as const;
 

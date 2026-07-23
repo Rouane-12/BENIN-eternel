@@ -40,7 +40,7 @@ const PLATS = [
     name: 'Wassa-Wassa',
     origin: 'Nord du Bénin',
     desc: 'Semoule de manioc cuite à la vapeur, servie avec une sauce tomate, de la viande ou du poisson.',
-    image: '/plats/wassa-wassa.webp'
+    image: '/plats/Wassa-wassa.webp'
   },
   {
     name: 'Wagashi',
@@ -88,13 +88,13 @@ const PLATS = [
     name: 'Telibo',
     origin: 'Nord Bénin',
     desc: 'Pâte noire semi-solide obtenue à partir de farine de cossette d\'igname séchée, se mange avec une sauce gluante, la sauce légume ou la sauce d\'arachide.',
-    image: '/plats/telibo.webp'
+    image: '/plats/Telibo.webp'
   },
   {
     name: 'Agbeli',
     origin: 'Sud Bénin',
     desc: 'Pâte de manioc fermenté, cousine du gari et du placali, servie avec une sauce d\'arachide ou une sauce tomate relevée.',
-    image: '/plats/agbeli.webp'
+    image: '/plats/Agbeli.webp'
   },
   {
     name: 'Sauce Gboman',
@@ -136,7 +136,7 @@ const PLATS = [
     name: 'Wanzou',
     origin: 'Nord Bénin',
     desc: 'Préparation traditionnelle du nord à base de légumineuses, appréciée en période de soudure.',
-    image: '/plats/wanzou.webp'
+    image: '/plats/Wanzou.webp'
   },
   {
     name: 'Tale-tale',

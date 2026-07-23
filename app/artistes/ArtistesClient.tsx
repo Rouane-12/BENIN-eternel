@@ -37,7 +37,7 @@ const FLAG = {
   vert: 'oklch(0.55 0.14 152)',
   rouge: 'oklch(0.56 0.23 27)',
 } as const;
-const PODIUM_COLORS = [FLAG.or, FLAG.vert, FLAG.rouge];
+const PODIUM_COLORS = [FLAG.vert, FLAG.or, FLAG.rouge];
 
 function getCategories(genre: string): Category[] {
   const g = genre.toLowerCase();
@@ -222,7 +222,7 @@ function PodiumCard({
 
 // Carte compacte pour l'annuaire complet (masonry).
 function DirectoryCard({ artiste, index, onVote, voted }: { artiste: Artiste; index: number; onVote: (id: string) => void; voted: boolean }) {
-  const color = accentFor(artiste.genre);
+  const color = PODIUM_COLORS[index % 3];
   return (
     <motion.div
       layout
